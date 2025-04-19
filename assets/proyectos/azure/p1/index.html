@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Proyecto Azure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="project-header">
+      <div class="project-title-section">
+        <p class="project-subtitle">
+          Implementación en de Servicios de Microsoft Azure
+        </p>
+        <div class="badges">
+          <span class="badge azure-badge">
+            <img src="img/azure.png" alt="Azure Logo" class="azure-icon" />
+            Microsoft Azure
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <main class="project-content">
+      <h2>Descripción del Proyecto</h2>
+      <p>Este proyecto fue creado con la intención de aprender a trabajar con algunos de los servicios que ofrece Microsoft Azure.      
+        Primero, se crearon los grupos de recursos y servicios necesarios en Azure, como el App Service 
+        (para alojar el API) y SQL Server (para guardar la información).
+        Se creó un API REST en Visual Studio con autenticación mediante Bearer Token. En este desarrollo se utilizó una herramienta llamada Dapper
+        para facilitar las consultas a la base de datos. El objetivo es poder realizar la publicación desde Visual Studio hacia Azure App Service.
+      </p>
+
+      <section class="project-links">
+        <h2>Enlaces del Proyecto</h2>
+        <div class="links-container">
+          <a href="https://github.com/DanielPovedaRomero/API-Azure" class="link-button github-link" target="_blank">
+            Ver en GitHub
+          </a>
+        </div>
+      </section>
+
+      <section class="api-section">
+        <h2>🔧 Creación de Servicios en Azure</h2>
+        <p> Se crean desde el portal de Azure los servicios de App Service, SQL Server y Base de Datos SQL.</p>      
+        <figure class="api-image">
+          <img src="img/0.png" alt="azure0" />
+          <img src="img/1.png" alt="azure1" />
+          <img src="img/2.png" alt="azure2" />
+        </figure>
+      </section>
+
+      <section class="api-section">
+        <h2>🔧 Creación del API</h2>
+        <p>Se desarrolló un API REST con autenticación Bearer Token utilizando .NET 8.0. Este API permite consumir sus 
+          endpoints e interactuar con el servicio de Base de Datos SQL.
+        </p>
+        <figure class="api-image">
+          <img src="img/3.png" alt="azure3" />
+        </figure>
+      </section>
+
+      <section class="api-section">
+        <h2>🔧 Publicación del API en App Service de Azure</h2>
+        <p>
+          Una vez finalizadas las pruebas locales, se procede a realizar la publicación desde Visual Studio. Para esto, primero debemos ir a la opción 
+          "Publicar" en Visual Studio y seleccionar "Importar Perfil".
+        </p>   
+        <figure class="api-image">
+          <img src="img/4.png" alt="azure4" />
+        </figure>
+        <p>
+          Nos pedirá que busquemos un archivo para importarlo.
+        </p> 
+        <figure class="api-image">
+          <img src="img/5.png" alt="azure5" />
+        </figure>
+        <p>
+          El archivo se descarga desde Azure, seleccionando el App Service creado y abriendo la opción de implementación: Centro de Implementación, 
+          luego "Administrar perfil de publicación" y finalmente "Descargar perfil de publicación".
+        </p> 
+        <figure class="api-image">
+          <img src="img/6.png" alt="azure6" />
+        </figure>
+        <p>
+          Visual Studio nos mostrará una pantalla validando que el archivo se ha cargado correctamente y finalizamos dando clic en el botón "Publicar".
+        </p> 
+        <figure class="api-image">
+          <img src="img/7.png" alt="azure7" />
+        </figure>
+        <p>
+          Una vez finalizado, podremos revisar nuestro App Service y ver que nos da una URL en la cual podremos visualizar nuestro API.
+        </p> 
+        <figure class="api-image">
+          <img src="img/8.png" alt="azure8" />
+        </figure>
+        <p>
+          Simplemente se debe agregar a la URL que nos da Azure "/swagger" para usar la interfaz del API y consumir los endpoints.
+        </p> 
+        <figure class="api-image">
+          <img src="img/9.png" alt="azure9" />
+        </figure>
+      </section>
+
+      <section class="api-section">
+        <h2>🔧 Consumir Endpoints del API</h2>
+        <p> Primero debemos autenticarnos. Para eso, consumimos el endpoint de Login, el cual en su respuesta nos dará un Bearer Token. </p>      
+        <figure class="api-image">
+          <img src="img/10.png" alt="azure10" />
+        </figure>
+        <figure class="api-image">
+          <img src="img/11.png" alt="azure11" />
+        </figure>
+        <figure class="api-image">
+          <img src="img/12.png" alt="azure12" />
+        </figure>
+        <p> Una vez autorizados, utilizaremos el método POST para crear un nuevo usuario. </p>      
+        <figure class="api-image">
+          <img src="img/13.png" alt="azure13" />
+        </figure>
+        <figure class="api-image">
+          <img src="img/14.png" alt="azure14" />
+        </figure>
+        <p> Ahora utilizaremos el método GET para traer todos los usuarios registrados. </p>      
+        <figure class="api-image">
+          <img src="img/15.png" alt="azure15" />
+        </figure>
+      </section>
+
+      <section class="api-section">
+        <h2>🔧 Uso de SQL Server Management Studio</h2>
+        <p> Utilizaremos SQL Server Management Studio para conectarnos con la base de datos de Azure. Simplemente usamos las credenciales con las que creamos el SQL Server en Azure. </p>      
+        <figure class="api-image">
+          <img src="img/16.png" alt="azure16" />
+        </figure>
+        <p>Podremos crear consultas para usar las bases de datos en Azure.</p>      
+        <figure class="api-image">
+          <img src="img/17.png" alt="azure17" />
+        </figure>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

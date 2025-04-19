@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+ 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #E6EDF4 ;
+  color: #333;
+  line-height: 1.6;         
+  margin: 0;
+}
+
+/* Contenedor principal */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Encabezado con tema Azure */
+.project-header {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #005A9E, #0078D4);
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.project-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.project-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* Badges */
+.badges {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  background-color: #ddd;
+}
+
+.azure-badge {
+  background-color: #fff;
+  color: #005A9E;
+  gap: 0.5rem;
+}
+
+.azure-icon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 10%;
+}
+
+/* Contenido */
+.project-content h2 {
+  font-size: 2rem;
+  color: #0078D4;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.project-content p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Sección de enlaces */
+.project-links .links-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.link-button {
+  display: inline-flex;     
+  align-items: center;      
+  text-decoration: none;    
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.github-link {
+  background-color: #24292e;
+  color: #fff;
+}
+
+.github-link:hover {
+  background-color: #24292e;
+}
+
+
+/* Sección de galería mejorada */
+
+.api-section {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: linear-gradient(to right, #e6f1fb, #f7fbff);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 120, 212, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.api-section:hover {
+  transform: translateY(-4px);
+}
+
+.api-section h2 {
+  color: #003e73;
+  margin-bottom: 1.5rem;
+  font-size: 2.2rem;
+  font-weight: bold;
+  border-bottom: 2px solid #0078d4;
+  display: inline-block;
+  padding-bottom: 0.3rem;
+}
+
+.api-section p {
+  font-size: 1.05rem;
+  color: #111; /* Texto más negro */
+  margin-bottom: 2rem;
+  line-height: 1.8;
+  text-align: center; /* Centrado */
+}
+
+
+.api-image {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.api-image img {
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  margin: 10px auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease;
+}
+
+.api-image img.small{
+  width: 50%;
+  max-width: 320px;
+  height: auto;
+  margin: 10px auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease;
+}
+
+.api-image img.medium{
+  width: 70%;
+  max-width: 420px;
+  height: auto;
+  margin: 10px auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease;
+}
+
+
+.api-image img.credentials{
+  width: 70%;
+  max-width: 500px;
+  height: auto;
+  margin: 10px auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease;
+}
+
+.api-image img:hover {
+  transform: scale(1.02);
+}
+
+.microsoft-link {
+  display: inline-block;
+  padding: 10px 16px;
+  background-color: #0078D4; /* color de Microsoft */
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+}
+
+.microsoft-link:hover {
+  background-color: #005a9e;
+}

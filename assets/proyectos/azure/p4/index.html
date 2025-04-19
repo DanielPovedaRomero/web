@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Proyecto Azure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="project-header">
+      <div class="project-title-section">
+        <p class="project-subtitle">
+          Implementación de Servicio de Lenguaje de Microsoft Azure
+        </p>
+        <div class="badges">
+          <span class="badge azure-badge">
+            <img src="img/azure.png" alt="Azure Logo" class="azure-icon" />
+            Microsoft Azure
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <main class="project-content">
+      <h2>Descripción del Proyecto</h2>
+      <p>
+        Este proyecto tiene como objetivo explorar el uso del servicio <strong>Azure AI Language</strong> de Microsoft, enfocado en el análisis y procesamiento del lenguaje natural mediante una aplicación de consola desarrollada en Visual Studio con .NET 8.0.
+      </p>
+      <p>
+        Se implementan múltiples funcionalidades utilizando el SDK <code>Azure.AI.TextAnalytics</code>, tales como la detección de idioma, análisis de sentimientos, extracción de frases clave, reconocimiento de entidades y vinculación de entidades con fuentes externas como Wikipedia.
+      </p>
+      <p>
+        Además, se utilizó el SDK <code>Azure.Storage.Blobs</code> para hacer lectura de un archivo PDF alojado en Azure Blob Storage.
+      </p>
+
+      <section class="project-links">
+        <h2>Enlaces del Proyecto</h2>
+        <div class="links-container">
+          <a href="https://github.com/DanielPovedaRomero/LenguajeIA.git" class="link-button github-link" target="_blank">
+            Ver en GitHub
+          </a>
+        </div>
+      </section>
+
+      <section class="api-section">
+        <h2>☁️ Creación del recurso Servicio de Lenguaje</h2>
+        <p>Debemos ir al portal de Azure y crear el recurso: Servicio de Lenguaje.</p>      
+        <figure class="api-image">
+          <img src="img/c1.png" alt="Creación del recurso en Azure" class="small" />
+        </figure>
+        <p>Una vez creado el recurso, debemos revisar su información y guardar las credenciales de conexión, que necesitaremos más adelante en el proyecto.</p> 
+        <figure class="api-image">
+          <img src="img/c2.png" alt="Credenciales del recurso" />
+        </figure>  
+        <p>Vamos a la opción de "Desarrollar" y elegimos "Clasificar Texto", lo cual nos llevará a la documentación oficial de Microsoft con ejemplos de GitHub sobre cómo usar el SDK.</p> 
+        <figure class="api-image">
+          <img src="img/c3.png" alt="Acceso a Vision Studio" />
+          <img src="img/c5.png" class="medium" alt="Acceso a Vision Studio" />
+        </figure> 
+      </section>
+
+      <section class="api-section">
+        <h2>🤖 Instalación del SDK Azure AI Text Analytics</h2>
+        <p>
+          Se creó una aplicación de consola en .NET 8.0. Posteriormente, instalamos el SDK <code>Azure.AI.TextAnalytics</code> desde NuGet. 
+          Es importante que la opción de incluir versiones preliminares (pre-release) esté activada. También es necesaria la instalación del paquete <code>Azure.Storage.Blobs</code> para obtener
+          el PDF alojado en Blob Storage.
+        </p>      
+        <figure class="api-image">
+          <img src="img/C6.png" alt="Instalación del SDK" />
+        </figure> 
+        <p> 
+         Usamos las credenciales obtenidas del recurso de Lenguaje y un PDF alojado en Blob Storage.
+        </p>
+        <p>
+          Configuramos el cliente.
+        </p>
+        <figure class="api-image">
+          <img src="img/C7.png" alt="Configuración del SDK" class="medium" />
+        </figure> 
+        <p>
+          Obtenemos el PDF desde Blob Storage.
+        </p>
+        <figure class="api-image">
+          <img src="img/c8.png" alt="Uso del SDK" />
+        </figure>  
+        <p>
+          Hacemos el llamado a los métodos creados como ejemplo.
+        </p>
+        <figure class="api-image">
+          <img src="img/c9.png" alt="Uso del SDK" />
+        </figure> 
+        <p>
+          El PDF de ejemplo consta de 2 páginas y contiene el siguiente contenido:
+        </p> 
+        <figure class="api-image">
+          <img src="img/c10.png" class="medium" alt="Imagen de prueba" />
+        </figure> 
+        <figure class="api-image">
+          <img src="img/c11.png" class="medium" alt="Imagen de prueba" />
+        </figure> 
+      </section>
+
+      <section class="api-section">
+        <h2>🧬 Detectar idioma</h2>
+        <p>
+          Se utiliza el servicio <strong>DetectLanguage</strong> para analizar el texto e identificar el idioma.
+        </p>    
+        <figure class="api-image">
+          <img src="img/c14.png" alt="Resultado Detect Language" />         
+        </figure> 
+        <figure class="api-image">
+          <img src="img/c15.png" alt="Resultado Detect Language" />         
+        </figure>      
+      </section>    
+
+      <section class="api-section">
+        <h2>🧬 Análisis de sentimiento</h2>
+        <p>
+          Se utiliza el servicio <strong>AnalyzeSentiment</strong> para analizar el porcentaje de los sentimientos presentes en el texto.
+        </p>    
+        <figure class="api-image">
+          <img src="img/c12.png" alt="Resultado Analyze Sentiment" />         
+        </figure> 
+        <figure class="api-image">
+          <img src="img/c13.png" class="medium" alt="Resultado Analyze Sentiment" />         
+        </figure>      
+      </section>    
+
+      <section class="api-section">
+        <h2>🧬 Obtener palabras clave</h2>
+        <p>
+          Se utiliza el servicio <strong>ExtractKeyPhrases</strong> para analizar el texto y extraer las palabras clave.
+        </p>    
+        <figure class="api-image">
+          <img src="img/c16.png" alt="Resultado Key Phrases" />         
+        </figure> 
+        <figure class="api-image">
+          <img src="img/c17.png" class="medium" alt="Resultado Key Phrases" />         
+        </figure>      
+      </section>    
+
+      <section class="api-section">
+        <h2>🧬 Obtener entidades</h2>
+        <p>
+          Se utiliza el servicio <strong>RecognizeEntities</strong> para analizar el texto y obtener las entidades encontradas.
+        </p>    
+        <figure class="api-image">
+          <img src="img/c18.png" alt="Resultado Recognize Entities" />         
+        </figure> 
+        <figure class="api-image">
+          <img src="img/c19.png" class="medium" alt="Resultado Recognize Entities" />         
+        </figure>      
+      </section>    
+
+      <section class="api-section">
+        <h2>🧬 Obtener vinculación entre entidades</h2>
+        <p>
+          Se utiliza el servicio <strong>RecognizeLinkedEntities</strong> para detectar entidades en el texto (como personas, lugares, organizaciones, eventos, etc.)
+          y vincularlas a fuentes externas como Wikipedia, proporcionando así más contexto y comprensión sobre el contenido analizado.
+        </p>    
+        <figure class="api-image">
+          <img src="img/c20.png" alt="Resultado Linked Entities" />         
+        </figure> 
+        <figure class="api-image">
+          <img src="img/c21.png" alt="Resultado Linked Entities" />         
+        </figure>      
+      </section>    
+    </main>
+  </div>
+</body>
+</html>

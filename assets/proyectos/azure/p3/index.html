@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Proyecto Azure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="project-header">
+      <div class="project-title-section">
+        <p class="project-subtitle">
+          Implementación Face IA de Microsoft Azure
+        </p>
+        <div class="badges">
+          <span class="badge azure-badge">
+            <img src="img/azure.png" alt="Azure Logo" class="azure-icon" />
+            Microsoft Azure
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <main class="project-content">
+      <h2>Descripción del Proyecto</h2>
+      <p>
+        Este proyecto fue creado con el objetivo de aprender a utilizar el servicio de <strong>Face IA</strong> de Microsoft Azure, una solución de inteligencia artificial diseñada para detectar y analizar rostros humanos en imágenes. 
+        Para ello, creamos un recurso en Azure y utilizamos su SDK más reciente, <code>Azure.AI.Vision.Face</code>, en una aplicación de consola desarrollada en Visual Studio. 
+        Este SDK nos permite aplicar funcionalidades como la detección de rostros, el análisis de atributos faciales y el reconocimiento de características clave.
+      </p>
+      
+      <section class="project-links">
+        <h2>Enlaces del Proyecto</h2>
+        <div class="links-container">
+          <a href="https://github.com/DanielPovedaRomero/FaceIA.git" class="link-button github-link" target="_blank">
+            Ver en GitHub
+          </a>
+        </div>
+      </section>
+
+      <section class="api-section">
+        <h2>☁️ Creación del recurso Face IA</h2>
+        <p>Debemos ir al portal de Azure y crear el recurso: Face IA.</p>      
+        <figure class="api-image">
+          <img src="img/c1.png" alt="Creación del recurso en Azure" class="small" />
+        </figure>
+        <p>Una vez creado el recurso, debemos revisar su información y guardar las credenciales de conexión, que necesitaremos más adelante en el proyecto.</p> 
+        <figure class="api-image">
+          <img src="img/c2.png" alt="Credenciales del recurso" />
+        </figure>  
+        <p>Vamos a la opción de inicio rápido en C# para ver algunos ejemplos o ir a Vision Studio para explorar más de los servicios.</p> 
+        <figure class="api-image">
+          <img src="img/c3.png" alt="Acceso a Vision Studio" />
+        </figure> 
+        <p>Dentro de Vision Studio, validamos que esté ligado a nuestro recurso de Azure, lo cual podemos confirmar desde el ícono de engranaje:</p> 
+        <figure class="api-image">
+          <img src="img/c4.png" alt="Validación de enlace al recurso" class="small" />
+        </figure> 
+        <figure class="api-image">
+          <img src="img/c5.png" alt="Revisión de configuración" />
+        </figure> 
+        <p>Una vez enlazado el recurso, podremos utilizar todos los servicios que Face IA nos ofrece.</p> 
+        <figure class="api-image">
+          <img src="img/c6.png" alt="Servicios disponibles" />
+        </figure> 
+      </section>
+
+      <section class="api-section">
+        <h2>🤖 Instalación del SDK Azure AI Vision Face</h2>
+        <p>
+          Para este proyecto se creó una aplicación de consola en .NET 8.0. Posteriormente, instalamos el SDK <code>Azure.AI.Vision.Face</code> desde NuGet. Es importante que la opción de incluir versiones preliminares (pre-release) esté activa.
+        </p>      
+        <figure class="api-image">
+          <img src="img/C7.png" alt="Instalación del SDK" />
+        </figure>
+        <p>
+          Me basé en el uso del SDK en la documentación oficial de Microsoft: 
+          <a href="https://learn.microsoft.com/es-es/azure/ai-services/computer-vision/quickstarts-sdk/identity-client-library?tabs=windows%2Cvisual-studio&pivots=programming-language-csharp" 
+             class="microsoft-link" target="_blank">
+            🧠 Ver documentación oficial de Microsoft
+          </a>
+        </p> 
+        <p>
+          Usaremos las credenciales obtenidas del recurso de Face creado y una imagen alojada en Blob Storage.
+        </p>
+        <figure class="api-image">
+          <img src="img/C8.png" alt="Configuración del SDK" class="small" />
+        </figure> 
+        <p>
+          Configuramos el cliente.
+        </p>
+        <figure class="api-image">
+          <img src="img/c9.png" class="small" alt="Uso del SDK" />
+        </figure>  
+        <p>
+          La imagen que utilizaremos como ejemplo es la siguiente: 
+        </p> 
+        <figure class="api-image">
+          <img src="img/c11.png" class="small" alt="Imagen de prueba" />
+        </figure> 
+      </section>
+
+      <section class="api-section">
+        <h2>🧬 Detección de rostros en una imagen</h2>
+        <p>
+          Se utilizará el servicio <strong>Detect faces in an image</strong> para detectar rostros presentes en una imagen y así poder obtener diferentes atributos.
+        </p>
+        <p>
+          Se crean los atributos del método que se usarán en el ejemplo.
+        </p>
+        <figure class="api-image">
+          <img src="img/c10.png" class="medium" alt="Resultado Caption" />         
+        </figure>
+        <p>
+          Se crea el método <code>Detect</code>.
+        </p>
+        <figure class="api-image">          
+          <img src="img/c12.png" class="medium" alt="Método Detect" />
+        </figure>
+        <p>
+          Obtenemos el resultado y recorremos su respuesta, la cual analiza cada uno de los rostros encontrados en la imagen.
+        </p>
+        <figure class="api-image">       
+          <img src="img/c13.png" alt="Resultado análisis de rostros" />
+        </figure>
+        <p>
+          Como resultado obtenemos:
+        </p>
+        <figure class="api-image">       
+          <img src="img/c14.png" alt="Resultado final" />
+        </figure>
+      </section>    
+    </main>
+  </div>
+</body>
+</html>

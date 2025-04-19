@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Poveda Romero</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header id="inicio">
+        <nav>
+            <div class="logo">
+                <img src="assets/img/header/logo.png" alt="My Portfolio Logo">
+            </div>
+            <button class="hamburger" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#experiencia">Experiencia</a></li>
+                <li><a href="#certificaciones">Certificaciones</a></li>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#informacion">Habilidades</a></li>             
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <div class="social-icons">
+
+                <a href="#" title="Gmail" class="copy-email">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+                <span id="email-text" style="display: none;">danielpovedaromero@gmail.com</span>
+                
+                <!-- Alerta flotante -->
+                <div id="copy-alert" class="copy-alert hidden">
+                    <span class="copy-prefix">&lt;System&gt;</span> <span class="copy-message">Correo copiado al portapapeles</span>
+                </div>          
+
+                <a href="https://www.linkedin.com/in/daniel-poveda-romero-84a59a1a6/" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/DanielPovedaRomero" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+        </nav>
+        <div class="inicio">
+            <div class="inicio-text">
+                <h2>.NET <br><span>Software Developer</span></h2>
+                <p>Hola Mundo! Soy Daniel<span class="cr-titulo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Flag_of_Costa_Rica.svg" alt="Bandera de Costa Rica" class="cr-bandera">
+                </span>     un apasionado desarrollador backend con experiencia en la creación de aplicaciones eficientes y escalables utilizando .NET C#. 
+                También enfocado en desarrollo de aplicaciones móviles con .NET MAUI y Xamarin.</p>
+                <a href="assets/cv/danielpovedaromero.pdf" download="danielpovedaromero.pdf" class="descargar-btn">
+                    <i class="fas fa-download"></i> Descargar CV
+                </a>                
+            </div>
+            <div class="inicio-image">
+                <img src="assets/img/header/perfil.jpeg" alt="Freelancer">
+            </div>
+        </div>
+    </header>
+
+    <!--Experiencia -->
+    <section id="experiencia" class="experiencia-laboral">
+        <div class="contenedor">
+            <div class="experiencia-introduccion">
+                <h2>Experiencia</h2>
+                <p>
+                    A lo largo de mi trayectoria como desarrollador, he adquirido experiencia en diversas tecnologías y roles. 
+                    Estas posiciones me han permitido abordar desafíos complejos y proponer soluciones eficaces.
+                </p>
+            </div>
+            <div class="experiencia-grid">
+                <div class="experiencia-item">
+                    <h3>
+                        Programador Medium 
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Flag_of_Costa_Rica.svg" alt="Bandera de Costa Rica" class="bandera">
+                    </h3>
+                    <span class="fecha">2022 — Actualidad</span>
+                    <p>
+                        Encargado de crear aplicaciones en .NET con arquitecturas escalables, refactorizar código para mejorar calidad y rendimiento, e implementar unit tests. 
+                        Integré soluciones con Softland ERP y participé en la migración de aplicaciones de Xamarin a .NET MAUI, añadiendo nuevas funcionalidades en proyectos móviles.
+                    </p>                    
+                    <div class="etiquetas">
+                        <span class="etiqueta">C#</span>
+                        <span class="etiqueta">.NET MAUI</span>
+                        <span class="etiqueta">Unit Testing</span>
+                        <span class="etiqueta">SQLite</span>
+                        <span class="etiqueta">GitHub</span>
+                        <span class="etiqueta">HTML</span>
+                        <span class="etiqueta">CSS</span>
+                        <span class="etiqueta">JavaScript</span>
+                    </div>
+                </div>
+                <div class="experiencia-item">
+                    <h3>
+                        Programador Junior 
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Flag_of_Costa_Rica.svg" alt="Bandera de Costa Rica" class="bandera">
+                    </h3>
+                    <span class="fecha">2019 — 2022</span>
+                    <p>
+                        Durante este tiempo, me especialicé en desarrollos a la medida, gestión de bases de datos y toma de requerimientos, garantizando entregables alineados a 
+                        las necesidades de los clientes. Adquirí experiencia con Softland ERP, integrando y personalizando funcionalidades empresariales, además de capacitar a 
+                        usuarios finales. También inicié mi trayectoria en tecnologías móviles con Xamarin.
+                    </p>
+                    
+                    <div class="etiquetas">
+                        <span class="etiqueta">.NET</span>
+                        <span class="etiqueta">SQL</span>
+                        <span class="etiqueta">Xamarin</span>
+                        <span class="etiqueta">SQLite</span>
+                        <span class="etiqueta">GitHub</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!--Certificaciones -->
+    <section id="certificaciones" class="certificaciones">
+        <div class="certificaciones-contenedor">
+            <h2 class="certificaciones-titulo"><i class="icono"></i> Certificaciones</h2>
+            <p class="certificaciones-descripcion">
+                A lo largo de mi carrera como desarrollador .NET, he obtenido diversas certificaciones que validan y fortalecen mis conocimientos técnicos, ampliando mi experiencia profesional.
+            </p>
+            <div class="certificaciones-plataformas-titulo">
+                <span class="corchete">&#123;</span> Plataformas<span class="corchete">&#125;</span>
+            </div>
+            <div class="certificaciones-plataformas">
+                <div class="plataforma-item">
+                    <img src="assets/img/plataformas/udem.png" alt="Udemy" class="plataforma-logo">
+                    <p class="plataforma-nombre">Udemy</p>
+                </div>
+                <div class="plataforma-item">
+                    <img src="assets/img/plataformas/platzi.jpg" alt="Platzi" class="plataforma-logo">
+                    <p class="plataforma-nombre">Platzi</p>
+                </div>
+                <div class="plataforma-item">
+                    <img src="assets/img/plataformas/microsoft.png" alt="Microsoft Learn" class="plataforma-logo">
+                    <p class="plataforma-nombre">Microsoft</p>
+                </div>
+            </div>
+            <div class="certificaciones-carrusel">
+                <button class="carrusel-btn prev" aria-label="Anterior">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="carrusel-track">
+                    <div class="carrusel-slide">
+                        <img src="assets/img/certificaciones/AzureFun.png" alt="Certificación 1">
+                    </div>
+                    <div class="carrusel-slide">
+                        <img src="assets/img/certificaciones/AzureAI.png" alt="Certificación 2">
+                    </div>                 
+                    <div class="carrusel-slide">
+                        <img src="assets/img/certificaciones/solid.jpg" alt="Certificación 3">
+                    </div>                  
+                    <div class="carrusel-slide">
+                        <img src="assets/img/certificaciones/maui.jpg" alt="Certificación 4">
+                    </div>                                     
+                    <div class="carrusel-slide">
+                        <img src="assets/img/certificaciones/patrones.jpg" alt="Certificación 5">
+                    </div>
+                </div>
+                <button class="carrusel-btn next" aria-label="Siguiente">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <a href="assets/certificaciones/index.html" class="ver-btn">
+                <i class="fas fa-eye"></i> Ver Mas...
+            </a>
+        </div>
+    </section>
+    
+    <!--Proyectos -->
+    <section id="proyectos" class="proyectos">
+        <div class="proyectos-container">
+            <h2 class="proyectos-title">Proyectos</h2>
+            <p class="proyectos-subtitle">Todo lo que puedas imaginar, lo podrás programar</p>
+            <div class="filtros">
+                <button class="filtro-btn descargar-btn active" data-filtro="todos">Todos</button>
+                <button class="filtro-btn descargar-btn" data-filtro="azure">Azure</button>
+                <button class="filtro-btn descargar-btn" data-filtro="css">CSS HTML</button>
+                <button class="filtro-btn descargar-btn" data-filtro="maui">.NET MAUI</button>
+            </div>
+            <div class="proyectos-grid">
+
+                <div class="card" data-categoria="azure">
+                    <div class="proyecto-card" >
+                        <div class="image-wrapper">
+                            <img src="assets/img/proyectos/htmlcss/azure/lenguaje.svg">
+                        </div>
+                        <p>Azure Languaje</p>
+                        <a href="assets/proyectos/azure/p4/index.html" class="ver-btn">
+                            <i class="fas fa-eye"></i> Ver
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card" data-categoria="azure">
+                    <div class="proyecto-card" >
+                        <div class="image-wrapper">
+                            <img src="assets/img/proyectos/htmlcss/azure/facia.png">
+                        </div>
+                        <p>Face IA</p>
+                        <a href="assets/proyectos/azure/p3/index.html" class="ver-btn">
+                            <i class="fas fa-eye"></i> Ver
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card" data-categoria="azure">
+                    <div class="proyecto-card" >
+                        <div class="image-wrapper">
+                            <img src="assets/img/proyectos/htmlcss/azure/vision.png">
+                        </div>
+                        <p>Image Analysis IA</p>
+                        <a href="assets/proyectos/azure/p2/index.html" class="ver-btn">
+                            <i class="fas fa-eye"></i> Ver
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card" data-categoria="azure">
+                    <div class="proyecto-card" >
+                        <div class="image-wrapper">
+                            <img src="assets/img/proyectos/htmlcss/azure/azure.jpg">
+                        </div>
+                        <p>API App Service</p>
+                        <a href="assets/proyectos/azure/p1/index.html" class="ver-btn">
+                            <i class="fas fa-eye"></i> Ver
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card" data-categoria="maui">
+                    <div class="proyecto-card" >
+                        <div class="image-wrapper">
+                            <img src="assets/img/proyectos/htmlcss/maui/1.png">
+                        </div>
+                        <p>Weather</p>
+                        <a href="assets/proyectos/maui/p3/index.html" class="ver-btn">
+                            <i class="fas fa-eye"></i> Ver
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="card" data-categoria="maui">
+                    <div class="proyecto-card" >
+                        <div class="image-wrapper">
+                            <img src="assets/img/proyectos/htmlcss/maui/2.png">
+                        </div>
+                        <p>HangMan</p>
+                        <a href="assets/proyectos/maui/p1/index.html" class="ver-btn">
+                            <i class="fas fa-eye"></i> Ver
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card" data-categoria="maui">
+                    <div class="proyecto-card" >
+                        <div class="image-wrapper">
+                            <img src="assets/img/proyectos/htmlcss/maui/3.png">
+                        </div>
+                        <p>BMI</p>
+                        <a href="assets/proyectos/maui/p2/index.html" class="ver-btn">
+                            <i class="fas fa-eye"></i> Ver
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="card" data-categoria="css">
+                    <div class="proyecto-card" >
+                        <div class="image-wrapper">
+                            <img src="assets/img/proyectos/htmlcss/huddle/1.png">
+                        </div>
+                        <p>Huddle</p>
+                        <a href="assets/proyectos/css/p1/index.html" class="ver-btn">
+                            <i class="fas fa-eye"></i> Ver
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card" data-categoria="css">
+                    <div class="proyecto-card" >
+                        <div class="image-wrapper">
+                            <img src="assets/img/proyectos/htmlcss/huddle/2.png">
+                        </div>
+                        <p>Fylo</p>
+                        <a href="assets/proyectos/css/p2/index.html" class="ver-btn">
+                            <i class="fas fa-eye"></i> Ver
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="card" data-categoria="css">
+                    <div class="proyecto-card" >
+                        <div class="image-wrapper">
+                            <img src="assets/img/proyectos/htmlcss/huddle/3.png">
+                        </div>
+                        <p>EasyBank</p>
+                        <a href="assets/proyectos/css/p3/index.html" class="ver-btn">
+                            <i class="fas fa-eye"></i> Ver
+                        </a>
+                    </div>
+                </div>
+                             
+            </div>          
+        </div>
+    </section>
+
+    <!--Habilidades -->
+    <section id="informacion" class="skills-section">
+        <div class="skills-container">
+            <div class="skills-text">
+                <h2>Habilidades <br><span>Técnicas</span></h2>
+                <p>Estas son algunas de las herramientas y tecnologías que he aprendido y perfeccionado a lo largo de mi camino como desarrollador, 
+                las cuales me han permitido enfrentar desafíos y crear soluciones efectivas en diversos proyectos.</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <img src="assets/img/skills/html.png" alt="React">
+                    <p>Html</p>                
+                </div>
+                <div class="skill-card">
+                    <img src="assets/img/skills/css3.png" alt="CSS">
+                    <p>Css</p>
+                </div>
+                <div class="skill-card">
+                    <img src="assets/img/skills/js.png" alt="JavaScript">
+                    <p>JavaScript</p>
+                </div>
+                <div class="skill-card">
+                    <img src="assets/img/skills/sql.png" alt="HTML">
+                    <p>Sql</p>
+                </div>
+                <div class="skill-card">
+                    <img src="assets/img/skills/sqlite.png" alt="Node.js">
+                    <p>SqlLite</p>
+                </div>
+                <div class="skill-card">
+                    <img src="assets/img/skills/github.png" alt="c#">
+                    <p>GitHub</p>
+                </div>
+                <div class="skill-card">
+                    <img src="assets/img/skills/maui.png" alt="HTML">
+                    <p>.Net Maui</p>
+                </div>
+                <div class="skill-card">
+                    <img src="assets/img/skills/cc.png" alt="Node.js">
+                    <p>C# .Net Core</p>
+                </div>
+                <div class="skill-card">
+                    <img src="assets/img/skills/unit.png" alt="MongoDB">
+                    <p>NUnit</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!--Contacto -->
+    <footer id="contacto" class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="assets/img/header/logo.png" alt="Logo de My Portfolio">
+                <p>Desarrollador Backend especializado en .NET.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Enlaces Rápidos</h4>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#experiencia-laboral">Experiencia</a></li>
+                    <li><a href="#certificaciones">Certificaciones</a></li>
+                    <li><a href="#proyectos">Proyectos</a></li>
+                    <li><a href="#informacion">Habilidades</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><i class="fa-solid fa-envelope"></i> <a href="mailto:danielpovedaromero@gmail.com">danielpovedaromero@gmail.com</a></li>
+                    <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/daniel-poveda-romero-84a59a1a6/" target="_blank">LinkedIn</a></li>
+                    <li><i class="fab fa-github"></i> <a href="https://github.com/DanielPovedaRomero" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Sígueme</h4>
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/daniel-poveda-romero-84a59a1a6/" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/DanielPovedaRomero" title="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>
+                <i class="fa-solid fa-computer"></i> 2025 My Portfolio. Daniel Poveda Romero.
+            </p>           
+        </div>
+    </footer>
+
+    <script>
+
+        const track = document.querySelector('.carrusel-track');
+        const slides = Array.from(track.children);
+        const nextButton = document.querySelector('.carrusel-btn.next');
+        const prevButton = document.querySelector('.carrusel-btn.prev');
+        const slideWidth = slides[0].getBoundingClientRect().width + 20;
+
+        let currentIndex = 0;
+
+        const moveToSlide = (track, currentIndex) => {
+            const amountToMove = -slideWidth * currentIndex;
+            track.style.transform = `translateX(${amountToMove}px)`;
+        };
+
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < slides.length - 3) {
+                currentIndex++;
+                moveToSlide(track, currentIndex);
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                moveToSlide(track, currentIndex);
+            }
+        });
+
+
+        const hamburger = document.querySelector('.hamburger');
+        const menu = document.querySelector('.menu');
+        hamburger.addEventListener('click', () => {
+            menu.classList.toggle('active');
+            hamburger.classList.toggle('open');
+        });
+
+
+        const filtroBotones = document.querySelectorAll(".filtro-btn");
+        const proyectos = document.querySelectorAll(".card");
+
+        filtroBotones.forEach((boton) => {
+            boton.addEventListener("click", () => {
+                filtroBotones.forEach((btn) => btn.classList.remove("active"));
+                boton.classList.add("active");
+                const filtro = boton.getAttribute("data-filtro");
+                proyectos.forEach((proyecto) => {
+                    if (filtro === "todos" || proyecto.getAttribute("data-categoria") === filtro) {
+                        proyecto.style.display = "block";
+                    } else {
+                        proyecto.style.display = "none";
+                    }
+                });
+            });
+        });
+
+        document.querySelector('.copy-email').addEventListener('click', function (event) {
+        event.preventDefault(); 
+        const email = document.getElementById('email-text').textContent;
+
+        navigator.clipboard.writeText(email)
+            .then(() => {
+                const alertBox = document.getElementById('copy-alert');
+                
+                alertBox.classList.remove('hidden');
+                alertBox.classList.add('show');
+            
+                setTimeout(() => {
+                    alertBox.classList.remove('show');
+                    alertBox.classList.add('hidden');
+                }, 3000);
+            })
+            .catch(err => {
+                console.error('Error al copiar el correo:', err);
+            });
+    });
+
+    </script>
+</body>
+</html>

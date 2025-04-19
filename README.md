@@ -1,2 +1,2 @@
-# web
-Portafolio Web personal
+# portafolioweb
+Portafolio personal para el proyecto WEB
