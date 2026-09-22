@@ -2173,9 +2173,250 @@ html {
 .tk-str { color: var(--code-blue); }
 .tk-fn { color: var(--code-purple); }
 
+/* Tacita de café que se balancea */
+.tk-cafe {
+    display: inline-block;
+    margin-left: 0.3rem;
+    color: var(--accent-2);
+    transform-origin: bottom center;
+    animation: tacita 2.5s ease-in-out infinite;
+}
+
+@keyframes tacita {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+}
+
 @media (min-width: 900px) {
     .code-window {
         display: block;
+    }
+}
+
+/********************************************
+   Portada moderna
+********************************************/
+
+/* Rol con degradado y brillo que lo recorre */
+.inicio h1 .acento {
+    background: linear-gradient(90deg, var(--accent), var(--accent-2), #FFD9B8, var(--accent-2), var(--accent));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: brillo-texto 5s linear infinite;
+}
+
+@keyframes brillo-texto {
+    to { background-position: 200% center; }
+}
+
+/* Botones */
+.hero-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.9rem;
+}
+
+.btn-outline {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: none;
+    backdrop-filter: blur(4px);
+}
+
+.btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.btn-outline i {
+    transition: transform 0.3s ease;
+}
+
+.btn-outline:hover i {
+    transform: translateX(4px);
+}
+
+/* Parallax: los elementos se desplazan según --px / --py (entre -1 y 1) */
+.inicio {
+    --px: 0;
+    --py: 0;
+}
+
+.inicio::before {
+    translate: calc(var(--px) * -30px) calc(var(--py) * -30px);
+    transition: translate 0.6s ease-out;
+}
+
+.inicio::after {
+    translate: calc(var(--px) * 30px) calc(var(--py) * 30px);
+    transition: translate 0.6s ease-out;
+}
+
+.code-window {
+    translate: calc(var(--px) * 14px) calc(var(--py) * 14px);
+    transition: translate 0.4s ease-out;
+}
+
+/* Cinta de tecnologías en bucle infinito */
+.stack-cinta {
+    --alto: 64px;
+    position: relative;
+    overflow: hidden;
+    border-block: 1px solid var(--border);
+    background: rgba(15, 36, 54, 0.55);
+    backdrop-filter: blur(6px);
+    /* Bordes que se desvanecen */
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.stack-pista {
+    display: flex;
+    width: max-content;
+    animation: cinta 40s linear infinite;
+}
+
+.stack-cinta:hover .stack-pista {
+    animation-play-state: paused;
+}
+
+.stack-lista {
+    display: flex;
+    align-items: center;
+    height: var(--alto);
+}
+
+.stack-lista li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0 1.75rem;
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: var(--text-soft);
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+/* Separador tipo punto entre tecnologías */
+.stack-lista li::after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    margin-left: 1.75rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    translate: 1.75rem 0;
+}
+
+.stack-lista li i {
+    font-size: 1.1rem;
+    color: var(--color);
+    transition: transform 0.3s ease;
+}
+
+.stack-lista li:hover {
+    color: #fff;
+}
+
+.stack-lista li:hover i {
+    transform: scale(1.25) rotate(-8deg);
+}
+
+/* La mitad de la pista es una copia exacta: al desplazarse -50% el bucle no tiene saltos */
+@keyframes cinta {
+    to { transform: translateX(-50%); }
+}
+
+@media (max-width: 600px) {
+    .stack-cinta {
+        --alto: 52px;
+    }
+
+    .stack-lista li {
+        padding: 0 1.1rem;
+        font-size: 0.82rem;
+    }
+
+    .stack-lista li::after {
+        margin-left: 1.1rem;
+        translate: 1.1rem 0;
+    }
+
+    .stack-pista {
+        animation-duration: 30s;
+    }
+}
+
+/* La portada deja ver la cinta sin hacer scroll */
+.inicio {
+    min-height: calc(100vh - var(--nav-height) - 64px);
+    min-height: calc(100svh - var(--nav-height) - 64px);
+}
+
+/* Indicador de scroll */
+.hero-scroll {
+    display: none;
+    position: absolute;
+    left: 50%;
+    bottom: 1.5rem;
+    translate: -50% 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.3s ease, color 0.3s ease;
+    animation: aparecer-arriba 0.8s ease 1.6s backwards;
+}
+
+.hero-scroll:hover {
+    opacity: 1;
+    color: var(--accent);
+}
+
+.hero-mouse {
+    width: 24px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    padding-top: 7px;
+    border: 2px solid currentColor;
+    border-radius: 14px;
+}
+
+.hero-mouse span {
+    width: 4px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--accent);
+    animation: rueda 1.8s ease-in-out infinite;
+}
+
+@keyframes rueda {
+    0% { opacity: 0; transform: translateY(-3px); }
+    30% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(12px); }
+}
+
+@media (min-width: 900px) {
+    .hero-acciones {
+        justify-content: flex-start;
+    }
+
+    .hero-scroll {
+        display: flex;
     }
 }
 

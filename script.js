@@ -19,6 +19,9 @@ const TRADUCCIONES_ES = {
         un apasionado desarrollador backend con experiencia en la creación de aplicaciones eficientes y escalables utilizando .NET C#.
         También enfocado en desarrollo de aplicaciones móviles con .NET MAUI y Xamarin.`,
     'hero.cv': 'Descargar CV',
+    'hero.projects': 'Ver proyectos',
+    'hero.scroll': 'Desliza',
+    'hero.stack': 'Stack tecnológico',
     'hero.photoAlt': 'Foto de Daniel Poveda Romero',
 
     'exp.title': 'Experiencia',
@@ -635,6 +638,34 @@ function initTyped() {
     setTimeout(tick, 2500);
 }
 
+/* Parallax de la portada: las capas siguen al cursor con distinta profundidad */
+function initParallax() {
+    const inicio = document.querySelector('.inicio');
+    if (!inicio || reducirMovimiento || !window.matchMedia('(hover: hover)').matches) return;
+
+    let pendiente = false;
+    let x = 0;
+    let y = 0;
+
+    inicio.addEventListener('pointermove', (e) => {
+        const rect = inicio.getBoundingClientRect();
+        x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+        if (pendiente) return;
+        pendiente = true;
+        requestAnimationFrame(() => {
+            pendiente = false;
+            inicio.style.setProperty('--px', x.toFixed(3));
+            inicio.style.setProperty('--py', y.toFixed(3));
+        });
+    });
+
+    inicio.addEventListener('pointerleave', () => {
+        inicio.style.setProperty('--px', 0);
+        inicio.style.setProperty('--py', 0);
+    });
+}
+
 /* Barra de progreso y enlace del menú de la sección visible */
 function initScroll() {
     const barra = document.querySelector('.scroll-progress');
@@ -669,6 +700,7 @@ initIdioma();
 document.getElementById('year').textContent = new Date().getFullYear();
 initReveal();
 initTyped();
+initParallax();
 initScroll();
 initMenu();
 initCarrusel();
