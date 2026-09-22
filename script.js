@@ -58,8 +58,14 @@ const TRADUCCIONES_ES = {
     'skills.comment': '// 04. habilidades',
     'skills.intro': 'Estas son algunas de las herramientas y tecnologías que he aprendido y perfeccionado a lo largo de mi camino como desarrollador, las cuales me han permitido enfrentar desafíos y crear soluciones efectivas en diversos proyectos.',
 
+    'footer.kicker': '¿qué sigue?',
+    'footer.title': 'Construyamos algo <span class="acento">grande juntos</span>',
+    'footer.text': 'Estoy abierto a nuevas oportunidades y colaboraciones. Si tienes un proyecto en mente o solo quieres saludar, mi bandeja de entrada siempre está abierta.',
     'footer.tagline': 'Desarrollador Backend especializado en .NET.',
-    'footer.links': 'Enlaces Rápidos',
+    'footer.status': 'Disponible para nuevos proyectos',
+    'footer.links': 'Navegación',
+    'footer.built': 'Hecho con <i class="fa-solid fa-heart" aria-hidden="true"></i> HTML, CSS y JS',
+    'footer.top': 'Volver arriba',
     'alert.copied': 'Correo copiado al portapapeles'
 };
 
@@ -284,7 +290,7 @@ function initReveal() {
         '.experiencia-introduccion', '.experiencia-item',
         '.plataformas-titulo', '.plataforma-item', '.carrusel',
         '.filtros', '.proyecto-card', '.skill-card',
-        '.footer-container > *'
+        '.footer-cta', '.footer-grid > *'
     ];
     const elementos = document.querySelectorAll(selectores.join(','));
 
