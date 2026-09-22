@@ -16,6 +16,11 @@
     --max-width: 1200px;
     --nav-height: 110px;
     --gutter: clamp(1rem, 5vw, 4rem);
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --code-green: #7EE787;
+    --code-blue: #79C0FF;
+    --code-purple: #D2A8FF;
+    --code-gray: #6E8BA3;
 }
 
 *,
@@ -246,9 +251,13 @@ a {
     margin: 0 0 1.5rem;
 }
 
+.inicio-visual {
+    position: relative;
+    order: -1;
+}
+
 .inicio-image {
     width: min(70vw, 320px);
-    order: -1;
 }
 
 .inicio-image img {
@@ -781,8 +790,11 @@ a {
         text-align: left;
     }
 
-    .inicio-image {
+    .inicio-visual {
         order: 0;
+    }
+
+    .inicio-image {
         width: min(100%, 400px);
     }
 
@@ -816,4 +828,428 @@ a {
         grid-template-columns: 1fr 1.5fr;
         text-align: left;
     }
+}
+
+/********************************************
+   Animaciones
+********************************************/
+
+/* Barra de progreso de lectura */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 300;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient);
+    transform: scaleX(var(--progreso, 0));
+    transform-origin: left;
+}
+
+/* Portada: fondo con manchas de luz en movimiento */
+.inicio {
+    position: relative;
+    isolation: isolate;
+}
+
+.inicio::before,
+.inicio::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: min(420px, 60vw);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.inicio::before {
+    top: 10%;
+    left: 5%;
+    background: var(--accent);
+    animation: flotar-mancha 14s ease-in-out infinite alternate;
+}
+
+.inicio::after {
+    right: 5%;
+    bottom: 10%;
+    background: #2F80ED;
+    animation: flotar-mancha 18s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes flotar-mancha {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(40px, -30px) scale(1.2); }
+}
+
+/* Portada: entrada escalonada */
+.inicio-text > * {
+    animation: aparecer-arriba 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+
+.inicio-text > :nth-child(2) { animation-delay: 0.15s; }
+.inicio-text > :nth-child(3) { animation-delay: 0.3s; }
+.inicio-text > :nth-child(4) { animation-delay: 0.45s; }
+
+.inicio-image {
+    position: relative;
+    animation: aparecer-zoom 1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s backwards,
+               flotar 6s ease-in-out 1.3s infinite;
+}
+
+/* Anillo de colores girando alrededor de la foto */
+.inicio-image::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    z-index: -1;
+    border-radius: 50%;
+    background: conic-gradient(var(--accent), var(--accent-2), #2F80ED, var(--accent));
+    animation: girar 6s linear infinite;
+}
+
+.inicio-image img {
+    border: 6px solid var(--bg);
+}
+
+.inicio h1 {
+    min-height: 3.6em;
+}
+
+/* Efecto máquina de escribir */
+.typed::after {
+    content: '|';
+    margin-left: 2px;
+    color: var(--accent-2);
+    font-weight: 400;
+    animation: parpadeo 0.8s steps(1) infinite;
+}
+
+@keyframes aparecer-arriba {
+    from { opacity: 0; transform: translateY(30px); }
+}
+
+@keyframes aparecer-zoom {
+    from { opacity: 0; transform: scale(0.8); }
+}
+
+@keyframes flotar {
+    50% { transform: translateY(-12px); }
+}
+
+@keyframes girar {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes parpadeo {
+    50% { opacity: 0; }
+}
+
+/* Aparición al hacer scroll (las clases las agrega script.js) */
+.reveal:not(.visible) {
+    opacity: 0;
+}
+
+.reveal.visible {
+    animation: aparecer-arriba 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) var(--retraso, 0s) backwards;
+}
+
+/* Línea bajo los títulos de sección que crece al aparecer */
+.titulo-seccion::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+    background: var(--gradient);
+    transform: scaleX(0);
+    transition: transform 0.8s ease 0.3s;
+}
+
+.titulo-seccion.visible::after,
+.titulo-seccion:not(.reveal)::after {
+    transform: scaleX(1);
+}
+
+/* Brillo que recorre los botones */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    transform: skewX(-20deg);
+}
+
+.btn:hover::after {
+    animation: brillo 0.7s ease;
+}
+
+@keyframes brillo {
+    to { left: 125%; }
+}
+
+/* Menú: subrayado animado y sección activa */
+.menu a {
+    position: relative;
+}
+
+.menu a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 2px;
+    background: var(--gradient);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.menu a:hover::after,
+.menu a.activo::after {
+    transform: scaleX(1);
+}
+
+.menu a.activo {
+    color: var(--accent);
+}
+
+/* Tarjetas: borde luminoso y movimiento del icono */
+.proyecto-card,
+.experiencia-item {
+    border: 1px solid transparent;
+}
+
+.proyecto-card:hover,
+.skill-card:hover,
+.experiencia-item:hover {
+    border-color: rgba(255, 119, 85, 0.5);
+    box-shadow: 0 10px 30px rgba(255, 119, 85, 0.15);
+}
+
+.experiencia-item {
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.experiencia-item:hover {
+    transform: translateY(-4px);
+}
+
+.proyecto-card img {
+    transition: transform 0.5s ease;
+}
+
+.proyecto-card:hover img {
+    transform: scale(1.08);
+}
+
+.skill-card img {
+    transition: transform 0.5s ease;
+}
+
+.skill-card:hover img {
+    transform: rotate(-8deg) scale(1.12);
+}
+
+.plataforma-logo:hover {
+    transform: scale(1.1) rotate(6deg);
+}
+
+/* Accesibilidad: sin movimiento si el usuario lo pide */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+    }
+
+    .reveal:not(.visible) {
+        opacity: 1;
+    }
+
+    .typed::after {
+        content: none;
+    }
+}
+
+/********************************************
+   Estilo programador
+********************************************/
+
+/* Fondo con cuadrícula tipo blueprint */
+body {
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+::selection {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+html {
+    scrollbar-color: var(--accent) var(--bg);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gradient);
+    border-radius: 5px;
+}
+
+/* Comando de terminal sobre el título principal */
+.terminal {
+    margin: 0 0 0.75rem !important;
+    font-family: var(--mono);
+    font-size: 1rem !important;
+    color: var(--code-green);
+}
+
+.terminal-prompt {
+    color: var(--accent);
+    margin-right: 0.25rem;
+}
+
+
+/* Comentario de código sobre cada título de sección */
+[data-comentario]::before {
+    content: attr(data-comentario);
+    display: block;
+    margin-bottom: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--code-gray);
+}
+
+/* Ventana de editor con código C# */
+.code-window {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: -1rem;
+    z-index: 2;
+    min-width: 300px;
+    background: rgba(13, 22, 33, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(6px);
+    text-align: left;
+    animation: aparecer-arriba 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.8s backwards,
+               flotar 7s ease-in-out 1.7s infinite reverse;
+}
+
+.code-window-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.code-window-bar span {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #FF5F56;
+}
+
+.code-window-bar span:nth-child(2) { background: #FFBD2E; }
+.code-window-bar span:nth-child(3) { background: #27C93F; }
+
+.code-window-bar em {
+    margin-left: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-style: normal;
+    color: var(--code-gray);
+}
+
+.code-window pre {
+    margin: 0;
+    padding: 0.9rem 1rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    line-height: 1.7;
+    letter-spacing: 0;
+    color: var(--text-muted);
+}
+
+.tk-key { color: #FF7B72; }
+.tk-type { color: var(--code-purple); }
+.tk-str { color: var(--code-blue); }
+.tk-fn { color: var(--code-purple); }
+
+@media (min-width: 900px) {
+    .code-window {
+        display: block;
+    }
+}
+
+/* Etiquetas como componentes <Tag /> */
+.etiqueta {
+    font-family: var(--mono);
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.etiqueta::before { content: '<'; opacity: 0.7; }
+.etiqueta::after { content: ' />'; opacity: 0.7; }
+
+/* Detalles monoespaciados */
+.fecha,
+.filtro-btn,
+.proyecto-card h3,
+.skill-card span,
+.footer h2,
+.copy-alert {
+    font-family: var(--mono);
+    letter-spacing: 0;
+}
+
+.filtro-btn::before {
+    content: '.';
+    opacity: 0.6;
+}
+
+.plataformas-titulo {
+    font-family: var(--mono);
+}
+
+.fecha::before {
+    content: '[ ';
+    color: var(--code-gray);
+}
+
+.fecha::after {
+    content: ' ]';
+    color: var(--code-gray);
+}
+
+.footer-bottom {
+    font-family: var(--mono);
+    letter-spacing: 0;
 }

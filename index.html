@@ -9,12 +9,13 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Montserrat:wght@400;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
 <body>
+    <div class="scroll-progress" aria-hidden="true"></div>
     <header class="site-header">
         <nav class="nav" aria-label="Navegación principal">
             <a href="#inicio" class="logo">
@@ -52,7 +53,8 @@
         <!-- Inicio -->
         <section id="inicio" class="inicio">
             <div class="inicio-text">
-                <h1>.NET <br><span class="acento">Software Developer</span></h1>
+                <p class="terminal"><span class="terminal-prompt">&gt;</span> whoami</p>
+                <h1>.NET <br><span class="acento"><span class="typed" data-palabras="Software Developer|Backend Developer|Mobile Developer">Software Developer</span></span></h1>
                 <p>
                     ¡Hola Mundo! Soy Daniel
                     <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Flag_of_Costa_Rica.svg" alt="Costa Rica" class="bandera bandera-sm" width="20" height="12">,
@@ -63,8 +65,22 @@
                     <i class="fas fa-download" aria-hidden="true"></i> Descargar CV
                 </a>
             </div>
-            <div class="inicio-image">
-                <img src="assets/img/header/perfil.jpeg" alt="Foto de Daniel Poveda Romero" width="400" height="400">
+            <div class="inicio-visual">
+                <div class="inicio-image">
+                    <img src="assets/img/header/perfil.jpeg" alt="Foto de Daniel Poveda Romero" width="400" height="400">
+                </div>
+                <div class="code-window" aria-hidden="true">
+                    <div class="code-window-bar">
+                        <span></span><span></span><span></span>
+                        <em>Developer.cs</em>
+                    </div>
+<pre><code><span class="tk-key">public class</span> <span class="tk-type">Developer</span>
+{
+    <span class="tk-key">string</span> Name = <span class="tk-str">"Daniel"</span>;
+    <span class="tk-key">string</span>[] Stack = { <span class="tk-str">".NET"</span>, <span class="tk-str">"MAUI"</span> };
+    <span class="tk-key">bool</span> Coffee = <span class="tk-key">true</span>;
+}</code></pre>
+                </div>
             </div>
         </section>
 
@@ -72,7 +88,7 @@
         <section id="experiencia" class="seccion">
             <div class="experiencia">
                 <div class="experiencia-introduccion">
-                    <h2 class="titulo-seccion">Experiencia</h2>
+                    <h2 class="titulo-seccion" data-comentario="// 01. experiencia">Experiencia</h2>
                     <p>
                         A lo largo de mi trayectoria como desarrollador, he adquirido experiencia en diversas tecnologías y roles.
                         Estas posiciones me han permitido abordar desafíos complejos y proponer soluciones eficaces.
@@ -125,7 +141,7 @@
 
         <!-- Certificaciones -->
         <section id="certificaciones" class="seccion certificaciones">
-            <h2 class="titulo-seccion">Certificaciones</h2>
+            <h2 class="titulo-seccion" data-comentario="// 02. certificaciones">Certificaciones</h2>
             <p class="descripcion">
                 A lo largo de mi carrera como desarrollador .NET, he obtenido diversas certificaciones que validan y fortalecen mis conocimientos técnicos, ampliando mi experiencia profesional.
             </p>
@@ -173,7 +189,7 @@
 
         <!-- Proyectos -->
         <section id="proyectos" class="seccion proyectos">
-            <h2 class="titulo-seccion">Proyectos</h2>
+            <h2 class="titulo-seccion" data-comentario="// 03. proyectos">Proyectos</h2>
             <p class="descripcion">Todo lo que puedas imaginar, lo podrás programar</p>
 
             <div class="filtros" role="group" aria-label="Filtrar proyectos">
@@ -240,7 +256,7 @@
         <!-- Habilidades -->
         <section id="habilidades" class="seccion skills">
             <div class="skills-text">
-                <h2>Habilidades <br><span class="acento">Técnicas</span></h2>
+                <h2 data-comentario="// 04. habilidades">Habilidades <br><span class="acento">Técnicas</span></h2>
                 <p>
                     Estas son algunas de las herramientas y tecnologías que he aprendido y perfeccionado a lo largo de mi camino como desarrollador,
                     las cuales me han permitido enfrentar desafíos y crear soluciones efectivas en diversos proyectos.
@@ -288,7 +304,7 @@
             </div>
         </div>
         <p class="footer-bottom">
-            <i class="fa-solid fa-computer" aria-hidden="true"></i> &copy; <span id="year">2025</span> Daniel Poveda Romero.
+            <span class="tk-fn">console</span>.<span class="tk-fn">log</span>(<span class="tk-str">"&copy; <span id="year">2025</span> Daniel Poveda Romero"</span>);
         </p>
     </footer>
 
