@@ -305,62 +305,193 @@
             <p class="descripcion" data-i18n="proj.intro">If you can imagine it, you can code it</p>
 
             <div class="filtros" role="group" aria-label="Filter projects" data-i18n-attr="aria-label:proj.filter">
-                <button class="filtro-btn active" type="button" data-filtro="todos" aria-pressed="true" data-i18n="proj.all">All</button>
-                <button class="filtro-btn" type="button" data-filtro="azure" aria-pressed="false">Azure</button>
-                <button class="filtro-btn" type="button" data-filtro="css" aria-pressed="false">HTML CSS</button>
-                <button class="filtro-btn" type="button" data-filtro="maui" aria-pressed="false">.NET MAUI</button>
+                <span class="filtro-indicador" aria-hidden="true"></span>
+                <button class="filtro-btn active" type="button" data-filtro="todos" aria-pressed="true"><span data-i18n="proj.all">All</span> <small class="filtro-count"></small></button>
+                <button class="filtro-btn" type="button" data-filtro="azure" aria-pressed="false">Azure <small class="filtro-count"></small></button>
+                <button class="filtro-btn" type="button" data-filtro="maui" aria-pressed="false">.NET MAUI <small class="filtro-count"></small></button>
+                <button class="filtro-btn" type="button" data-filtro="css" aria-pressed="false">HTML CSS <small class="filtro-count"></small></button>
             </div>
 
             <ul class="proyectos-grid">
-                <li class="proyecto-card" data-categoria="azure">
-                    <img src="assets/img/proyectos/htmlcss/azure/lenguaje.svg" alt="" loading="lazy">
-                    <h3>Azure Language</h3>
-                    <a href="assets/proyectos/azure/p4/index.html" class="btn btn-sm"><i class="fas fa-eye" aria-hidden="true"></i> <span data-i18n="proj.view">View</span></a>
+                <li class="proyecto-card" data-categoria="azure" style="--marca: #2F80ED">
+                    <article class="proyecto-inner">
+                        <div class="proyecto-media">
+                            <img src="assets/img/proyectos/htmlcss/azure/lenguaje.svg" alt="" loading="lazy">
+                            <span class="proyecto-num" aria-hidden="true">01</span>
+                            <span class="proyecto-cat"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Azure</span>
+                        </div>
+                        <div class="proyecto-body">
+                            <h3>Azure Language</h3>
+                            <p data-i18n="proj.d1">Console app that analyzes text from a PDF: sentiment, key phrases, entities and language detection.</p>
+                            <ul class="proyecto-tech" aria-label="Technologies" data-i18n-attr="aria-label:exp.tech"><li>C#</li><li>Azure AI Language</li><li>Blob Storage</li></ul>
+                            <a href="assets/proyectos/azure/p4/index.html" class="proyecto-link">
+                                <span data-i18n="proj.view">View project</span>
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
                 </li>
-                <li class="proyecto-card" data-categoria="azure">
-                    <img src="assets/img/proyectos/htmlcss/azure/facia.png" alt="" loading="lazy">
-                    <h3>Face AI</h3>
-                    <a href="assets/proyectos/azure/p3/index.html" class="btn btn-sm"><i class="fas fa-eye" aria-hidden="true"></i> <span data-i18n="proj.view">View</span></a>
+                <li class="proyecto-card" data-categoria="azure" style="--marca: #2F80ED">
+                    <article class="proyecto-inner">
+                        <div class="proyecto-media">
+                            <img src="assets/img/proyectos/htmlcss/azure/facia.png" alt="" loading="lazy">
+                            <span class="proyecto-num" aria-hidden="true">02</span>
+                            <span class="proyecto-cat"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Azure</span>
+                        </div>
+                        <div class="proyecto-body">
+                            <h3>Face AI</h3>
+                            <p data-i18n="proj.d2">Face detection and facial attribute analysis using the Azure AI Vision Face SDK.</p>
+                            <ul class="proyecto-tech" aria-label="Technologies" data-i18n-attr="aria-label:exp.tech"><li>C#</li><li>Azure Face</li><li>.NET 8</li></ul>
+                            <a href="assets/proyectos/azure/p3/index.html" class="proyecto-link">
+                                <span data-i18n="proj.view">View project</span>
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
                 </li>
-                <li class="proyecto-card" data-categoria="azure">
-                    <img src="assets/img/proyectos/htmlcss/azure/vision.png" alt="" loading="lazy">
-                    <h3>Image Analysis AI</h3>
-                    <a href="assets/proyectos/azure/p2/index.html" class="btn btn-sm"><i class="fas fa-eye" aria-hidden="true"></i> <span data-i18n="proj.view">View</span></a>
+                <li class="proyecto-card" data-categoria="azure" style="--marca: #2F80ED">
+                    <article class="proyecto-inner">
+                        <div class="proyecto-media">
+                            <img src="assets/img/proyectos/htmlcss/azure/vision.png" alt="" loading="lazy">
+                            <span class="proyecto-num" aria-hidden="true">03</span>
+                            <span class="proyecto-cat"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Azure</span>
+                        </div>
+                        <div class="proyecto-body">
+                            <h3>Image Analysis AI</h3>
+                            <p data-i18n="proj.d3">Image captions, object detection, OCR and tagging with Azure Computer Vision.</p>
+                            <ul class="proyecto-tech" aria-label="Technologies" data-i18n-attr="aria-label:exp.tech"><li>C#</li><li>Computer Vision</li><li>OCR</li></ul>
+                            <a href="assets/proyectos/azure/p2/index.html" class="proyecto-link">
+                                <span data-i18n="proj.view">View project</span>
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
                 </li>
-                <li class="proyecto-card" data-categoria="azure">
-                    <img src="assets/img/proyectos/htmlcss/azure/azure.jpg" alt="" loading="lazy">
-                    <h3>API App Service</h3>
-                    <a href="assets/proyectos/azure/p1/index.html" class="btn btn-sm"><i class="fas fa-eye" aria-hidden="true"></i> <span data-i18n="proj.view">View</span></a>
+                <li class="proyecto-card" data-categoria="azure" style="--marca: #2F80ED">
+                    <article class="proyecto-inner">
+                        <div class="proyecto-media">
+                            <img src="assets/img/proyectos/htmlcss/azure/azure.jpg" alt="" loading="lazy">
+                            <span class="proyecto-num" aria-hidden="true">04</span>
+                            <span class="proyecto-cat"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Azure</span>
+                        </div>
+                        <div class="proyecto-body">
+                            <h3>API App Service</h3>
+                            <p data-i18n="proj.d4">REST API with Bearer Token auth and Dapper, deployed to Azure App Service with Azure SQL.</p>
+                            <ul class="proyecto-tech" aria-label="Technologies" data-i18n-attr="aria-label:exp.tech"><li>.NET 8</li><li>Dapper</li><li>Azure SQL</li></ul>
+                            <a href="assets/proyectos/azure/p1/index.html" class="proyecto-link">
+                                <span data-i18n="proj.view">View project</span>
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
                 </li>
-                <li class="proyecto-card" data-categoria="maui">
-                    <img src="assets/img/proyectos/htmlcss/maui/1.png" alt="" loading="lazy">
-                    <h3>Weather</h3>
-                    <a href="assets/proyectos/maui/p3/index.html" class="btn btn-sm"><i class="fas fa-eye" aria-hidden="true"></i> <span data-i18n="proj.view">View</span></a>
+                <li class="proyecto-card" data-categoria="maui" style="--marca: #A56CF6">
+                    <article class="proyecto-inner">
+                        <div class="proyecto-media">
+                            <img src="assets/img/proyectos/htmlcss/maui/1.png" alt="" loading="lazy">
+                            <span class="proyecto-num" aria-hidden="true">05</span>
+                            <span class="proyecto-cat"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> .NET MAUI</span>
+                        </div>
+                        <div class="proyecto-body">
+                            <h3>Weather</h3>
+                            <p data-i18n="proj.d5">Weather app that consumes a REST API, with custom styles, Lottie animations and SkiaSharp.</p>
+                            <ul class="proyecto-tech" aria-label="Technologies" data-i18n-attr="aria-label:exp.tech"><li>.NET MAUI</li><li>REST API</li><li>SkiaSharp</li></ul>
+                            <a href="assets/proyectos/maui/p3/index.html" class="proyecto-link">
+                                <span data-i18n="proj.view">View project</span>
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
                 </li>
-                <li class="proyecto-card" data-categoria="maui">
-                    <img src="assets/img/proyectos/htmlcss/maui/2.png" alt="" loading="lazy">
-                    <h3>HangMan</h3>
-                    <a href="assets/proyectos/maui/p1/index.html" class="btn btn-sm"><i class="fas fa-eye" aria-hidden="true"></i> <span data-i18n="proj.view">View</span></a>
+                <li class="proyecto-card" data-categoria="maui" style="--marca: #A56CF6">
+                    <article class="proyecto-inner">
+                        <div class="proyecto-media">
+                            <img src="assets/img/proyectos/htmlcss/maui/2.png" alt="" loading="lazy">
+                            <span class="proyecto-num" aria-hidden="true">06</span>
+                            <span class="proyecto-cat"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> .NET MAUI</span>
+                        </div>
+                        <div class="proyecto-body">
+                            <h3>HangMan</h3>
+                            <p data-i18n="proj.d6">Hangman game with dynamically generated buttons, FlexLayout and data binding.</p>
+                            <ul class="proyecto-tech" aria-label="Technologies" data-i18n-attr="aria-label:exp.tech"><li>.NET MAUI</li><li>XAML</li><li>Binding</li></ul>
+                            <a href="assets/proyectos/maui/p1/index.html" class="proyecto-link">
+                                <span data-i18n="proj.view">View project</span>
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
                 </li>
-                <li class="proyecto-card" data-categoria="maui">
-                    <img src="assets/img/proyectos/htmlcss/maui/3.png" alt="" loading="lazy">
-                    <h3>BMI</h3>
-                    <a href="assets/proyectos/maui/p2/index.html" class="btn btn-sm"><i class="fas fa-eye" aria-hidden="true"></i> <span data-i18n="proj.view">View</span></a>
+                <li class="proyecto-card" data-categoria="maui" style="--marca: #A56CF6">
+                    <article class="proyecto-inner">
+                        <div class="proyecto-media">
+                            <img src="assets/img/proyectos/htmlcss/maui/3.png" alt="" loading="lazy">
+                            <span class="proyecto-num" aria-hidden="true">07</span>
+                            <span class="proyecto-cat"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> .NET MAUI</span>
+                        </div>
+                        <div class="proyecto-body">
+                            <h3>BMI</h3>
+                            <p data-i18n="proj.d7">Body mass index calculator with gauges built on the MVVM pattern.</p>
+                            <ul class="proyecto-tech" aria-label="Technologies" data-i18n-attr="aria-label:exp.tech"><li>.NET MAUI</li><li>MVVM</li><li>Syncfusion</li></ul>
+                            <a href="assets/proyectos/maui/p2/index.html" class="proyecto-link">
+                                <span data-i18n="proj.view">View project</span>
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
                 </li>
-                <li class="proyecto-card" data-categoria="css">
-                    <img src="assets/img/proyectos/htmlcss/huddle/1.png" alt="" loading="lazy">
-                    <h3>Huddle</h3>
-                    <a href="assets/proyectos/css/p1/index.html" class="btn btn-sm"><i class="fas fa-eye" aria-hidden="true"></i> <span data-i18n="proj.view">View</span></a>
+                <li class="proyecto-card" data-categoria="css" style="--marca: #FF7755">
+                    <article class="proyecto-inner">
+                        <div class="proyecto-media">
+                            <img src="assets/img/proyectos/htmlcss/huddle/1.png" alt="" loading="lazy">
+                            <span class="proyecto-num" aria-hidden="true">08</span>
+                            <span class="proyecto-cat"><i class="fa-brands fa-css3-alt" aria-hidden="true"></i> HTML CSS</span>
+                        </div>
+                        <div class="proyecto-body">
+                            <h3>Huddle</h3>
+                            <p data-i18n="proj.d8">Responsive landing page with curved sections, built from a Frontend Mentor design.</p>
+                            <ul class="proyecto-tech" aria-label="Technologies" data-i18n-attr="aria-label:exp.tech"><li>HTML</li><li>CSS</li><li>Responsive</li></ul>
+                            <a href="assets/proyectos/css/p1/index.html" class="proyecto-link">
+                                <span data-i18n="proj.view">View project</span>
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
                 </li>
-                <li class="proyecto-card" data-categoria="css">
-                    <img src="assets/img/proyectos/htmlcss/huddle/2.png" alt="" loading="lazy">
-                    <h3>Fylo</h3>
-                    <a href="assets/proyectos/css/p2/index.html" class="btn btn-sm"><i class="fas fa-eye" aria-hidden="true"></i> <span data-i18n="proj.view">View</span></a>
+                <li class="proyecto-card" data-categoria="css" style="--marca: #FF7755">
+                    <article class="proyecto-inner">
+                        <div class="proyecto-media">
+                            <img src="assets/img/proyectos/htmlcss/huddle/2.png" alt="" loading="lazy">
+                            <span class="proyecto-num" aria-hidden="true">09</span>
+                            <span class="proyecto-cat"><i class="fa-brands fa-css3-alt" aria-hidden="true"></i> HTML CSS</span>
+                        </div>
+                        <div class="proyecto-body">
+                            <h3>Fylo</h3>
+                            <p data-i18n="proj.d9">Responsive landing page with curved backgrounds and testimonials, from a Frontend Mentor design.</p>
+                            <ul class="proyecto-tech" aria-label="Technologies" data-i18n-attr="aria-label:exp.tech"><li>HTML</li><li>CSS</li><li>Responsive</li></ul>
+                            <a href="assets/proyectos/css/p2/index.html" class="proyecto-link">
+                                <span data-i18n="proj.view">View project</span>
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
                 </li>
-                <li class="proyecto-card" data-categoria="css">
-                    <img src="assets/img/proyectos/htmlcss/huddle/3.png" alt="" loading="lazy">
-                    <h3>EasyBank</h3>
-                    <a href="assets/proyectos/css/p3/index.html" class="btn btn-sm"><i class="fas fa-eye" aria-hidden="true"></i> <span data-i18n="proj.view">View</span></a>
+                <li class="proyecto-card" data-categoria="css" style="--marca: #FF7755">
+                    <article class="proyecto-inner">
+                        <div class="proyecto-media">
+                            <img src="assets/img/proyectos/htmlcss/huddle/3.png" alt="" loading="lazy">
+                            <span class="proyecto-num" aria-hidden="true">10</span>
+                            <span class="proyecto-cat"><i class="fa-brands fa-css3-alt" aria-hidden="true"></i> HTML CSS</span>
+                        </div>
+                        <div class="proyecto-body">
+                            <h3>EasyBank</h3>
+                            <p data-i18n="proj.d10">Digital banking landing page with a mobile menu, from a Frontend Mentor design.</p>
+                            <ul class="proyecto-tech" aria-label="Technologies" data-i18n-attr="aria-label:exp.tech"><li>HTML</li><li>CSS</li><li>Responsive</li></ul>
+                            <a href="assets/proyectos/css/p3/index.html" class="proyecto-link">
+                                <span data-i18n="proj.view">View project</span>
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
                 </li>
             </ul>
         </section>

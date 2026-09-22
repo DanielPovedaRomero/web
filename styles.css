@@ -949,74 +949,289 @@ a {
     text-align: center;
 }
 
+/* Filtros como pestañas con indicador deslizante */
 .filtros {
-    display: flex;
+    position: relative;
+    display: inline-flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.75rem;
-    margin-bottom: 2.5rem;
+    gap: 0.25rem;
+    margin-bottom: 3rem;
+    padding: 0.35rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(15, 36, 54, 0.7);
+}
+
+.filtro-indicador {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 999px;
+    background: var(--gradient);
+    box-shadow: 0 4px 18px rgba(255, 119, 85, 0.35);
+    transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1), width 0.45s cubic-bezier(0.65, 0, 0.35, 1), height 0.45s ease;
+    pointer-events: none;
 }
 
 .filtro-btn {
-    min-width: 110px;
-    padding: 0.7rem 1.2rem;
-    border: 2px solid var(--accent);
-    border-radius: 5px;
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.6rem 1.1rem;
+    border: none;
+    border-radius: 999px;
     background: transparent;
-    color: var(--text);
-    font: inherit;
-    font-size: 0.95rem;
+    color: var(--text-soft);
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: color 0.3s ease;
 }
 
-.filtro-btn:hover {
-    background-color: rgba(255, 119, 85, 0.2);
-}
-
+.filtro-btn:hover,
 .filtro-btn.active {
-    background: var(--gradient);
-    border-color: transparent;
+    color: #fff;
 }
 
+.filtro-count {
+    min-width: 1.4rem;
+    padding: 0.05rem 0.4rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    font-size: 0.7rem;
+    transition: background-color 0.3s ease;
+}
+
+.filtro-btn.active .filtro-count {
+    background: rgba(9, 26, 40, 0.3);
+}
+
+/* En móvil las pestañas pasan a dos filas: bordes menos redondeados */
+@media (max-width: 520px) {
+    .filtros {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        border-radius: 18px;
+    }
+
+    .filtro-btn {
+        justify-content: center;
+    }
+}
+
+/* Sin JS el indicador no existe: el botón activo lleva su propio fondo */
+.filtros:not(.con-indicador) .filtro-btn.active {
+    background: var(--gradient);
+}
+
+/* Rejilla */
 .proyectos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+    gap: 1.75rem;
+    text-align: left;
 }
 
 .proyecto-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 1.25rem;
-    overflow: hidden;
-    background-color: var(--surface);
-    border-radius: var(--radius);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    perspective: 900px;
 }
 
 .proyecto-card[hidden] {
     display: none;
 }
 
-.proyecto-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+/* Tarjeta que se inclina en 3D siguiendo el cursor */
+.proyecto-inner {
+    --rx: 0deg;
+    --ry: 0deg;
+    --gx: 50%;
+    --gy: 50%;
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    transform: rotateX(var(--rx)) rotateY(var(--ry));
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease-out, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-.proyecto-card img {
+/* Reflejo de luz */
+.proyecto-inner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: radial-gradient(circle at var(--gx) var(--gy), rgba(255, 255, 255, 0.14), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.proyecto-card:hover .proyecto-inner {
+    border-color: color-mix(in srgb, var(--marca) 70%, transparent);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px color-mix(in srgb, var(--marca) 25%, transparent);
+}
+
+.proyecto-card:hover .proyecto-inner::after {
+    opacity: 1;
+}
+
+.proyecto-card:not(:hover) .proyecto-inner {
+    transition: transform 0.6s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.proyecto-media {
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+.proyecto-media img {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 10;
     object-fit: cover;
-    background-color: #000;
+    transition: transform 0.6s ease;
 }
 
-.proyecto-card h3 {
-    margin: 1rem 0;
-    font-size: 1.15rem;
+.proyecto-card:hover .proyecto-media img {
+    transform: scale(1.08);
+}
+
+/* Degradado inferior para dar profundidad a la imagen */
+.proyecto-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(15, 36, 54, 0.85));
+    pointer-events: none;
+}
+
+.proyecto-num {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.9rem;
+    z-index: 1;
+    padding: 0.15rem 0.5rem;
+    border-radius: 6px;
+    background: rgba(9, 26, 40, 0.75);
+    backdrop-filter: blur(4px);
+    font-family: var(--mono);
+    font-size: 0.75rem;
     font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.proyecto-cat {
+    position: absolute;
+    left: 0.9rem;
+    bottom: 0.8rem;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.7rem;
+    border: 1px solid color-mix(in srgb, var(--marca) 60%, transparent);
+    border-radius: 999px;
+    background: rgba(9, 26, 40, 0.8);
+    backdrop-filter: blur(4px);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: color-mix(in srgb, var(--marca) 60%, #fff);
+}
+
+.proyecto-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem 1.35rem 1.35rem;
+}
+
+.proyecto-body h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.proyecto-body p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+}
+
+.proyecto-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: auto;
+    padding-top: 0.25rem;
+}
+
+.proyecto-tech li {
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0;
+    color: var(--text-soft);
+}
+
+/* Enlace que cubre toda la tarjeta */
+.proyecto-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.proyecto-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    border-radius: 14px;
+}
+
+.proyecto-link i {
+    transition: transform 0.3s ease;
+}
+
+.proyecto-card:hover .proyecto-link i {
+    transform: translateX(6px);
+}
+
+.proyecto-link:focus-visible {
+    outline: none;
+}
+
+.proyecto-link:focus-visible::before {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Reaparición escalonada al cambiar de filtro */
+.proyecto-card.entrando {
+    animation: aparecer-zoom 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) var(--retraso-filtro, 0s) backwards;
 }
 
 /********************************************
@@ -1673,22 +1888,9 @@ a {
 }
 
 /* Tarjetas: borde luminoso y movimiento del icono */
-.proyecto-card {
-    border: 1px solid transparent;
-}
-
-.proyecto-card:hover,
 .skill-card:hover {
     border-color: rgba(255, 119, 85, 0.5);
     box-shadow: 0 10px 30px rgba(255, 119, 85, 0.15);
-}
-
-.proyecto-card img {
-    transition: transform 0.5s ease;
-}
-
-.proyecto-card:hover img {
-    transform: scale(1.08);
 }
 
 .skill-card img {
@@ -1842,17 +2044,10 @@ html {
 }
 
 /* Detalles monoespaciados */
-.filtro-btn,
-.proyecto-card h3,
 .skill-card span,
 .copy-alert {
     font-family: var(--mono);
     letter-spacing: 0;
-}
-
-.filtro-btn::before {
-    content: '.';
-    opacity: 0.6;
 }
 
 /********************************************

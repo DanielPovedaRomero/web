@@ -62,7 +62,17 @@ const TRADUCCIONES_ES = {
     'proj.intro': 'Todo lo que puedas imaginar, lo podrás programar',
     'proj.filter': 'Filtrar proyectos',
     'proj.all': 'Todos',
-    'proj.view': 'Ver',
+    'proj.view': 'Ver proyecto',
+    'proj.d1': 'App de consola que analiza texto de un PDF: sentimiento, frases clave, entidades y detección de idioma.',
+    'proj.d2': 'Detección de rostros y análisis de atributos faciales con el SDK Azure AI Vision Face.',
+    'proj.d3': 'Descripciones de imágenes, detección de objetos, OCR y etiquetado con Azure Computer Vision.',
+    'proj.d4': 'API REST con autenticación Bearer Token y Dapper, publicada en Azure App Service con Azure SQL.',
+    'proj.d5': 'App del clima que consume una API REST, con estilos propios, animaciones Lottie y SkiaSharp.',
+    'proj.d6': 'Juego del ahorcado con botones generados dinámicamente, FlexLayout y data binding.',
+    'proj.d7': 'Calculadora de índice de masa corporal con indicadores, construida con el patrón MVVM.',
+    'proj.d8': 'Landing page responsive con secciones curvas, a partir de un diseño de Frontend Mentor.',
+    'proj.d9': 'Landing page responsive con fondos curvos y testimonios, a partir de un diseño de Frontend Mentor.',
+    'proj.d10': 'Landing page de banca digital con menú móvil, a partir de un diseño de Frontend Mentor.',
 
     'skills.title': 'Habilidades <br><span class="acento">Técnicas</span>',
     'skills.comment': '// 04. habilidades',
@@ -391,10 +401,36 @@ function initTimeline() {
     actualizar();
 }
 
-/* Filtro de proyectos */
+/* Filtro de proyectos: pestañas con indicador deslizante y contadores */
 function initFiltros() {
-    const botones = document.querySelectorAll('.filtro-btn');
+    const contenedor = document.querySelector('.filtros');
+    if (!contenedor) return;
+
+    const botones = contenedor.querySelectorAll('.filtro-btn');
+    const indicador = contenedor.querySelector('.filtro-indicador');
     const proyectos = document.querySelectorAll('.proyecto-card');
+
+    // Cantidad de proyectos por categoría
+    botones.forEach((boton) => {
+        const filtro = boton.dataset.filtro;
+        const total = filtro === 'todos'
+            ? proyectos.length
+            : Array.from(proyectos).filter((p) => p.dataset.categoria === filtro).length;
+        boton.querySelector('.filtro-count').textContent = total;
+    });
+
+    // Mover la píldora detrás del botón activo
+    const moverIndicador = () => {
+        const activo = contenedor.querySelector('.filtro-btn.active');
+        indicador.style.width = `${activo.offsetWidth}px`;
+        indicador.style.height = `${activo.offsetHeight}px`;
+        indicador.style.transform = `translate(${activo.offsetLeft}px, ${activo.offsetTop}px)`;
+    };
+    contenedor.classList.add('con-indicador');
+    moverIndicador();
+    window.addEventListener('resize', moverIndicador);
+    document.addEventListener('cambio-idioma', moverIndicador);
+    document.fonts?.ready.then(moverIndicador);
 
     botones.forEach((boton) => {
         boton.addEventListener('click', () => {
@@ -405,10 +441,43 @@ function initFiltros() {
                 btn.classList.toggle('active', activo);
                 btn.setAttribute('aria-pressed', String(activo));
             });
+            moverIndicador();
 
+            let orden = 0;
             proyectos.forEach((proyecto) => {
-                proyecto.hidden = filtro !== 'todos' && proyecto.dataset.categoria !== filtro;
+                const visible = filtro === 'todos' || proyecto.dataset.categoria === filtro;
+                proyecto.hidden = !visible;
+                proyecto.classList.remove('entrando');
+                if (visible && !reducirMovimiento) {
+                    void proyecto.offsetWidth; // reinicia la animación
+                    proyecto.style.setProperty('--retraso-filtro', `${orden++ * 0.06}s`);
+                    proyecto.classList.add('entrando');
+                }
             });
+        });
+    });
+}
+
+/* Inclinación 3D de las tarjetas de proyecto siguiendo el cursor */
+function initTilt() {
+    if (reducirMovimiento || !window.matchMedia('(hover: hover)').matches) return;
+
+    document.querySelectorAll('.proyecto-card').forEach((card) => {
+        const inner = card.querySelector('.proyecto-inner');
+
+        card.addEventListener('pointermove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width;
+            const y = (e.clientY - rect.top) / rect.height;
+            inner.style.setProperty('--ry', `${(x - 0.5) * 12}deg`);
+            inner.style.setProperty('--rx', `${(0.5 - y) * 10}deg`);
+            inner.style.setProperty('--gx', `${x * 100}%`);
+            inner.style.setProperty('--gy', `${y * 100}%`);
+        });
+
+        card.addEventListener('pointerleave', () => {
+            inner.style.setProperty('--rx', '0deg');
+            inner.style.setProperty('--ry', '0deg');
         });
     });
 }
@@ -546,4 +615,5 @@ initCarrusel();
 initTimeline();
 initContadores();
 initFiltros();
+initTilt();
 initCopiarCorreo();
