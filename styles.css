@@ -272,71 +272,292 @@ a {
 ********************************************/
 .experiencia {
     display: grid;
-    gap: 2rem;
+    gap: 3rem;
+}
+
+.experiencia-introduccion {
     text-align: center;
 }
 
 .experiencia-introduccion p {
-    font-size: 1.1rem;
     margin: 0;
+    font-size: 1.1rem;
 }
 
-.experiencia-grid {
+/* Línea de tiempo */
+.timeline {
+    --nodo: 34px;
+    --separacion: 0.9rem;
+    position: relative;
     display: grid;
-    gap: 1.5rem;
+    gap: 2rem;
+    margin: 0;
+    padding: 0 0 0 calc(var(--nodo) + var(--separacion));
+    list-style: none;
 }
 
-.experiencia-item {
+/* Riel de fondo y relleno que avanza con el scroll */
+.timeline::before,
+.timeline::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--nodo) / 2 - 1px);
+    width: 2px;
+    border-radius: 2px;
+}
+
+.timeline::before {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.timeline::after {
+    background: linear-gradient(180deg, var(--accent), var(--accent-2), #2F80ED);
+    box-shadow: 0 0 12px rgba(255, 119, 85, 0.6);
+    transform: scaleY(var(--tl-progreso, 1));
+    transform-origin: top;
+}
+
+.tl-item {
+    position: relative;
+}
+
+.tl-nodo {
+    position: absolute;
+    top: 1.5rem;
+    left: calc(-1 * (var(--nodo) + var(--separacion)));
+    font-size: 0.8rem;
+    z-index: 1;
+    width: var(--nodo);
+    height: var(--nodo);
+    display: grid;
+    place-items: center;
+    border: 2px solid rgba(255, 119, 85, 0.6);
+    border-radius: 50%;
+    background: var(--bg);
+    color: var(--accent);
+    box-shadow: 0 0 0 6px var(--bg);
+}
+
+/* Anillo que late en el puesto actual */
+.tl-actual .tl-nodo {
+    border-color: var(--accent);
+    background: var(--gradient);
+    color: #fff;
+}
+
+.tl-actual .tl-nodo::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    animation: anillo 2s ease-out infinite;
+}
+
+@keyframes anillo {
+    to { transform: scale(1.7); opacity: 0; }
+}
+
+/* Tarjeta con spotlight que sigue al cursor */
+.exp-card {
+    --x: 50%;
+    --y: 50%;
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    padding: 1.5rem;
-    background-color: var(--surface);
-    border-radius: var(--radius);
+    gap: 0.9rem;
+    padding: 1.25rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface);
     box-shadow: var(--shadow);
     text-align: left;
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-.experiencia-item h3 {
+.exp-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(420px circle at var(--x) var(--y), rgba(255, 119, 85, 0.13), transparent 45%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.exp-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 119, 85, 0.5);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35), 0 0 30px rgba(255, 119, 85, 0.12);
+}
+
+.exp-card:hover::before {
+    opacity: 1;
+}
+
+.exp-card > * {
+    position: relative;
+}
+
+.exp-header {
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.exp-fecha {
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    margin: 0;
-    font-size: 1.25rem;
-}
-
-.fecha {
+    padding: 0.3rem 0.8rem;
+    border: 1px solid rgba(255, 119, 85, 0.35);
+    border-radius: 999px;
+    background: rgba(255, 119, 85, 0.08);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0;
     color: var(--accent);
-    font-weight: 700;
 }
 
-.experiencia-item p {
+.exp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid rgba(126, 231, 135, 0.3);
+    border-radius: 999px;
+    background: rgba(126, 231, 135, 0.06);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0;
+    color: var(--code-green);
+}
+
+.exp-badge-punto {
+    position: relative;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--code-green);
+}
+
+.exp-badge-punto::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--code-green);
+    animation: pulso 2s ease-out infinite;
+}
+
+.exp-card h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    line-height: 1.3;
+}
+
+.exp-card h3 .bandera {
+    display: inline-block;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+}
+
+.exp-card p {
     margin: 0;
     color: var(--text-muted);
 }
 
+/* Etiquetas como componentes <Tag /> */
 .etiquetas {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 0.5rem;
-    margin-top: 0.5rem;
+    margin-top: 0.25rem;
 }
 
 .etiqueta {
-    padding: 0.4rem 1rem;
-    border-radius: 25px;
-    background: var(--gradient);
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid rgba(255, 119, 85, 0.3);
+    border-radius: 6px;
+    background: rgba(255, 119, 85, 0.08);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: var(--accent-2);
     white-space: nowrap;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
+.etiqueta::before { content: '<'; opacity: 0.6; }
+.etiqueta::after { content: ' />'; opacity: 0.6; }
+
 .etiqueta:hover {
-    transform: scale(1.1);
+    transform: translateY(-3px);
+    border-color: transparent;
+    background: var(--gradient);
+    color: #fff;
+}
+
+/* Animaciones de entrada (las clases las agrega script.js) */
+.tl-item.reveal.visible {
+    animation-name: aparecer-derecha;
+}
+
+.tl-item.visible .tl-nodo {
+    animation: rebote 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) calc(var(--retraso, 0s) + 0.2s) backwards;
+}
+
+.tl-item.visible .etiqueta {
+    animation: aparecer-arriba 0.5s ease calc(var(--retraso, 0s) + 0.4s + var(--i, 0) * 0.06s) backwards;
+}
+
+@keyframes aparecer-derecha {
+    from { opacity: 0; transform: translateX(40px); }
+}
+
+@keyframes rebote {
+    from { opacity: 0; transform: scale(0); }
+}
+
+@media (min-width: 600px) {
+    .timeline {
+        --nodo: 44px;
+        --separacion: 1.25rem;
+    }
+
+    .tl-nodo {
+        font-size: 1rem;
+    }
+
+    .exp-card {
+        padding: 1.75rem 2rem;
+    }
+}
+
+@media (min-width: 900px) {
+    .experiencia {
+        grid-template-columns: 1fr 1.8fr;
+        align-items: start;
+        gap: 4rem;
+    }
+
+    /* La introducción queda fija mientras se recorre la línea de tiempo */
+    .experiencia-introduccion {
+        position: sticky;
+        top: calc(var(--nav-height) + 1.5rem);
+        text-align: left;
+    }
+
+    .experiencia-introduccion .titulo-seccion::after {
+        margin-left: 0;
+    }
 }
 
 /********************************************
@@ -1215,12 +1436,6 @@ a {
     }
 }
 
-@media (min-width: 600px) {
-    .experiencia-item {
-        padding: 2rem;
-    }
-}
-
 @media (min-width: 900px) {
     .logo img {
         width: 120px;
@@ -1239,12 +1454,6 @@ a {
         width: min(100%, 400px);
     }
 
-    .experiencia {
-        grid-template-columns: 1fr 2fr;
-        align-items: center;
-        text-align: left;
-    }
-
     /* Escritorio: 2 certificados grandes, flechas fuera de la imagen */
     .carrusel {
         --visibles: 2;
@@ -1257,10 +1466,6 @@ a {
 
     .carrusel-btn.next {
         right: 0;
-    }
-
-    .etiquetas {
-        justify-content: flex-start;
     }
 }
 
@@ -1468,24 +1673,14 @@ a {
 }
 
 /* Tarjetas: borde luminoso y movimiento del icono */
-.proyecto-card,
-.experiencia-item {
+.proyecto-card {
     border: 1px solid transparent;
 }
 
 .proyecto-card:hover,
-.skill-card:hover,
-.experiencia-item:hover {
+.skill-card:hover {
     border-color: rgba(255, 119, 85, 0.5);
     box-shadow: 0 10px 30px rgba(255, 119, 85, 0.15);
-}
-
-.experiencia-item {
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.experiencia-item:hover {
-    transform: translateY(-4px);
 }
 
 .proyecto-card img {
@@ -1646,18 +1841,7 @@ html {
     }
 }
 
-/* Etiquetas como componentes <Tag /> */
-.etiqueta {
-    font-family: var(--mono);
-    letter-spacing: 0;
-    text-transform: none;
-}
-
-.etiqueta::before { content: '<'; opacity: 0.7; }
-.etiqueta::after { content: ' />'; opacity: 0.7; }
-
 /* Detalles monoespaciados */
-.fecha,
 .filtro-btn,
 .proyecto-card h3,
 .skill-card span,
@@ -1669,16 +1853,6 @@ html {
 .filtro-btn::before {
     content: '.';
     opacity: 0.6;
-}
-
-.fecha::before {
-    content: '[ ';
-    color: var(--code-gray);
-}
-
-.fecha::after {
-    content: ' ]';
-    color: var(--code-gray);
 }
 
 /********************************************

@@ -30,6 +30,7 @@ const TRADUCCIONES_ES = {
     'exp.job1.date': '2022 — Actualidad',
     'exp.job1.desc': 'Encargado de crear aplicaciones en .NET con arquitecturas escalables, refactorizar código para mejorar calidad y rendimiento, e implementar unit tests. Integré soluciones con Softland ERP y participé en la migración de aplicaciones de Xamarin a .NET MAUI, añadiendo nuevas funcionalidades en proyectos móviles.',
     'exp.job2.title': 'Programador Junior',
+    'exp.current': 'Actual',
     'exp.job2.desc': 'Durante este tiempo, me especialicé en desarrollos a la medida, gestión de bases de datos y toma de requerimientos, garantizando entregables alineados a las necesidades de los clientes. Adquirí experiencia con Softland ERP, integrando y personalizando funcionalidades empresariales, además de capacitar a usuarios finales. También inicié mi trayectoria en tecnologías móviles con Xamarin.',
 
     'cert.title': 'Certificaciones',
@@ -349,6 +350,47 @@ function initContadores() {
     });
 }
 
+/* Línea de tiempo de experiencia: spotlight y progreso con el scroll */
+function initTimeline() {
+    const timeline = document.querySelector('.timeline');
+    if (!timeline) return;
+
+    // Orden de aparición de las etiquetas de cada tarjeta
+    timeline.querySelectorAll('.etiquetas').forEach((lista) => {
+        Array.from(lista.children).forEach((etiqueta, i) => etiqueta.style.setProperty('--i', i));
+    });
+
+    // Resplandor que sigue al cursor dentro de cada tarjeta
+    timeline.querySelectorAll('.exp-card').forEach((card) => {
+        card.addEventListener('pointermove', (e) => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--x', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--y', `${e.clientY - rect.top}px`);
+        });
+    });
+
+    if (reducirMovimiento) return;
+
+    // La línea se llena a medida que el centro de la pantalla la recorre
+    let pendiente = false;
+    const actualizar = () => {
+        pendiente = false;
+        const rect = timeline.getBoundingClientRect();
+        const centro = window.innerHeight * 0.6;
+        const progreso = Math.min(Math.max((centro - rect.top) / rect.height, 0), 1);
+        timeline.style.setProperty('--tl-progreso', progreso.toFixed(3));
+    };
+
+    window.addEventListener('scroll', () => {
+        if (!pendiente) {
+            pendiente = true;
+            requestAnimationFrame(actualizar);
+        }
+    }, { passive: true });
+    window.addEventListener('resize', actualizar);
+    actualizar();
+}
+
 /* Filtro de proyectos */
 function initFiltros() {
     const botones = document.querySelectorAll('.filtro-btn');
@@ -398,7 +440,7 @@ function initReveal() {
 
     const selectores = [
         '.titulo-seccion', '.descripcion', '.skills-text',
-        '.experiencia-introduccion', '.experiencia-item',
+        '.experiencia-introduccion', '.tl-item',
         '.cert-stat', '.plataformas-titulo', '.plataforma-item', '.carrusel',
         '.filtros', '.proyecto-card', '.skill-card',
         '.footer-cta', '.footer-grid > *'
@@ -501,6 +543,7 @@ initTyped();
 initScroll();
 initMenu();
 initCarrusel();
+initTimeline();
 initContadores();
 initFiltros();
 initCopiarCorreo();
