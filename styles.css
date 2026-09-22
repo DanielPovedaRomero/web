@@ -735,7 +735,7 @@ a {
         order: 3;
     }
 
-    .nav .social-icons {
+    .nav-actions {
         margin-left: auto;
     }
 
@@ -759,7 +759,7 @@ a {
 }
 
 @media (max-width: 420px) {
-    .nav .social-icons {
+    .nav-actions {
         gap: 0.75rem;
     }
 
@@ -1252,4 +1252,66 @@ html {
 .footer-bottom {
     font-family: var(--mono);
     letter-spacing: 0;
+}
+
+/********************************************
+   Selector de idioma
+********************************************/
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.lang-toggle {
+    position: relative;
+    display: inline-flex;
+    padding: 3px;
+    border: 1px solid rgba(255, 119, 85, 0.6);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Píldora que se desliza detrás del idioma activo */
+.lang-toggle::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    bottom: 3px;
+    left: 3px;
+    width: calc(50% - 3px);
+    border-radius: 999px;
+    background: var(--gradient);
+    transition: transform 0.3s ease;
+}
+
+.lang-toggle[data-activo="es"]::before {
+    transform: translateX(100%);
+}
+
+.lang-toggle span {
+    position: relative;
+    padding: 0.25rem 0.6rem;
+    color: var(--text-soft);
+    transition: color 0.3s ease;
+}
+
+.lang-toggle[data-activo="en"] [data-lang="en"],
+.lang-toggle[data-activo="es"] [data-lang="es"] {
+    color: #fff;
+}
+
+.lang-toggle:hover {
+    border-color: var(--accent);
+}
+
+/* En pantallas muy chicas los íconos sociales quedan en el footer */
+@media (max-width: 420px) {
+    .nav .social-icons {
+        display: none;
+    }
 }

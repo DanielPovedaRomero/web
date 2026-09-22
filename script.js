@@ -1,5 +1,136 @@
 'use strict';
 
+/********************************************
+   Idiomas (inglés por defecto, español opcional)
+   El inglés se toma del propio HTML; aquí solo va el español
+   y los textos que genera el JavaScript.
+********************************************/
+const TRADUCCIONES_ES = {
+    'nav.label': 'Navegación principal',
+    'nav.home': 'Inicio',
+    'nav.experience': 'Experiencia',
+    'nav.certifications': 'Certificaciones',
+    'nav.projects': 'Proyectos',
+    'nav.skills': 'Habilidades',
+    'nav.contact': 'Contacto',
+    'nav.copyEmail': 'Copiar correo',
+
+    'hero.intro': `¡Hola Mundo! Soy Daniel
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Flag_of_Costa_Rica.svg" alt="Costa Rica" class="bandera bandera-sm" width="20" height="12">,
+        un apasionado desarrollador backend con experiencia en la creación de aplicaciones eficientes y escalables utilizando .NET C#.
+        También enfocado en desarrollo de aplicaciones móviles con .NET MAUI y Xamarin.`,
+    'hero.cv': 'Descargar CV',
+    'hero.photoAlt': 'Foto de Daniel Poveda Romero',
+
+    'exp.title': 'Experiencia',
+    'exp.comment': '// 01. experiencia',
+    'exp.intro': 'A lo largo de mi trayectoria como desarrollador, he adquirido experiencia en diversas tecnologías y roles. Estas posiciones me han permitido abordar desafíos complejos y proponer soluciones eficaces.',
+    'exp.tech': 'Tecnologías',
+    'exp.job1.title': 'Programador Medium',
+    'exp.job1.date': '2022 — Actualidad',
+    'exp.job1.desc': 'Encargado de crear aplicaciones en .NET con arquitecturas escalables, refactorizar código para mejorar calidad y rendimiento, e implementar unit tests. Integré soluciones con Softland ERP y participé en la migración de aplicaciones de Xamarin a .NET MAUI, añadiendo nuevas funcionalidades en proyectos móviles.',
+    'exp.job2.title': 'Programador Junior',
+    'exp.job2.desc': 'Durante este tiempo, me especialicé en desarrollos a la medida, gestión de bases de datos y toma de requerimientos, garantizando entregables alineados a las necesidades de los clientes. Adquirí experiencia con Softland ERP, integrando y personalizando funcionalidades empresariales, además de capacitar a usuarios finales. También inicié mi trayectoria en tecnologías móviles con Xamarin.',
+
+    'cert.title': 'Certificaciones',
+    'cert.comment': '// 02. certificaciones',
+    'cert.intro': 'A lo largo de mi carrera como desarrollador .NET, he obtenido diversas certificaciones que validan y fortalecen mis conocimientos técnicos, ampliando mi experiencia profesional.',
+    'cert.platforms': 'Plataformas',
+    'cert.carousel': 'carrusel',
+    'cert.featured': 'Certificaciones destacadas',
+    'cert.prev': 'Anterior',
+    'cert.next': 'Siguiente',
+    'cert.c1': 'Certificación Azure Fundamentals',
+    'cert.c2': 'Certificación Azure AI Fundamentals',
+    'cert.c3': 'Certificado de principios SOLID',
+    'cert.c4': 'Certificado de .NET MAUI',
+    'cert.c5': 'Certificado de patrones de diseño',
+    'cert.more': 'Ver más',
+
+    'proj.title': 'Proyectos',
+    'proj.comment': '// 03. proyectos',
+    'proj.intro': 'Todo lo que puedas imaginar, lo podrás programar',
+    'proj.filter': 'Filtrar proyectos',
+    'proj.all': 'Todos',
+    'proj.view': 'Ver',
+
+    'skills.title': 'Habilidades <br><span class="acento">Técnicas</span>',
+    'skills.comment': '// 04. habilidades',
+    'skills.intro': 'Estas son algunas de las herramientas y tecnologías que he aprendido y perfeccionado a lo largo de mi camino como desarrollador, las cuales me han permitido enfrentar desafíos y crear soluciones efectivas en diversos proyectos.',
+
+    'footer.tagline': 'Desarrollador Backend especializado en .NET.',
+    'footer.links': 'Enlaces Rápidos',
+    'alert.copied': 'Correo copiado al portapapeles'
+};
+
+// Textos que solo existen en el JavaScript
+const TEXTOS_JS = {
+    en: {
+        menuOpen: 'Open menu',
+        menuClose: 'Close menu',
+        goToCert: (n) => `Go to certification ${n}`,
+        switchLang: 'Cambiar a español',
+        roles: ['Software Developer', 'Backend Developer', 'Mobile Developer'],
+        title: 'Daniel Poveda Romero | .NET Software Developer'
+    },
+    es: {
+        menuOpen: 'Abrir menú',
+        menuClose: 'Cerrar menú',
+        goToCert: (n) => `Ir a la certificación ${n}`,
+        switchLang: 'Switch to English',
+        roles: ['Desarrollador de Software', 'Desarrollador Backend', 'Desarrollador Móvil'],
+        title: 'Daniel Poveda Romero | Desarrollador de Software .NET'
+    }
+};
+
+let idioma = 'en';
+const t = (clave) => TEXTOS_JS[idioma][clave];
+
+function initIdioma() {
+    const boton = document.querySelector('.lang-toggle');
+    if (!boton) return;
+
+    // Guardar los textos originales en inglés que vienen en el HTML
+    const textos = Array.from(document.querySelectorAll('[data-i18n]'), (el) => ({
+        el, clave: el.dataset.i18n, en: el.textContent.trim().replace(/\s+/g, ' ')
+    }));
+    const htmls = Array.from(document.querySelectorAll('[data-i18n-html]'), (el) => ({
+        el, clave: el.dataset.i18nHtml, en: el.innerHTML.trim()
+    }));
+    const atributos = [];
+    document.querySelectorAll('[data-i18n-attr]').forEach((el) => {
+        el.dataset.i18nAttr.split(';').forEach((par) => {
+            const [attr, clave] = par.split(':');
+            atributos.push({ el, attr, clave, en: el.getAttribute(attr) });
+        });
+    });
+
+    const traducir = ({ clave, en }) => (idioma === 'es' ? TRADUCCIONES_ES[clave] ?? en : en);
+
+    const aplicar = (nuevo) => {
+        idioma = nuevo;
+        textos.forEach((item) => { item.el.textContent = traducir(item); });
+        htmls.forEach((item) => { item.el.innerHTML = traducir(item); });
+        atributos.forEach((item) => item.el.setAttribute(item.attr, traducir(item)));
+
+        document.documentElement.lang = nuevo;
+        document.title = t('title');
+        boton.dataset.activo = nuevo;
+        boton.setAttribute('aria-label', t('switchLang'));
+        boton.title = t('switchLang');
+
+        try { localStorage.setItem('idioma', nuevo); } catch (e) { /* sin almacenamiento */ }
+        document.dispatchEvent(new CustomEvent('cambio-idioma'));
+    };
+
+    boton.addEventListener('click', () => aplicar(idioma === 'en' ? 'es' : 'en'));
+
+    let guardado = null;
+    try { guardado = localStorage.getItem('idioma'); } catch (e) { /* sin almacenamiento */ }
+    if (guardado === 'es') aplicar('es');
+    else boton.dataset.activo = 'en';
+}
+
 /* Menú móvil */
 function initMenu() {
     const hamburger = document.querySelector('.hamburger');
@@ -10,8 +141,11 @@ function initMenu() {
         menu.classList.toggle('active', open);
         hamburger.classList.toggle('open', open);
         hamburger.setAttribute('aria-expanded', String(open));
-        hamburger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+        hamburger.setAttribute('aria-label', t(open ? 'menuClose' : 'menuOpen'));
     };
+
+    setOpen(false);
+    document.addEventListener('cambio-idioma', () => setOpen(menu.classList.contains('active')));
 
     hamburger.addEventListener('click', () => setOpen(!menu.classList.contains('active')));
 
@@ -58,12 +192,14 @@ function initCarrusel() {
                 const punto = document.createElement('button');
                 punto.type = 'button';
                 punto.className = 'carrusel-punto';
-                punto.setAttribute('aria-label', `Ir a la certificación ${i + 1}`);
                 punto.addEventListener('click', () => { index = i; update(); });
                 return punto;
             }));
         }
-        Array.from(puntos.children).forEach((p, i) => p.classList.toggle('active', i === index));
+        Array.from(puntos.children).forEach((p, i) => {
+            p.classList.toggle('active', i === index);
+            p.setAttribute('aria-label', t('goToCert')(i + 1));
+        });
     };
 
     const update = () => {
@@ -77,6 +213,7 @@ function initCarrusel() {
     prev.addEventListener('click', () => { index--; update(); });
     next.addEventListener('click', () => { index++; update(); });
     window.addEventListener('resize', update);
+    document.addEventListener('cambio-idioma', renderPuntos);
 
     // Deslizar con el dedo en móviles
     let inicioX = null;
@@ -171,16 +308,27 @@ function initReveal() {
 /* Efecto máquina de escribir que rota entre varios roles */
 function initTyped() {
     const el = document.querySelector('.typed');
-    if (!el || reducirMovimiento) return;
+    if (!el) return;
 
-    const palabras = el.dataset.palabras.split('|');
-    el.closest('h1').setAttribute('aria-label', `.NET ${palabras.join(', ')}`);
-
+    const h1 = el.closest('h1');
     let palabra = 0;
-    let letras = palabras[0].length;
+    let letras = 0;
     let borrando = true;
 
+    // Mostrar el primer rol del idioma actual y reiniciar el ciclo
+    const reiniciar = () => {
+        palabra = 0;
+        el.textContent = t('roles')[0];
+        letras = el.textContent.length;
+        borrando = true;
+        h1.setAttribute('aria-label', `.NET ${t('roles').join(', ')}`);
+    };
+    reiniciar();
+    document.addEventListener('cambio-idioma', reiniciar);
+    if (reducirMovimiento) return;
+
     const tick = () => {
+        const palabras = t('roles');
         const actual = palabras[palabra];
         letras += borrando ? -1 : 1;
         el.textContent = actual.slice(0, letras);
@@ -229,6 +377,7 @@ function initScroll() {
     actualizar();
 }
 
+initIdioma();
 document.getElementById('year').textContent = new Date().getFullYear();
 initReveal();
 initTyped();
