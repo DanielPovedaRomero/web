@@ -1509,39 +1509,253 @@ a {
 }
 
 /********************************************
-   Alerta de correo
+   Copiar correo: botón y notificación
 ********************************************/
-.copy-alert {
-    position: fixed;
-    right: 1rem;
-    bottom: 1rem;
-    z-index: 200;
-    max-width: calc(100% - 2rem);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding: 0.8rem 1.5rem;
-    background-color: var(--bg);
-    border: 2px solid rgba(255, 119, 85, 0.67);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.9rem;
-    font-weight: 700;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+
+/* El sobre se transforma en un check al copiar */
+.copy-email {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
 }
 
-.copy-alert.show {
+.copy-email i {
+    grid-area: 1 / 1;
+    transition: opacity 0.3s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.copy-email .copy-icono-ok {
+    color: var(--code-green);
+    opacity: 0;
+    transform: scale(0) rotate(-90deg);
+}
+
+.copy-email.copiado .copy-icono-mail {
+    opacity: 0;
+    transform: scale(0.3);
+}
+
+.copy-email.copiado .copy-icono-ok {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+}
+
+/* Onda expansiva */
+.copy-email::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border: 2px solid var(--code-green);
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.copy-email.copiado::after {
+    animation: onda 0.7s ease-out;
+}
+
+@keyframes onda {
+    from { opacity: 1; transform: scale(0.6); }
+    to   { opacity: 0; transform: scale(1.6); }
+}
+
+/* Botón pequeño junto al correo del footer */
+.copy-mini {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    margin-left: auto;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-soft);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.copy-mini:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.copy-mini::after {
+    border-radius: 10px;
+}
+
+/* Notificación */
+.toast {
+    --duracion: 3500ms;
+    --color: var(--code-green);
+    position: fixed;
+    left: 50%;
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    z-index: 300;
+    width: min(420px, calc(100% - 2rem));
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.9rem 0.9rem 1rem 1rem;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--color) 40%, transparent);
+    border-radius: 14px;
+    background: rgba(13, 22, 33, 0.95);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5), 0 0 24px color-mix(in srgb, var(--color) 15%, transparent);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, 140%);
+    transition: transform 0.55s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.3s ease, visibility 0.55s;
+}
+
+.toast.show {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translate(-50%, 0);
+}
+
+.toast--error {
+    --color: #FF5F56;
+}
+
+.toast-icono {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--color) 14%, transparent);
+    color: var(--color);
+}
+
+.toast-icono svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Trazo que se dibuja al aparecer */
+.toast-trazo {
+    stroke-dasharray: 24;
+}
+
+.toast.show .toast-trazo {
+    animation: dibujar 0.5s ease 0.3s backwards;
+}
+
+@keyframes dibujar {
+    from { stroke-dashoffset: 24; }
+}
+
+.toast .icono-error,
+.toast--error .icono-ok {
+    display: none;
+}
+
+.toast--error .icono-error {
+    display: inline;
+}
+
+.toast-texto {
+    min-width: 0;
+}
+
+.toast-titulo,
+.toast-email {
+    margin: 0;
+    font-family: var(--mono);
+    letter-spacing: 0;
+}
+
+.toast-titulo {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.toast .msg-error,
+.toast--error .msg-ok {
+    display: none;
+}
+
+.toast--error .msg-error {
+    display: inline;
 }
 
 .copy-prefix {
     color: var(--accent);
+}
+
+.toast-email {
+    margin-top: 0.15rem;
+    overflow-wrap: anywhere;
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    user-select: all;
+}
+
+.toast-cerrar {
+    align-self: start;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-soft);
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.toast-cerrar:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text);
+}
+
+/* Barra de tiempo restante */
+.toast-progreso {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--color);
+    transform-origin: left;
+    transform: scaleX(0);
+}
+
+.toast.show .toast-progreso {
+    animation: vaciar var(--duracion) linear forwards;
+}
+
+.toast.pausado .toast-progreso {
+    animation-play-state: paused;
+}
+
+@keyframes vaciar {
+    from { transform: scaleX(1); }
+    to   { transform: scaleX(0); }
+}
+
+/* Escritorio: esquina inferior derecha, entra desde el lado */
+@media (min-width: 700px) {
+    .toast {
+        left: auto;
+        right: 1.5rem;
+        bottom: 1.5rem;
+        transform: translateX(calc(100% + 2rem));
+    }
+
+    .toast.show {
+        transform: translateX(0);
+    }
 }
 
 /********************************************
@@ -1965,12 +2179,6 @@ html {
     }
 }
 
-/* Detalles monoespaciados */
-.copy-alert {
-    font-family: var(--mono);
-    letter-spacing: 0;
-}
-
 /********************************************
    Selector de idioma
 ********************************************/
@@ -1980,9 +2188,10 @@ html {
     gap: 1.25rem;
 }
 
-/* En pantallas muy chicas los íconos sociales quedan en el footer */
+/* En pantallas muy chicas LinkedIn y GitHub quedan en el footer;
+   el botón de copiar correo se mantiene */
 @media (max-width: 420px) {
-    .nav .social-icons {
+    .nav .social-icons a:not(.copy-email) {
         display: none;
     }
 }

@@ -42,7 +42,8 @@
 
                 <div class="social-icons">
                     <a href="mailto:danielpovedaromero@gmail.com" class="copy-email" data-email="danielpovedaromero@gmail.com" title="Copy email" aria-label="Copy email" data-i18n-attr="title:nav.copyEmail;aria-label:nav.copyEmail">
-                        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                        <i class="fa-solid fa-envelope copy-icono-mail" aria-hidden="true"></i>
+                        <i class="fa-solid fa-check copy-icono-ok" aria-hidden="true"></i>
                     </a>
                     <a href="https://www.linkedin.com/in/daniel-poveda-romero-84a59a1a6/" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn">
                         <i class="fab fa-linkedin" aria-hidden="true"></i>
@@ -539,6 +540,10 @@
                             <span class="footer-icono"><i class="fa-solid fa-envelope" aria-hidden="true"></i></span>
                             danielpovedaromero@gmail.com
                         </a>
+                        <button type="button" class="copy-email copy-mini" data-email="danielpovedaromero@gmail.com" title="Copy email" aria-label="Copy email" data-i18n-attr="title:nav.copyEmail;aria-label:nav.copyEmail">
+                            <i class="fa-regular fa-copy copy-icono-mail" aria-hidden="true"></i>
+                            <i class="fa-solid fa-check copy-icono-ok" aria-hidden="true"></i>
+                        </button>
                     </li>
                     <li>
                         <a href="https://www.linkedin.com/in/daniel-poveda-romero-84a59a1a6/" target="_blank" rel="noopener noreferrer">
@@ -573,9 +578,26 @@
         </div>
     </footer>
 
-    <!-- Alerta flotante -->
-    <div id="copy-alert" class="copy-alert" role="status" aria-live="polite">
-        <span class="copy-prefix">&lt;System&gt;</span> <span class="copy-message" data-i18n="alert.copied">Email copied to clipboard</span>
+    <!-- Notificación al copiar el correo -->
+    <div id="copy-alert" class="toast" role="status" aria-live="polite" aria-atomic="true">
+        <span class="toast-icono" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+                <path class="toast-trazo icono-ok" d="M5 12.5l4.5 4.5L19 7.5"/>
+                <path class="toast-trazo icono-error" d="M7 7l10 10M17 7L7 17"/>
+            </svg>
+        </span>
+        <div class="toast-texto">
+            <p class="toast-titulo">
+                <span class="copy-prefix">&lt;System&gt;</span>
+                <span class="msg-ok" data-i18n="alert.copied">Email copied to clipboard</span>
+                <span class="msg-error" data-i18n="alert.error">Couldn't copy automatically, copy it here:</span>
+            </p>
+            <p class="toast-email">danielpovedaromero@gmail.com</p>
+        </div>
+        <button class="toast-cerrar" type="button" aria-label="Close" data-i18n-attr="aria-label:alert.close">
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+        <span class="toast-progreso" aria-hidden="true"></span>
     </div>
 </body>
 </html>

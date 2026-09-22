@@ -81,7 +81,9 @@ const TRADUCCIONES_ES = {
     'footer.links': 'Navegación',
     'footer.built': 'Hecho con <i class="fa-solid fa-heart" aria-hidden="true"></i> HTML, CSS y JS',
     'footer.top': 'Volver arriba',
-    'alert.copied': 'Correo copiado al portapapeles'
+    'alert.copied': 'Correo copiado al portapapeles',
+    'alert.error': 'No se pudo copiar automáticamente, cópialo aquí:',
+    'alert.close': 'Cerrar'
 };
 
 // Textos que solo existen en el JavaScript
@@ -477,26 +479,89 @@ function initTilt() {
     });
 }
 
-/* Copiar correo al portapapeles; si no se puede, el enlace mailto sigue funcionando */
+/* Copiar correo al portapapeles con botón animado y notificación */
 function initCopiarCorreo() {
-    const link = document.querySelector('.copy-email');
-    const alerta = document.getElementById('copy-alert');
-    if (!link || !alerta || !navigator.clipboard) return;
+    const botones = document.querySelectorAll('.copy-email');
+    const toast = document.getElementById('copy-alert');
+    if (!botones.length || !toast) return;
 
-    let timer;
-    link.addEventListener('click', async (e) => {
-        e.preventDefault();
-        try {
-            await navigator.clipboard.writeText(link.dataset.email);
-            alerta.classList.add('show');
-            clearTimeout(timer);
-            timer = setTimeout(() => alerta.classList.remove('show'), 3000);
-        } catch (err) {
-            window.location.href = link.href;
+    const DURACION = 3500;
+    toast.style.setProperty('--duracion', `${DURACION}ms`);
+    let timer = null;
+    let inicio = 0;
+    let restante = DURACION;
+
+    // Clipboard API y, si no está disponible (http o navegador antiguo), método clásico
+    const copiar = async (texto) => {
+        if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(texto);
+            return;
         }
+        const area = document.createElement('textarea');
+        area.value = texto;
+        area.setAttribute('readonly', '');
+        area.style.cssText = 'position:fixed;top:0;left:0;opacity:0;';
+        document.body.append(area);
+        area.select();
+        const ok = document.execCommand('copy');
+        area.remove();
+        if (!ok) throw new Error('No se pudo copiar');
+    };
+
+    const ocultar = () => {
+        clearTimeout(timer);
+        toast.classList.remove('show', 'pausado');
+    };
+
+    const programar = (ms) => {
+        clearTimeout(timer);
+        inicio = Date.now();
+        restante = ms;
+        timer = setTimeout(ocultar, ms);
+    };
+
+    const mostrar = (error) => {
+        toast.classList.remove('show', 'pausado');
+        toast.classList.toggle('toast--error', error);
+        void toast.offsetWidth; // reinicia las animaciones si ya estaba visible
+        toast.classList.add('show');
+        programar(error ? DURACION * 2 : DURACION);
+    };
+
+    // Pausar mientras el cursor está encima
+    toast.addEventListener('mouseenter', () => {
+        if (!toast.classList.contains('show')) return;
+        clearTimeout(timer);
+        restante -= Date.now() - inicio;
+        toast.classList.add('pausado');
+    });
+    toast.addEventListener('mouseleave', () => {
+        if (!toast.classList.contains('show')) return;
+        toast.classList.remove('pausado');
+        programar(Math.max(restante, 800));
+    });
+
+    toast.querySelector('.toast-cerrar').addEventListener('click', ocultar);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') ocultar();
+    });
+
+    botones.forEach((boton) => {
+        boton.addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                await copiar(boton.dataset.email);
+                boton.classList.remove('copiado');
+                void boton.offsetWidth;
+                boton.classList.add('copiado');
+                setTimeout(() => boton.classList.remove('copiado'), 1800);
+                mostrar(false);
+            } catch (err) {
+                mostrar(true);
+            }
+        });
     });
 }
-
 
 /* Aparición de elementos al hacer scroll, escalonada entre hermanos */
 function initReveal() {
