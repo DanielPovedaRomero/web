@@ -11,7 +11,6 @@ const TRADUCCIONES_ES = {
     'nav.experience': 'Experiencia',
     'nav.certifications': 'Certificaciones',
     'nav.projects': 'Proyectos',
-    'nav.skills': 'Habilidades',
     'nav.contact': 'Contacto',
     'nav.copyEmail': 'Copiar correo',
 
@@ -73,10 +72,6 @@ const TRADUCCIONES_ES = {
     'proj.d8': 'Landing page responsive con secciones curvas, a partir de un diseño de Frontend Mentor.',
     'proj.d9': 'Landing page responsive con fondos curvos y testimonios, a partir de un diseño de Frontend Mentor.',
     'proj.d10': 'Landing page de banca digital con menú móvil, a partir de un diseño de Frontend Mentor.',
-
-    'skills.title': 'Habilidades <br><span class="acento">Técnicas</span>',
-    'skills.comment': '// 04. habilidades',
-    'skills.intro': 'Estas son algunas de las herramientas y tecnologías que he aprendido y perfeccionado a lo largo de mi camino como desarrollador, las cuales me han permitido enfrentar desafíos y crear soluciones efectivas en diversos proyectos.',
 
     'footer.kicker': '¿qué sigue?',
     'footer.title': 'Construyamos algo <span class="acento">grande juntos</span>',
@@ -508,10 +503,10 @@ function initReveal() {
     if (reducirMovimiento || !('IntersectionObserver' in window)) return;
 
     const selectores = [
-        '.titulo-seccion', '.descripcion', '.skills-text',
+        '.titulo-seccion', '.descripcion',
         '.experiencia-introduccion', '.tl-item',
         '.cert-stat', '.plataformas-titulo', '.plataforma-item', '.carrusel',
-        '.filtros', '.proyecto-card', '.skill-card',
+        '.filtros', '.proyecto-card',
         '.footer-cta', '.footer-grid > *'
     ];
     const elementos = document.querySelectorAll(selectores.join(','));
