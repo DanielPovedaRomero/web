@@ -189,25 +189,18 @@ function initMenu() {
     window.matchMedia('(min-width: 900px)').addEventListener('change', () => setOpen(false));
 }
 
-/* Navbar: cápsula al hacer scroll, se oculta al bajar y píldora que sigue al cursor */
+/* Navbar: siempre visible, cápsula al hacer scroll y píldora que sigue al cursor */
 function initNavbar() {
     const header = document.querySelector('.site-header');
     const menu = document.getElementById('menu');
     const indicador = menu && menu.querySelector('.menu-indicador');
     if (!header || !menu || !indicador) return;
 
-    // Estado según el scroll
-    let ultimoY = window.scrollY;
+    // Cápsula flotante en cuanto se deja la parte superior de la página
     let pendiente = false;
     const actualizar = () => {
         pendiente = false;
-        const y = window.scrollY;
-        header.classList.toggle('scrolled', y > 20);
-        const bajando = y > ultimoY + 4;
-        const subiendo = y < ultimoY - 4;
-        if (bajando && y > 400 && !menu.classList.contains('active')) header.classList.add('oculto');
-        if (subiendo || y <= 400) header.classList.remove('oculto');
-        if (bajando || subiendo) ultimoY = y;
+        header.classList.toggle('scrolled', window.scrollY > 20);
     };
     window.addEventListener('scroll', () => {
         if (!pendiente) {
@@ -216,9 +209,6 @@ function initNavbar() {
         }
     }, { passive: true });
     actualizar();
-
-    // Mostrar la barra si se navega con teclado dentro de ella
-    header.addEventListener('focusin', () => header.classList.remove('oculto'));
 
     // Píldora deslizante: sigue al cursor y vuelve a la sección activa
     const escritorio = window.matchMedia('(min-width: 900px)');
