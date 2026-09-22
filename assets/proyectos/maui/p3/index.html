@@ -1,139 +1,116 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <title>Clima</title>
+  <title data-es="Proyecto Clima">Weather Project</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../../../css/i18n.css" />
+  <script src="../../../js/i18n.js" data-inicio="../../../../index.html#proyectos"></script>
 </head>
 <body>
 
-  <!-- Contenedor principal -->
-  <div class="container"> 
-    <header class="project-header">    
+  <div class="container">
+    <header class="project-header">
       <div class="project-title-section">
-        <h1 class="project-title">Proyecto Clima</h1>
-        <p class="project-subtitle">
-          Creado en .Net Maui
-        </p>
+        <h1 class="project-title"><span lang="en">Weather Project</span><span lang="es">Proyecto Clima</span></h1>
+        <p class="project-subtitle"><span lang="en">Built with .NET MAUI</span><span lang="es">Creado en .NET MAUI</span></p>
         <div class="badges">
-            <span class="badge dotnet-maui">
-              <img src="img/maui.png" alt=".NET MAUI Logo" class="maui-icon" />
-              .NET MAUI
-            </span>
-          </div>
+          <span class="badge dotnet-maui">
+            <img src="img/maui.png" alt=".NET MAUI Logo" class="maui-icon" />
+            .NET MAUI
+          </span>
+        </div>
       </div>
     </header>
-    
-      <!-- Cuerpo del documento -->
+
     <main class="project-content">
 
-      <h2>Proyecto</h2>
-      <p> El objetivo de este proyecto es crear una app para poder consultar el clima de cualquier lugar a través de la API <strong>Weather API</strong>. 
-        En esta sección se explora la conexión con un servicio web externo, la implementación de <strong>estilos</strong> y <strong>diccionarios de datos</strong> 
-        para personalizar la interfaz, la incorporación de <strong>fuentes</strong> personalizadas y el uso de <strong>archivos Lottie</strong> para animaciones. Además, 
+      <h2><span lang="en">Project</span><span lang="es">Proyecto</span></h2>
+      <p lang="en">The goal of this project is to build an app that checks the weather anywhere using the <strong>Weather API</strong>.
+        It explores connecting to an external web service, implementing <strong>styles</strong> and <strong>resource dictionaries</strong>
+        to customize the interface, adding custom <strong>fonts</strong> and using <strong>Lottie files</strong> for animations. It also
+        integrates the <strong>SkiaSharp.Extended.UI.Maui</strong> NuGet package and applies <strong>Handlers</strong> to configure and extend controls, all to
+        create a polished, complete interface in the app.</p>
+      <p lang="es">El objetivo de este proyecto es crear una app para poder consultar el clima de cualquier lugar a través de la API <strong>Weather API</strong>.
+        En esta sección se explora la conexión con un servicio web externo, la implementación de <strong>estilos</strong> y <strong>diccionarios de datos</strong>
+        para personalizar la interfaz, la incorporación de <strong>fuentes</strong> personalizadas y el uso de <strong>archivos Lottie</strong> para animaciones. Además,
         se integra el paquete NuGet <strong>SkiaSharp.Extended.UI.Maui</strong> y se aplican <strong>Handlers</strong> para configurar y extender controles, todo esto para
-        poder crear una interfaz bien agradable y completa en la app </p>
+        poder crear una interfaz bien agradable y completa en la app.</p>
 
-        <!-- GitHub y AppCenter -->
-        <section class="project-links">
-          <h2>Enlaces del Proyecto</h2>
-        
-          <div class="links-container">
-            <a href="https://github.com/DanielPovedaRomero/MauiWeather" class="link-button github-link" target="_blank">
-              Ver en GitHub
-            </a>
-            <a href="https://install.appcenter.ms/users/danielpovedaromero/apps/Clima/releases/1" class="link-button appcenter-link" target="_blank">
-              Descargar en App Center
-            </a>
+      <section class="project-links">
+        <h2><span lang="en">Project Links</span><span lang="es">Enlaces del Proyecto</span></h2>
+        <div class="links-container">
+          <a href="https://github.com/DanielPovedaRomero/MauiWeather" class="link-button github-link" target="_blank" rel="noopener">
+            <span lang="en">View on GitHub</span><span lang="es">Ver en GitHub</span>
+          </a>
+          <a href="https://install.appcenter.ms/users/danielpovedaromero/apps/Clima/releases/1" class="link-button appcenter-link" target="_blank" rel="noopener">
+            <span lang="en">Download on App Center</span><span lang="es">Descargar en App Center</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="project-challenges">
+        <h2><span lang="en">Challenges</span><span lang="es">Retos</span></h2>
+        <div class="challenges-list">
+
+          <div class="challenge-item">
+            <h3><span lang="en">Creating styles</span><span lang="es">Creación de estilos</span></h3>
+            <p lang="en">The goal was to unify and customize the app's look by creating <strong>styles</strong> and shared resources.</p>
+            <p lang="es">El objetivo fue unificar y personalizar la apariencia de la aplicación mediante la creación de <strong>estilos</strong> y recursos compartidos.</p>
           </div>
-        </section>
 
-        <!-- Retos -->
-        <section class="project-challenges">
-          <h2>Retos</h2>
-          <div class="challenges-list">
-
-            <!-- Reto 1 -->
-            <div class="challenge-item">
-              <h3>Creacion de estilos</h3>
-              <p>
-                El objetivo fue unificar y personalizar la apariencia de la aplicación mediante la creación de <strong>estilos</strong> y recursos compartidos.         
-              </p>
-            </div>
-
-            <!-- Reto 2 -->
-            <div class="challenge-item">
-              <h3>Utilizar Nuget</h3>
-              <p>
-            <strong>SkiaSharp.Extended.UI.Maui</strong> supuso aprender a trabajar con componentes gráficos avanzados y a dibujar elementos personalizados dentro de la aplicación.
-              </p>
-            </div>
-
-            <!-- Reto 3 -->
-            <div class="challenge-item">
-              <h3>Uso de Converters</h3>
-              <p>
-                Lograr usar converter para interpretar la respuesta de la API y así decidir qué imagen mostrar en pantalla según el valor recibido.
-              </p>
-            </div>
-
+          <div class="challenge-item">
+            <h3><span lang="en">Using NuGet</span><span lang="es">Utilizar Nuget</span></h3>
+            <p lang="en"><strong>SkiaSharp.Extended.UI.Maui</strong> meant learning to work with advanced graphics components and to draw custom elements inside the app.</p>
+            <p lang="es"><strong>SkiaSharp.Extended.UI.Maui</strong> supuso aprender a trabajar con componentes gráficos avanzados y a dibujar elementos personalizados dentro de la aplicación.</p>
           </div>
-        </section>
 
+          <div class="challenge-item">
+            <h3><span lang="en">Using Converters</span><span lang="es">Uso de Converters</span></h3>
+            <p lang="en">Use a converter to interpret the API response and decide which image to show on screen based on the value received.</p>
+            <p lang="es">Lograr usar converter para interpretar la respuesta de la API y así decidir qué imagen mostrar en pantalla según el valor recibido.</p>
+          </div>
 
-      <h2>Capturas del Proyecto</h2>
+        </div>
+      </section>
+
+      <h2><span lang="en">Project Screenshots</span><span lang="es">Capturas del Proyecto</span></h2>
       <div class="gallery">
-
-        <!-- Imagen 1 -->
         <figure class="screenshot">
-          <img src="img/1.png" alt="Pantalla principal Clima" />
-          <figcaption>Inicio del proyecto</figcaption>
+          <img src="img/1.png" alt="Weather main screen" data-es-alt="Pantalla principal Clima" />
+          <figcaption><span lang="en">Project start</span><span lang="es">Inicio del proyecto</span></figcaption>
         </figure>
-      
-        <!-- Imagen 2 -->
         <figure class="screenshot">
-          <img src="img/2.png" alt="Detalle del juego Clima" />
-          <figcaption>Crear barra de búsqueda</figcaption>
+          <img src="img/2.png" alt="Weather search bar" data-es-alt="Barra de búsqueda Clima" />
+          <figcaption><span lang="en">Creating the search bar</span><span lang="es">Crear barra de búsqueda</span></figcaption>
         </figure>
-
-        <!-- Imagen 3 -->
         <figure class="screenshot">
-          <img src="img/3.png" alt="Detalle del juego Clima" />
-          <figcaption>Información de lugar</figcaption>
+          <img src="img/3.png" alt="Weather location info" data-es-alt="Información de lugar Clima" />
+          <figcaption><span lang="en">Location information</span><span lang="es">Información de lugar</span></figcaption>
         </figure>
-      
-        <!-- Imagen 4 -->
         <figure class="screenshot">
-          <img src="img/4.png" alt="Pantalla principal Clima" />
-          <figcaption>Agregar imagen de clima</figcaption>
+          <img src="img/4.png" alt="Weather image" data-es-alt="Imagen del clima" />
+          <figcaption><span lang="en">Adding the weather image</span><span lang="es">Agregar imagen de clima</span></figcaption>
         </figure>
-      
-        <!-- Imagen 5 -->
         <figure class="screenshot">
-          <img src="img/5.png" alt="Detalle del juego Clima" />
-          <figcaption>Detalle del clima</figcaption>
+          <img src="img/5.png" alt="Weather details" data-es-alt="Detalle del clima" />
+          <figcaption><span lang="en">Weather details</span><span lang="es">Detalle del clima</span></figcaption>
         </figure>
-
-        <!-- Imagen 6 -->
         <figure class="screenshot">
-          <img src="img/6.png" alt="Detalle del juego Clima" />
-          <figcaption>Pronóstico de otros días</figcaption>
+          <img src="img/6.png" alt="Forecast for other days" data-es-alt="Pronóstico de otros días" />
+          <figcaption><span lang="en">Forecast for other days</span><span lang="es">Pronóstico de otros días</span></figcaption>
         </figure>
-
-         <!-- Imagen 7 -->
-         <figure class="screenshot">
-          <img src="img/7.png" alt="Detalle del juego Clima" />
-          <figcaption>Proyecto final con consulta al API</figcaption>
-        </figure>
-
-        <!-- Imagen 7 -->
         <figure class="screenshot">
-            <img src="img/8.png" alt="Detalle del juego Clima" />
-            <figcaption>Proyecto final con consulta al API</figcaption>
-          </figure>
+          <img src="img/7.png" alt="Final project with API query" data-es-alt="Proyecto final con consulta al API" />
+          <figcaption><span lang="en">Final project with API query</span><span lang="es">Proyecto final con consulta al API</span></figcaption>
+        </figure>
+        <figure class="screenshot">
+          <img src="img/8.png" alt="Final project with API query" data-es-alt="Proyecto final con consulta al API" />
+          <figcaption><span lang="en">Final project with API query</span><span lang="es">Proyecto final con consulta al API</span></figcaption>
+        </figure>
       </div>
     </main>
-  </div> 
+  </div>
 </body>
 </html>

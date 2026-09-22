@@ -1,135 +1,117 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <title>Proyecto Ahorcado (Hangman)</title>
+  <title data-es="Proyecto Ahorcado (Hangman)">Hangman Project</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../../../css/i18n.css" />
+  <script src="../../../js/i18n.js" data-inicio="../../../../index.html#proyectos"></script>
 </head>
 <body>
 
-  <!-- Contenedor principal -->
-  <div class="container"> 
-    <header class="project-header">    
+  <div class="container">
+    <header class="project-header">
       <div class="project-title-section">
-        <h1 class="project-title">Proyecto Ahorcado (Hangman)</h1>
-        <p class="project-subtitle">
-          Creado en .Net Maui
-        </p>
+        <h1 class="project-title"><span lang="en">Hangman Project</span><span lang="es">Proyecto Ahorcado (Hangman)</span></h1>
+        <p class="project-subtitle"><span lang="en">Built with .NET MAUI</span><span lang="es">Creado en .NET MAUI</span></p>
         <div class="badges">
-            <span class="badge dotnet-maui">
-              <img src="img/maui.png" alt=".NET MAUI Logo" class="maui-icon" />
-              .NET MAUI
-            </span>
-          </div>
+          <span class="badge dotnet-maui">
+            <img src="img/maui.png" alt=".NET MAUI Logo" class="maui-icon" />
+            .NET MAUI
+          </span>
+        </div>
       </div>
     </header>
-    
-      <!-- Cuerpo del documento -->
+
     <main class="project-content">
 
-      <h2>Proyecto</h2>
-      <p>El objetivo de este proyecto es desarrollar el juego del Ahorcado (Hangman) utilizando .NET MAUI, 
-        aplicando conocimientos aprendidos en el curso para el desarrollo de interfaces y de la arquitectura de datos en aplicaciones. 
-        Entre los principales temas que se abordan se está la creación y el uso de Layouts en XAML, la configuración adecuada del BindingContext y la 
+      <h2><span lang="en">Project</span><span lang="es">Proyecto</span></h2>
+      <p lang="en">The goal of this project is to build the Hangman game with .NET MAUI,
+        applying what I learned in the course about interface development and data architecture in applications.
+        The main topics covered include creating and using Layouts in XAML, properly configuring the BindingContext and
+        implementing the INotifyPropertyChanged interface to handle communication between the logic and the XAML interface.</p>
+      <p lang="es">El objetivo de este proyecto es desarrollar el juego del Ahorcado (Hangman) utilizando .NET MAUI,
+        aplicando conocimientos aprendidos en el curso para el desarrollo de interfaces y de la arquitectura de datos en aplicaciones.
+        Entre los principales temas que se abordan está la creación y el uso de Layouts en XAML, la configuración adecuada del BindingContext y la
         implementación de la interfaz INotifyPropertyChanged para manejar la comunicación entre la lógica y la interfaz del XAML.</p>
 
-        <!-- GitHub y AppCenter -->
-        <section class="project-links">
-          <h2>Enlaces del Proyecto</h2>
-        
-          <div class="links-container">
-            <a href="https://github.com/DanielPovedaRomero/HangMan" class="link-button github-link" target="_blank">
-              Ver en GitHub
-            </a>
-            <a href="https://install.appcenter.ms/users/danielpovedaromero/apps/HangMan/releases/1" class="link-button appcenter-link" target="_blank">
-              Descargar en App Center
-            </a>
+      <section class="project-links">
+        <h2><span lang="en">Project Links</span><span lang="es">Enlaces del Proyecto</span></h2>
+        <div class="links-container">
+          <a href="https://github.com/DanielPovedaRomero/HangMan" class="link-button github-link" target="_blank" rel="noopener">
+            <span lang="en">View on GitHub</span><span lang="es">Ver en GitHub</span>
+          </a>
+          <a href="https://install.appcenter.ms/users/danielpovedaromero/apps/HangMan/releases/1" class="link-button appcenter-link" target="_blank" rel="noopener">
+            <span lang="en">Download on App Center</span><span lang="es">Descargar en App Center</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="project-challenges">
+        <h2><span lang="en">Challenges</span><span lang="es">Retos</span></h2>
+        <div class="challenges-list">
+
+          <div class="challenge-item">
+            <h3><span lang="en">Generate dynamic buttons</span><span lang="es">Generar botones dinámicos</span></h3>
+            <p lang="en">Create the buttons dynamically so they adapt to different device screens.</p>
+            <p lang="es">Crear los botones de forma dinámica para que se ajusten a las diferentes pantallas de los dispositivos.</p>
           </div>
-        </section>
 
-        <!-- Retos -->
-        <section class="project-challenges">
-          <h2>Retos</h2>
-          <div class="challenges-list">
-
-            <!-- Reto 1 -->
-            <div class="challenge-item">
-              <h3>Generar botones dinámicos</h3>
-              <p>
-                Crear los botones de forma dinámica para que se ajusten a las diferentes pantallas de los dispotivos.                
-              </p>
-            </div>
-
-            <!-- Reto 2 -->
-            <div class="challenge-item">
-              <h3>Utilizar FlexLayout</h3>
-              <p>
-                Implementar un <strong>FlexLayout</strong> que permita organizar y adaptar los elementos en pantalla 
-                de manera flexible.
-              </p>
-            </div>
-
-            <!-- Reto 3 -->
-            <div class="challenge-item">
-              <h3>Uso de BindingContext</h3>
-              <p>
-                Establecer y actualizar un <code>BindingContext</code> que sincronice los datos y 
-                la lógica del juego con la interfaz, asegurando que los cambios en el FlexLayout o 
-                en cualquier otro control se reflejen de inmediato.
-              </p>
-            </div>
-
+          <div class="challenge-item">
+            <h3><span lang="en">Use FlexLayout</span><span lang="es">Utilizar FlexLayout</span></h3>
+            <p lang="en">Implement a <strong>FlexLayout</strong> to organize and adapt the on-screen elements flexibly.</p>
+            <p lang="es">Implementar un <strong>FlexLayout</strong> que permita organizar y adaptar los elementos en pantalla de manera flexible.</p>
           </div>
-        </section>
 
+          <div class="challenge-item">
+            <h3><span lang="en">Using BindingContext</span><span lang="es">Uso de BindingContext</span></h3>
+            <p lang="en">
+              Set and update a <code>BindingContext</code> that keeps the game data and logic in sync with the interface,
+              making sure changes in the FlexLayout or any other control are reflected immediately.
+            </p>
+            <p lang="es">
+              Establecer y actualizar un <code>BindingContext</code> que sincronice los datos y
+              la lógica del juego con la interfaz, asegurando que los cambios en el FlexLayout o
+              en cualquier otro control se reflejen de inmediato.
+            </p>
+          </div>
 
-      <h2>Capturas del Proyecto</h2>
+        </div>
+      </section>
+
+      <h2><span lang="en">Project Screenshots</span><span lang="es">Capturas del Proyecto</span></h2>
       <div class="gallery">
-
-        <!-- Imagen 1 -->
         <figure class="screenshot">
-          <img src="img/1.png" alt="Pantalla principal HangMan" />
-          <figcaption>Inicio del proyecto</figcaption>
+          <img src="img/1.png" alt="HangMan main screen" data-es-alt="Pantalla principal HangMan" />
+          <figcaption><span lang="en">Project start</span><span lang="es">Inicio del proyecto</span></figcaption>
         </figure>
-      
-        <!-- Imagen 2 -->
         <figure class="screenshot">
-          <img src="img/2.png" alt="Detalle del juego HangMan" />
-          <figcaption>Interfaz base del proyecto</figcaption>
+          <img src="img/2.png" alt="HangMan base interface" data-es-alt="Interfaz base de HangMan" />
+          <figcaption><span lang="en">Base project interface</span><span lang="es">Interfaz base del proyecto</span></figcaption>
         </figure>
-
-        <!-- Imagen 3 -->
         <figure class="screenshot">
-          <img src="img/3.png" alt="Detalle del juego HangMan" />
-          <figcaption>Botones dinámicos</figcaption>
+          <img src="img/3.png" alt="HangMan dynamic buttons" data-es-alt="Botones dinámicos de HangMan" />
+          <figcaption><span lang="en">Dynamic buttons</span><span lang="es">Botones dinámicos</span></figcaption>
         </figure>
-      
-        <!-- Imagen 4 -->
         <figure class="screenshot">
-          <img src="img/4.png" alt="Pantalla principal HangMan" />
-          <figcaption>Funcionalidad de perder</figcaption>
+          <img src="img/4.png" alt="HangMan losing screen" data-es-alt="Pantalla de derrota de HangMan" />
+          <figcaption><span lang="en">Losing feature</span><span lang="es">Funcionalidad de perder</span></figcaption>
         </figure>
-      
-        <!-- Imagen 5 -->
         <figure class="screenshot">
-          <img src="img/5.png" alt="Detalle del juego HangMan" />
-          <figcaption>Funcionalidad de ganar</figcaption>
+          <img src="img/5.png" alt="HangMan winning screen" data-es-alt="Pantalla de victoria de HangMan" />
+          <figcaption><span lang="en">Winning feature</span><span lang="es">Funcionalidad de ganar</span></figcaption>
         </figure>
-
-        <!-- Imagen 6 -->
         <figure class="screenshot">
-          <img src="img/6.png" alt="Detalle del juego HangMan" />
-          <figcaption>Imágenes según los intentos</figcaption>
+          <img src="img/6.png" alt="HangMan images by attempts" data-es-alt="Imágenes de HangMan según intentos" />
+          <figcaption><span lang="en">Images based on attempts</span><span lang="es">Imágenes según los intentos</span></figcaption>
         </figure>
-
-         <!-- Imagen 7 -->
-         <figure class="screenshot">
-          <img src="img/7.png" alt="Detalle del juego HangMan" />
-          <figcaption>Juego final</figcaption>
+        <figure class="screenshot">
+          <img src="img/7.png" alt="HangMan final game" data-es-alt="Juego final de HangMan" />
+          <figcaption><span lang="en">Final game</span><span lang="es">Juego final</span></figcaption>
         </figure>
       </div>
     </main>
-  </div> 
+  </div>
 </body>
 </html>

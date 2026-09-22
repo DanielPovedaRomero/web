@@ -1,0 +1,103 @@
+/********************************************
+   Idioma: se oculta el texto del idioma no activo
+********************************************/
+html[lang="en"] body [lang="es"],
+html[lang="es"] body [lang="en"] {
+    display: none !important;
+}
+
+/********************************************
+   Selector de idioma EN | ES
+********************************************/
+.lang-toggle {
+    position: relative;
+    display: inline-flex;
+    padding: 3px;
+    border: 1px solid rgba(255, 119, 85, 0.6);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+/* Píldora que se desliza detrás del idioma activo */
+.lang-toggle::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    bottom: 3px;
+    left: 3px;
+    width: calc(50% - 3px);
+    border-radius: 999px;
+    background: linear-gradient(135deg, #FF7755, #FFAA77);
+    transition: transform 0.3s ease;
+}
+
+.lang-toggle[data-activo="es"]::before {
+    transform: translateX(100%);
+}
+
+.lang-toggle span {
+    position: relative;
+    padding: 0.25rem 0.6rem;
+    color: #CCCCCC;
+    transition: color 0.3s ease;
+}
+
+.lang-toggle[data-activo="en"] [data-lang="en"],
+.lang-toggle[data-activo="es"] [data-lang="es"] {
+    color: #FFFFFF;
+}
+
+.lang-toggle:hover {
+    border-color: #FF7755;
+}
+
+.lang-toggle:focus-visible,
+.i18n-volver:focus-visible {
+    outline: 2px solid #FF7755;
+    outline-offset: 3px;
+}
+
+/********************************************
+   Botón flotante de las subpáginas
+********************************************/
+.i18n-widget {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.4rem 0.5rem 0.4rem 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    background: rgba(9, 26, 40, 0.92);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(6px);
+    font-family: 'Montserrat', system-ui, sans-serif;
+}
+
+.i18n-volver {
+    color: #FFFFFF;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+.i18n-volver:hover {
+    color: #FF7755;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lang-toggle::before,
+    .lang-toggle span {
+        transition: none;
+    }
+}

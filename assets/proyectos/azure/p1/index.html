@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Proyecto Azure</title>
+  <title data-es="Proyecto Azure | API App Service">Azure Project | API App Service</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../../../css/i18n.css" />
+  <script src="../../../js/i18n.js" data-inicio="../../../../index.html#proyectos"></script>
 </head>
 <body>
   <div class="container">
     <header class="project-header">
       <div class="project-title-section">
-        <p class="project-subtitle">
-          Implementación en de Servicios de Microsoft Azure
-        </p>
+        <p class="project-subtitle" lang="en">Deploying Microsoft Azure Services</p>
+        <p class="project-subtitle" lang="es">Implementación de Servicios de Microsoft Azure</p>
         <div class="badges">
           <span class="badge azure-badge">
             <img src="img/azure.png" alt="Azure Logo" class="azure-icon" />
@@ -23,119 +24,150 @@
     </header>
 
     <main class="project-content">
-      <h2>Descripción del Proyecto</h2>
-      <p>Este proyecto fue creado con la intención de aprender a trabajar con algunos de los servicios que ofrece Microsoft Azure.      
-        Primero, se crearon los grupos de recursos y servicios necesarios en Azure, como el App Service 
+      <h2><span lang="en">Project Description</span><span lang="es">Descripción del Proyecto</span></h2>
+      <p lang="en">This project was created to learn how to work with some of the services offered by Microsoft Azure.
+        First, the required resource groups and services were created in Azure, such as App Service
+        (to host the API) and SQL Server (to store the data).
+        A REST API was built in Visual Studio with Bearer Token authentication. This project uses a tool called Dapper
+        to simplify database queries. The goal is to publish directly from Visual Studio to Azure App Service.
+      </p>
+      <p lang="es">Este proyecto fue creado con la intención de aprender a trabajar con algunos de los servicios que ofrece Microsoft Azure.
+        Primero, se crearon los grupos de recursos y servicios necesarios en Azure, como el App Service
         (para alojar el API) y SQL Server (para guardar la información).
         Se creó un API REST en Visual Studio con autenticación mediante Bearer Token. En este desarrollo se utilizó una herramienta llamada Dapper
         para facilitar las consultas a la base de datos. El objetivo es poder realizar la publicación desde Visual Studio hacia Azure App Service.
       </p>
 
       <section class="project-links">
-        <h2>Enlaces del Proyecto</h2>
+        <h2><span lang="en">Project Links</span><span lang="es">Enlaces del Proyecto</span></h2>
         <div class="links-container">
-          <a href="https://github.com/DanielPovedaRomero/API-Azure" class="link-button github-link" target="_blank">
-            Ver en GitHub
+          <a href="https://github.com/DanielPovedaRomero/API-Azure" class="link-button github-link" target="_blank" rel="noopener">
+            <span lang="en">View on GitHub</span><span lang="es">Ver en GitHub</span>
           </a>
         </div>
       </section>
 
       <section class="api-section">
-        <h2>🔧 Creación de Servicios en Azure</h2>
-        <p> Se crean desde el portal de Azure los servicios de App Service, SQL Server y Base de Datos SQL.</p>      
+        <h2>🔧 <span lang="en">Creating the Azure Services</span><span lang="es">Creación de Servicios en Azure</span></h2>
+        <p lang="en">The App Service, SQL Server and SQL Database services are created from the Azure portal.</p>
+        <p lang="es">Se crean desde el portal de Azure los servicios de App Service, SQL Server y Base de Datos SQL.</p>
         <figure class="api-image">
-          <img src="img/0.png" alt="azure0" />
-          <img src="img/1.png" alt="azure1" />
-          <img src="img/2.png" alt="azure2" />
+          <img src="img/0.png" alt="Creating App Service" data-es-alt="Creación de App Service" />
+          <img src="img/1.png" alt="Creating SQL Server" data-es-alt="Creación de SQL Server" />
+          <img src="img/2.png" alt="Creating SQL Database" data-es-alt="Creación de Base de Datos SQL" />
         </figure>
       </section>
 
       <section class="api-section">
-        <h2>🔧 Creación del API</h2>
-        <p>Se desarrolló un API REST con autenticación Bearer Token utilizando .NET 8.0. Este API permite consumir sus 
+        <h2>🔧 <span lang="en">Building the API</span><span lang="es">Creación del API</span></h2>
+        <p lang="en">A REST API with Bearer Token authentication was built with .NET 8.0. This API exposes endpoints
+          that interact with the SQL Database service.
+        </p>
+        <p lang="es">Se desarrolló un API REST con autenticación Bearer Token utilizando .NET 8.0. Este API permite consumir sus
           endpoints e interactuar con el servicio de Base de Datos SQL.
         </p>
         <figure class="api-image">
-          <img src="img/3.png" alt="azure3" />
+          <img src="img/3.png" alt="API project in Visual Studio" data-es-alt="Proyecto del API en Visual Studio" />
         </figure>
       </section>
 
       <section class="api-section">
-        <h2>🔧 Publicación del API en App Service de Azure</h2>
-        <p>
-          Una vez finalizadas las pruebas locales, se procede a realizar la publicación desde Visual Studio. Para esto, primero debemos ir a la opción 
+        <h2>🔧 <span lang="en">Publishing the API to Azure App Service</span><span lang="es">Publicación del API en App Service de Azure</span></h2>
+        <p lang="en">
+          Once local testing is done, we publish from Visual Studio. To do this, go to the
+          "Publish" option in Visual Studio and select "Import Profile".
+        </p>
+        <p lang="es">
+          Una vez finalizadas las pruebas locales, se procede a realizar la publicación desde Visual Studio. Para esto, primero debemos ir a la opción
           "Publicar" en Visual Studio y seleccionar "Importar Perfil".
-        </p>   
+        </p>
         <figure class="api-image">
-          <img src="img/4.png" alt="azure4" />
+          <img src="img/4.png" alt="Import profile" data-es-alt="Importar perfil" />
         </figure>
-        <p>
-          Nos pedirá que busquemos un archivo para importarlo.
-        </p> 
+        <p lang="en">It will ask us to browse for a file to import.</p>
+        <p lang="es">Nos pedirá que busquemos un archivo para importarlo.</p>
         <figure class="api-image">
-          <img src="img/5.png" alt="azure5" />
+          <img src="img/5.png" alt="Select publish profile file" data-es-alt="Seleccionar archivo de perfil" />
         </figure>
-        <p>
-          El archivo se descarga desde Azure, seleccionando el App Service creado y abriendo la opción de implementación: Centro de Implementación, 
+        <p lang="en">
+          The file is downloaded from Azure by selecting the App Service we created and opening the Deployment Center option,
+          then "Manage publish profile" and finally "Download publish profile".
+        </p>
+        <p lang="es">
+          El archivo se descarga desde Azure, seleccionando el App Service creado y abriendo la opción de implementación: Centro de Implementación,
           luego "Administrar perfil de publicación" y finalmente "Descargar perfil de publicación".
-        </p> 
+        </p>
         <figure class="api-image">
-          <img src="img/6.png" alt="azure6" />
+          <img src="img/6.png" alt="Download publish profile" data-es-alt="Descargar perfil de publicación" />
         </figure>
-        <p>
+        <p lang="en">
+          Visual Studio shows a screen confirming the file was loaded correctly, and we finish by clicking the "Publish" button.
+        </p>
+        <p lang="es">
           Visual Studio nos mostrará una pantalla validando que el archivo se ha cargado correctamente y finalizamos dando clic en el botón "Publicar".
-        </p> 
+        </p>
         <figure class="api-image">
-          <img src="img/7.png" alt="azure7" />
+          <img src="img/7.png" alt="Publish from Visual Studio" data-es-alt="Publicar desde Visual Studio" />
         </figure>
-        <p>
+        <p lang="en">
+          When it finishes, we can check our App Service and see the URL where our API is available.
+        </p>
+        <p lang="es">
           Una vez finalizado, podremos revisar nuestro App Service y ver que nos da una URL en la cual podremos visualizar nuestro API.
-        </p> 
+        </p>
         <figure class="api-image">
-          <img src="img/8.png" alt="azure8" />
+          <img src="img/8.png" alt="App Service URL" data-es-alt="URL del App Service" />
         </figure>
-        <p>
+        <p lang="en">
+          Simply add "/swagger" to the URL provided by Azure to use the API interface and call the endpoints.
+        </p>
+        <p lang="es">
           Simplemente se debe agregar a la URL que nos da Azure "/swagger" para usar la interfaz del API y consumir los endpoints.
-        </p> 
+        </p>
         <figure class="api-image">
-          <img src="img/9.png" alt="azure9" />
+          <img src="img/9.png" alt="Swagger interface" data-es-alt="Interfaz de Swagger" />
         </figure>
       </section>
 
       <section class="api-section">
-        <h2>🔧 Consumir Endpoints del API</h2>
-        <p> Primero debemos autenticarnos. Para eso, consumimos el endpoint de Login, el cual en su respuesta nos dará un Bearer Token. </p>      
+        <h2>🔧 <span lang="en">Calling the API Endpoints</span><span lang="es">Consumir Endpoints del API</span></h2>
+        <p lang="en">First we need to authenticate. To do so, we call the Login endpoint, whose response returns a Bearer Token.</p>
+        <p lang="es">Primero debemos autenticarnos. Para eso, consumimos el endpoint de Login, el cual en su respuesta nos dará un Bearer Token.</p>
         <figure class="api-image">
-          <img src="img/10.png" alt="azure10" />
+          <img src="img/10.png" alt="Login endpoint" data-es-alt="Endpoint de Login" />
         </figure>
         <figure class="api-image">
-          <img src="img/11.png" alt="azure11" />
+          <img src="img/11.png" alt="Bearer Token response" data-es-alt="Respuesta con Bearer Token" />
         </figure>
         <figure class="api-image">
-          <img src="img/12.png" alt="azure12" />
+          <img src="img/12.png" alt="Authorizing with the token" data-es-alt="Autorización con el token" />
         </figure>
-        <p> Una vez autorizados, utilizaremos el método POST para crear un nuevo usuario. </p>      
+        <p lang="en">Once authorized, we use the POST method to create a new user.</p>
+        <p lang="es">Una vez autorizados, utilizaremos el método POST para crear un nuevo usuario.</p>
         <figure class="api-image">
-          <img src="img/13.png" alt="azure13" />
+          <img src="img/13.png" alt="POST request" data-es-alt="Petición POST" />
         </figure>
         <figure class="api-image">
-          <img src="img/14.png" alt="azure14" />
+          <img src="img/14.png" alt="POST response" data-es-alt="Respuesta POST" />
         </figure>
-        <p> Ahora utilizaremos el método GET para traer todos los usuarios registrados. </p>      
+        <p lang="en">Now we use the GET method to retrieve all registered users.</p>
+        <p lang="es">Ahora utilizaremos el método GET para traer todos los usuarios registrados.</p>
         <figure class="api-image">
-          <img src="img/15.png" alt="azure15" />
+          <img src="img/15.png" alt="GET response" data-es-alt="Respuesta GET" />
         </figure>
       </section>
 
       <section class="api-section">
-        <h2>🔧 Uso de SQL Server Management Studio</h2>
-        <p> Utilizaremos SQL Server Management Studio para conectarnos con la base de datos de Azure. Simplemente usamos las credenciales con las que creamos el SQL Server en Azure. </p>      
+        <h2>🔧 <span lang="en">Using SQL Server Management Studio</span><span lang="es">Uso de SQL Server Management Studio</span></h2>
+        <p lang="en">We use SQL Server Management Studio to connect to the Azure database, simply using the credentials we set when creating the SQL Server in Azure.</p>
+        <p lang="es">Utilizaremos SQL Server Management Studio para conectarnos con la base de datos de Azure. Simplemente usamos las credenciales con las que creamos el SQL Server en Azure.</p>
         <figure class="api-image">
-          <img src="img/16.png" alt="azure16" />
+          <img src="img/16.png" alt="Connecting from SSMS" data-es-alt="Conexión desde SSMS" />
         </figure>
-        <p>Podremos crear consultas para usar las bases de datos en Azure.</p>      
+        <p lang="en">We can write queries to work with the databases in Azure.</p>
+        <p lang="es">Podremos crear consultas para usar las bases de datos en Azure.</p>
         <figure class="api-image">
-          <img src="img/17.png" alt="azure17" />
+          <img src="img/17.png" alt="SQL queries on Azure" data-es-alt="Consultas SQL en Azure" />
         </figure>
       </section>
     </main>

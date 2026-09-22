@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Proyecto Azure</title>
+  <title data-es="Proyecto Azure | Image Analysis IA">Azure Project | Image Analysis AI</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../../../css/i18n.css" />
+  <script src="../../../js/i18n.js" data-inicio="../../../../index.html#proyectos"></script>
 </head>
 <body>
   <div class="container">
     <header class="project-header">
       <div class="project-title-section">
-        <p class="project-subtitle">
-          Implementación de IA Vision Image Analysis de Microsoft Azure
-        </p>
+        <p class="project-subtitle" lang="en">Implementing Microsoft Azure AI Vision Image Analysis</p>
+        <p class="project-subtitle" lang="es">Implementación de IA Vision Image Analysis de Microsoft Azure</p>
         <div class="badges">
           <span class="badge azure-badge">
             <img src="img/azure.png" alt="Azure Logo" class="azure-icon" />
@@ -23,141 +24,176 @@
     </header>
 
     <main class="project-content">
-      <h2>Descripción del Proyecto</h2>
-      <p>
-        Este proyecto fue creado con el objetivo de aprender a trabajar con el servicio de <strong>Image Analysis</strong> de Inteligencia Artificial de Azure. Para ello, utilizaremos el recurso de <em>Computer Vision</em> e instalaremos su SDK más reciente, 
-        <code>Azure.AI.Vision.ImageAnalysis</code>, en Visual Studio. Este SDK nos permitirá crear una aplicación de consola para analizar imágenes mediante funcionalidades como generación de descripciones, etiquetado de objetos y extracción de texto, 
+      <h2><span lang="en">Project Description</span><span lang="es">Descripción del Proyecto</span></h2>
+      <p lang="en">
+        This project was created to learn how to work with Azure's AI <strong>Image Analysis</strong> service. To do so, we use the <em>Computer Vision</em> resource and install its latest SDK,
+        <code>Azure.AI.Vision.ImageAnalysis</code>, in Visual Studio. This SDK lets us build a console application that analyzes images with features such as caption generation, object tagging and text extraction,
+        exploring the different AI services Azure offers.
+      </p>
+      <p lang="es">
+        Este proyecto fue creado con el objetivo de aprender a trabajar con el servicio de <strong>Image Analysis</strong> de Inteligencia Artificial de Azure. Para ello, utilizaremos el recurso de <em>Computer Vision</em> e instalaremos su SDK más reciente,
+        <code>Azure.AI.Vision.ImageAnalysis</code>, en Visual Studio. Este SDK nos permitirá crear una aplicación de consola para analizar imágenes mediante funcionalidades como generación de descripciones, etiquetado de objetos y extracción de texto,
         explorando así los distintos servicios de inteligencia artificial que ofrece Azure.
       </p>
-      
+
       <section class="project-links">
-        <h2>Enlaces del Proyecto</h2>
+        <h2><span lang="en">Project Links</span><span lang="es">Enlaces del Proyecto</span></h2>
         <div class="links-container">
-          <a href="https://github.com/DanielPovedaRomero/AzureComputerVision.git" class="link-button github-link" target="_blank">
-            Ver en GitHub
+          <a href="https://github.com/DanielPovedaRomero/AzureComputerVision.git" class="link-button github-link" target="_blank" rel="noopener">
+            <span lang="en">View on GitHub</span><span lang="es">Ver en GitHub</span>
           </a>
         </div>
       </section>
 
       <section class="api-section">
-        <h2>☁️ Creación del recurso Computer Vision</h2>
-        <p>Debemos ir al portal de Azure y crear el recurso: Computer Vision.</p>      
+        <h2>☁️ <span lang="en">Creating the Computer Vision resource</span><span lang="es">Creación del recurso Computer Vision</span></h2>
+        <p lang="en">We go to the Azure portal and create the resource: Computer Vision.</p>
+        <p lang="es">Debemos ir al portal de Azure y crear el recurso: Computer Vision.</p>
         <figure class="api-image">
-          <img src="img/c1.png" alt="Creación del recurso en Azure" class="small" />
+          <img src="img/c1.png" alt="Creating the resource in Azure" data-es-alt="Creación del recurso en Azure" class="small" />
         </figure>
-        <p>Una vez creado el recurso, debemos revisar su información y guardar las credenciales de conexión, que necesitaremos más adelante en el proyecto.</p> 
+        <p lang="en">Once the resource is created, we review its details and save the connection credentials, which we will need later in the project.</p>
+        <p lang="es">Una vez creado el recurso, debemos revisar su información y guardar las credenciales de conexión, que necesitaremos más adelante en el proyecto.</p>
         <figure class="api-image">
-          <img src="img/c6.png" alt="Credenciales del recurso" />
-        </figure>  
-        <p>Vamos a la opción que nos permite acceder a Vision Studio desde el recurso.</p> 
+          <img src="img/c6.png" alt="Resource credentials" data-es-alt="Credenciales del recurso" />
+        </figure>
+        <p lang="en">We go to the option that opens Vision Studio from the resource.</p>
+        <p lang="es">Vamos a la opción que nos permite acceder a Vision Studio desde el recurso.</p>
         <figure class="api-image">
-          <img src="img/c2.png" alt="Acceso a Vision Studio" />
-        </figure> 
-        <p>Dentro de Vision Studio, validamos que esté ligado a nuestro recurso de Azure, lo cual podemos confirmar desde el ícono de engranaje:</p> 
+          <img src="img/c2.png" alt="Opening Vision Studio" data-es-alt="Acceso a Vision Studio" />
+        </figure>
+        <p lang="en">Inside Vision Studio, we check that it is linked to our Azure resource, which we can confirm from the gear icon:</p>
+        <p lang="es">Dentro de Vision Studio, validamos que esté ligado a nuestro recurso de Azure, lo cual podemos confirmar desde el ícono de engranaje:</p>
         <figure class="api-image">
-          <img src="img/c4.png" alt="Validación de enlace al recurso" class="small" />
-        </figure> 
+          <img src="img/c4.png" alt="Checking the resource link" data-es-alt="Validación de enlace al recurso" class="small" />
+        </figure>
         <figure class="api-image">
-          <img src="img/c3.png" alt="Revisión de configuración" />
-        </figure> 
-        <p>Una vez enlazado el recurso, podremos utilizar todos los servicios que Vision nos ofrece.</p> 
+          <img src="img/c3.png" alt="Reviewing the configuration" data-es-alt="Revisión de configuración" />
+        </figure>
+        <p lang="en">Once the resource is linked, we can use all the services Vision offers.</p>
+        <p lang="es">Una vez enlazado el recurso, podremos utilizar todos los servicios que Vision nos ofrece.</p>
         <figure class="api-image">
-          <img src="img/c5.png" alt="Servicios disponibles" />
-        </figure> 
+          <img src="img/c5.png" alt="Available services" data-es-alt="Servicios disponibles" />
+        </figure>
       </section>
 
       <section class="api-section">
-        <h2>🤖 Instalación del SDK Azure ImageAnalysis</h2>
-        <p>
+        <h2>🤖 <span lang="en">Installing the Azure ImageAnalysis SDK</span><span lang="es">Instalación del SDK Azure ImageAnalysis</span></h2>
+        <p lang="en">
+          For this project a .NET 8.0 console application was created. Then we installed the <code>Azure.AI.Vision.ImageAnalysis</code> SDK from NuGet.
+        </p>
+        <p lang="es">
           Para este proyecto se creó una aplicación de consola en .NET 8.0. Posteriormente, instalamos el SDK <code>Azure.AI.Vision.ImageAnalysis</code> desde NuGet.
-        </p>      
+        </p>
         <figure class="api-image">
-          <img src="img/azure0.png" alt="Instalación del SDK" />
+          <img src="img/azure0.png" alt="Installing the SDK" data-es-alt="Instalación del SDK" />
         </figure>
         <p>
-          Nos basamos en el ejemplo de la documentación oficial de Microsoft: 
-          <a href="https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/call-analyze-image-40?pivots=programming-language-csharp" 
-          class="microsoft-link" target="_blank">
-          🧠 Ver documentación oficial de Microsoft
+          <span lang="en">We based it on the example in the official Microsoft documentation:</span>
+          <span lang="es">Nos basamos en el ejemplo de la documentación oficial de Microsoft:</span>
+          <a href="https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/call-analyze-image-40?pivots=programming-language-csharp"
+             class="microsoft-link" target="_blank" rel="noopener">
+            🧠 <span lang="en">View official Microsoft documentation</span><span lang="es">Ver documentación oficial de Microsoft</span>
           </a>
-        </p> 
+        </p>
         <figure class="api-image">
-          <img src="img/azure14.png" alt="Configuración del SDK" class="credentials" />
-        </figure> 
+          <img src="img/azure14.png" alt="SDK configuration" data-es-alt="Configuración del SDK" class="credentials" />
+        </figure>
         <figure class="api-image">
-          <img src="img/azure1.png" alt="Uso del SDK" />
-        </figure>  
-        <p>
+          <img src="img/azure1.png" alt="Using the SDK" data-es-alt="Uso del SDK" />
+        </figure>
+        <p lang="en">
+          To test the services we use this sample image, which lets us see the generated results.
+        </p>
+        <p lang="es">
           Para probar los servicios utilizaremos esta imagen de prueba, la cual nos permitirá observar los resultados generados.
-        </p> 
+        </p>
         <figure class="api-image">
-          <img src="img/azuretest.jpg" alt="Imagen de prueba" />
-        </figure> 
+          <img src="img/azuretest.jpg" alt="Sample image" data-es-alt="Imagen de prueba" />
+        </figure>
       </section>
 
       <section class="api-section">
-        <h2>🧬 Descripción de la imagen</h2>
-        <p>
+        <h2>🧬 <span lang="en">Image caption</span><span lang="es">Descripción de la imagen</span></h2>
+        <p lang="en">
+          The <strong>Caption</strong> service is used to get a short description of the image and the confidence score of that description.
+        </p>
+        <p lang="es">
           Se utilizará el servicio <strong>Caption</strong> para obtener una breve descripción de la imagen y el porcentaje de confianza de dicha descripción.
         </p>
         <figure class="api-image">
-          <img src="img/azure2.png" alt="Resultado Caption" />
-          <img src="img/azure3.png" alt="Resultado Caption 2" />
+          <img src="img/azure2.png" alt="Caption result" data-es-alt="Resultado Caption" />
+          <img src="img/azure3.png" alt="Caption result 2" data-es-alt="Resultado Caption 2" />
         </figure>
       </section>
 
       <section class="api-section">
-        <h2>🧬 Descripción detallada de la imagen</h2>
-        <p>
+        <h2>🧬 <span lang="en">Detailed image captions</span><span lang="es">Descripción detallada de la imagen</span></h2>
+        <p lang="en">
+          The <strong>DenseCaptions</strong> service is used to generate several detailed descriptions of the image, including their confidence score and bounding box.
+        </p>
+        <p lang="es">
           Se utilizará el servicio <strong>DenseCaptions</strong> para generar varias descripciones detalladas de la imagen, indicando su porcentaje de confianza y su caja delimitadora.
         </p>
         <figure class="api-image">
-          <img src="img/azure4.png" alt="Resultado DenseCaptions 1" />
-          <img src="img/azure5.png" alt="Resultado DenseCaptions 2" />
+          <img src="img/azure4.png" alt="DenseCaptions result 1" data-es-alt="Resultado DenseCaptions 1" />
+          <img src="img/azure5.png" alt="DenseCaptions result 2" data-es-alt="Resultado DenseCaptions 2" />
         </figure>
       </section>
 
       <section class="api-section">
-        <h2>🧬 Detección de objetos y etiquetas</h2>
-        <p>
+        <h2>🧬 <span lang="en">Object and tag detection</span><span lang="es">Detección de objetos y etiquetas</span></h2>
+        <p lang="en">
+          The <strong>Objects</strong> service is used to detect objects and tags in the image, including their bounding boxes.
+        </p>
+        <p lang="es">
           Se utilizará el servicio <strong>Objects</strong> para la detección de objetos y etiquetas en la imagen, incluyendo sus respectivas cajas delimitadoras.
         </p>
         <figure class="api-image">
-          <img src="img/azure6.png" alt="Objetos detectados 1" />
-          <img src="img/azure7.png" alt="Objetos detectados 2" />
+          <img src="img/azure6.png" alt="Detected objects 1" data-es-alt="Objetos detectados 1" />
+          <img src="img/azure7.png" alt="Detected objects 2" data-es-alt="Objetos detectados 2" />
         </figure>
       </section>
 
       <section class="api-section">
-        <h2>🧬 Lectura de texto en imágenes (OCR)</h2>
-        <p>
+        <h2>🧬 <span lang="en">Reading text in images (OCR)</span><span lang="es">Lectura de texto en imágenes (OCR)</span></h2>
+        <p lang="en">
+          The <strong>Read (OCR)</strong> service is used to extract text from images.
+        </p>
+        <p lang="es">
           Se utilizará el servicio <strong>Read (OCR)</strong> para extraer texto de imágenes.
         </p>
         <figure class="api-image">
-          <img src="img/azure8.png" alt="OCR Resultado 1" />
-          <img src="img/azure9.png" alt="OCR Resultado 2" />
+          <img src="img/azure8.png" alt="OCR result 1" data-es-alt="OCR Resultado 1" />
+          <img src="img/azure9.png" alt="OCR result 2" data-es-alt="OCR Resultado 2" />
         </figure>
       </section>
 
       <section class="api-section">
-        <h2>🧬 Etiquetas</h2>
-        <p>
+        <h2>🧬 <span lang="en">Tags</span><span lang="es">Etiquetas</span></h2>
+        <p lang="en">
+          The <strong>Tags</strong> service is used to get the tags found in the image and their confidence score.
+        </p>
+        <p lang="es">
           Se utilizará el servicio <strong>Tags</strong> para obtener las etiquetas encontradas en la imagen y su porcentaje de confianza.
         </p>
         <figure class="api-image">
-          <img src="img/azure10.png" alt="Etiquetas 1" />
-          <img src="img/azure11.png" alt="Etiquetas 2" />
+          <img src="img/azure10.png" alt="Tags 1" data-es-alt="Etiquetas 1" />
+          <img src="img/azure11.png" alt="Tags 2" data-es-alt="Etiquetas 2" />
         </figure>
       </section>
 
       <section class="api-section">
-        <h2>🧬 Detección de personas</h2>
-        <p>
+        <h2>🧬 <span lang="en">People detection</span><span lang="es">Detección de personas</span></h2>
+        <p lang="en">
+          The <strong>People</strong> service is used to detect people in the image, showing their bounding boxes and confidence score.
+        </p>
+        <p lang="es">
           Se utilizará el servicio <strong>People</strong> para detectar personas en la imagen, mostrando sus cuadros delimitadores y el porcentaje de confianza.
         </p>
         <figure class="api-image">
-          <img src="img/azure12.png" alt="Personas detectadas 1" />
-          <img src="img/azure13.png" alt="Personas detectadas 2" />
+          <img src="img/azure12.png" alt="Detected people 1" data-es-alt="Personas detectadas 1" />
+          <img src="img/azure13.png" alt="Detected people 2" data-es-alt="Personas detectadas 2" />
         </figure>
       </section>
     </main>

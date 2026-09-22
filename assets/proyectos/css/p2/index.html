@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- displays site properly based on user's device -->
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  <title>Segundo Reto</title>
+  <title data-es="Frontend Mentor | Landing page de Fylo">Frontend Mentor | Fylo landing page</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="../../../css/i18n.css">
+  <script src="../../../js/i18n.js" data-inicio="../../../../index.html#proyectos"></script>
 </head>
 
 <body>
@@ -17,27 +18,29 @@
 
     <nav class="nav container">
       <figure class="nav__logo">
-        <img src="images/logo.svg" class="nav__img">
+        <img src="images/logo.svg" class="nav__img" alt="Fylo">
       </figure>
 
       <div class="nav__links">
-        <a href="#" class="nav__link">Features</a>
-        <a href="#" class="nav__link">Team</a>
-        <a href="#" class="nav__link">Sign In</a>
+        <a href="#" class="nav__link"><span lang="en">Features</span><span lang="es">Funciones</span></a>
+        <a href="#" class="nav__link"><span lang="en">Team</span><span lang="es">Equipo</span></a>
+        <a href="#" class="nav__link"><span lang="en">Sign In</span><span lang="es">Iniciar sesión</span></a>
       </div>
     </nav>
 
     <section class="hero__main container">
-      <img src="images/illustration-intro.png" class="hero__img">
+      <img src="images/illustration-intro.png" class="hero__img" alt="">
 
-      <h1 class="hero__title"> All your files in one secure location, accessible anywhere.</h1>
+      <h1 class="hero__title"><span lang="en">All your files in one secure location, accessible anywhere.</span><span lang="es">Todos tus archivos en un lugar seguro, accesibles desde cualquier parte.</span></h1>
 
       <p class="hero__paragraph">
-        Fylo stores all your most important files in one secure location. Access them wherever
-        you need, share and collaborate with friends family, and co-workers.
+        <span lang="en">Fylo stores all your most important files in one secure location. Access them wherever
+        you need, share and collaborate with friends, family, and co-workers.</span>
+        <span lang="es">Fylo guarda todos tus archivos más importantes en un lugar seguro. Accede a ellos donde
+        los necesites, compártelos y colabora con amigos, familia y compañeros de trabajo.</span>
       </p>
 
-      <a href="#" class="hero__cta">Get Started</a>
+      <a href="#" class="hero__cta"><span lang="en">Get Started</span><span lang="es">Comenzar</span></a>
     </section>
   </header>
 
@@ -46,60 +49,66 @@
     <section class="cards container">
 
       <article class="cards__item">
-        <img src="images/icon-access-anywhere.svg" class="cards__img">
-        <h3 class="cards__title"> Access your files, anywhere</h3>
+        <img src="images/icon-access-anywhere.svg" class="cards__img" alt="">
+        <h3 class="cards__title"><span lang="en">Access your files, anywhere</span><span lang="es">Accede a tus archivos, donde sea</span></h3>
         <p class="cards__paragraph">
-          The ability to use a smartphone, tablet, or computer to access your account means your
-          files follow you everywhere.
-        </p>
-      </article>
-
-
-      <article class="cards__item">
-        <img src="images/icon-security.svg" class="cards__img">
-        <h3 class="cards__title"> Security you can trust</h3>
-        <p class="cards__paragraph">
-          2-factor authentication and user-controlled encryption are just a couple of the security
-          features we allow to help secure your files.
+          <span lang="en">The ability to use a smartphone, tablet, or computer to access your account means your
+          files follow you everywhere.</span>
+          <span lang="es">Poder usar un teléfono, tableta o computadora para acceder a tu cuenta significa que tus
+          archivos te acompañan a todas partes.</span>
         </p>
       </article>
 
       <article class="cards__item">
-        <img src="images/icon-collaboration.svg" class="cards__img">
-        <h3 class="cards__title"> Real-time collaboration</h3>
+        <img src="images/icon-security.svg" class="cards__img" alt="">
+        <h3 class="cards__title"><span lang="en">Security you can trust</span><span lang="es">Seguridad en la que puedes confiar</span></h3>
         <p class="cards__paragraph">
-          Securely share files and folders with friends, family and colleagues for live collaboration.
-          No email attachments required.
+          <span lang="en">2-factor authentication and user-controlled encryption are just a couple of the security
+          features we allow to help secure your files.</span>
+          <span lang="es">La autenticación de 2 factores y el cifrado controlado por el usuario son solo algunas de las
+          funciones de seguridad que ofrecemos para proteger tus archivos.</span>
         </p>
       </article>
 
       <article class="cards__item">
-        <img src="images/icon-access-anywhere.svg" class="cards__img">
-        <h3 class="cards__title">Store any type of file</h3>
+        <img src="images/icon-collaboration.svg" class="cards__img" alt="">
+        <h3 class="cards__title"><span lang="en">Real-time collaboration</span><span lang="es">Colaboración en tiempo real</span></h3>
         <p class="cards__paragraph">
-          Whether you're sharing holidays photos or work documents, Fylo has you covered allowing for all
-          file types to be securely stored and shared.
+          <span lang="en">Securely share files and folders with friends, family and colleagues for live collaboration.
+          No email attachments required.</span>
+          <span lang="es">Comparte archivos y carpetas de forma segura con amigos, familia y colegas para colaborar en vivo.
+          Sin necesidad de adjuntos por correo.</span>
         </p>
       </article>
 
+      <article class="cards__item">
+        <img src="images/icon-access-anywhere.svg" class="cards__img" alt="">
+        <h3 class="cards__title"><span lang="en">Store any type of file</span><span lang="es">Guarda cualquier tipo de archivo</span></h3>
+        <p class="cards__paragraph">
+          <span lang="en">Whether you're sharing holiday photos or work documents, Fylo has you covered allowing for all
+          file types to be securely stored and shared.</span>
+          <span lang="es">Ya sea que compartas fotos de vacaciones o documentos de trabajo, Fylo te cubre permitiendo
+          guardar y compartir de forma segura todo tipo de archivos.</span>
+        </p>
+      </article>
 
     </section>
 
     <section class="about container">
       <figure class="about__picture">
-        <img src="images/illustration-stay-productive.png" class="about__img">
+        <img src="images/illustration-stay-productive.png" class="about__img" alt="">
       </figure>
 
       <div class="about__texts">
-        <h2 class="about__title"> Stay productive, wherever you are</h2>
-        <p class="about__paragraph">Never let location be an issue when accessing your files. Fylo has you covered for
-          all of your file
-          storage needs.</p>
-        <p class="about__paragraph"> Securely share files and folders with friends, family and colleagues for live
-          collaboration. No email
-          attachments required.</p>
-        <a href="#" class="about__cta">See how Fylo works
-          <img src="images/icon-arrow.svg" class="about__icon">
+        <h2 class="about__title"><span lang="en">Stay productive, wherever you are</span><span lang="es">Mantente productivo, estés donde estés</span></h2>
+        <p class="about__paragraph"><span lang="en">Never let location be an issue when accessing your files. Fylo has you covered for
+          all of your file storage needs.</span><span lang="es">Que la ubicación nunca sea un problema para acceder a tus archivos. Fylo cubre
+          todas tus necesidades de almacenamiento.</span></p>
+        <p class="about__paragraph"><span lang="en">Securely share files and folders with friends, family and colleagues for live
+          collaboration. No email attachments required.</span><span lang="es">Comparte archivos y carpetas de forma segura con amigos, familia y colegas para colaborar
+          en vivo. Sin necesidad de adjuntos por correo.</span></p>
+        <a href="#" class="about__cta"><span lang="en">See how Fylo works</span><span lang="es">Mira cómo funciona Fylo</span>
+          <img src="images/icon-arrow.svg" class="about__icon" alt="">
         </a>
       </div>
     </section>
@@ -108,78 +117,77 @@
 
       <article class="testimony__item testimony__item--first">
         <p class="testimony__text">
-          Fylo has improved our team productivity by an order of magnitude. Since making the switch our team has
-          become a well-oiled collaboration machine.
+          <span lang="en">Fylo has improved our team productivity by an order of magnitude. Since making the switch our team has
+          become a well-oiled collaboration machine.</span>
+          <span lang="es">Fylo ha multiplicado la productividad de nuestro equipo. Desde que hicimos el cambio, nuestro equipo se ha
+          convertido en una máquina de colaboración bien aceitada.</span>
         </p>
 
         <div class="testimony__info">
           <figure class="testimony__picture">
-            <img src="images/profile-1.jpg" class="testimony__img">
+            <img src="images/profile-1.jpg" class="testimony__img" alt="">
           </figure>
 
           <div class="testimony__profile">
             <h3 class="testimony__name">Satish Patel</h3>
-            <p class="testimony__job">Founder & CEO, Huddle
-            </p>
+            <p class="testimony__job"><span lang="en">Founder &amp; CEO, Huddle</span><span lang="es">Fundador y CEO, Huddle</span></p>
           </div>
         </div>
-
       </article>
-
 
       <article class="testimony__item">
         <p class="testimony__text">
-          Fylo has improved our team productivity by an order of magnitude. Since making the switch our team has
-          become a well-oiled collaboration machine.
+          <span lang="en">Fylo has improved our team productivity by an order of magnitude. Since making the switch our team has
+          become a well-oiled collaboration machine.</span>
+          <span lang="es">Fylo ha multiplicado la productividad de nuestro equipo. Desde que hicimos el cambio, nuestro equipo se ha
+          convertido en una máquina de colaboración bien aceitada.</span>
         </p>
 
         <div class="testimony__info">
           <figure class="testimony__picture">
-            <img src="images/profile-2.jpg" class="testimony__img">
+            <img src="images/profile-2.jpg" class="testimony__img" alt="">
           </figure>
 
           <div class="testimony__profile">
             <h3 class="testimony__name">Bruce McKenzie</h3>
-            <p class="testimony__job">Founder & CEO, Huddle
-            </p>
+            <p class="testimony__job"><span lang="en">Founder &amp; CEO, Huddle</span><span lang="es">Fundador y CEO, Huddle</span></p>
           </div>
         </div>
       </article>
 
       <article class="testimony__item">
         <p class="testimony__text">
-          Fylo has improved our team productivity by an order of magnitude. Since making the switch our team has
-          become a well-oiled collaboration machine.
+          <span lang="en">Fylo has improved our team productivity by an order of magnitude. Since making the switch our team has
+          become a well-oiled collaboration machine.</span>
+          <span lang="es">Fylo ha multiplicado la productividad de nuestro equipo. Desde que hicimos el cambio, nuestro equipo se ha
+          convertido en una máquina de colaboración bien aceitada.</span>
         </p>
 
         <div class="testimony__info">
           <figure class="testimony__picture">
-            <img src="images/profile-3.jpg" class="testimony__img">
+            <img src="images/profile-3.jpg" class="testimony__img" alt="">
           </figure>
 
           <div class="testimony__profile">
             <h3 class="testimony__name">Iva Boyd</h3>
-            <p class="testimony__job">Founder & CEO, Huddle
-            </p>
+            <p class="testimony__job"><span lang="en">Founder &amp; CEO, Huddle</span><span lang="es">Fundadora y CEO, Huddle</span></p>
           </div>
         </div>
-
       </article>
-
 
     </section>
 
     <section class="join">
       <div class="join__container container">
-        <h2 class="join__title"> Get early access today</h2>
-        <p class="join__paragraph">It only takes a minute to sign up and our free starter tier is extremely generous. If
-          you have any
-          questions, our support team would be happy to help you.
+        <h2 class="join__title"><span lang="en">Get early access today</span><span lang="es">Obtén acceso anticipado hoy</span></h2>
+        <p class="join__paragraph"><span lang="en">It only takes a minute to sign up and our free starter tier is extremely generous. If
+          you have any questions, our support team would be happy to help you.</span><span lang="es">Registrarte toma solo un minuto y nuestro plan inicial gratuito es muy generoso. Si
+          tienes alguna pregunta, nuestro equipo de soporte estará encantado de ayudarte.</span>
         </p>
 
         <form class="join__form">
-          <input type="email" class="join__input" placeholder="email@example.com">
-          <input type="submit" value="Get Started For Free" class="join__input join__input--submit">
+          <input type="email" class="join__input" placeholder="email@example.com" data-es-placeholder="correo@ejemplo.com" aria-label="Email" data-es-aria-label="Correo electrónico">
+          <input type="submit" value="Get Started For Free" data-es-value="Comienza Gratis" class="join__input join__input--submit">
         </form>
       </div>
     </section>
@@ -190,13 +198,13 @@
     <section class="footer__container container">
 
       <figure class="footer__picture">
-        <img src="images/logo.svg" class="footer__img">
+        <img src="images/logo.svg" class="footer__img" alt="Fylo">
       </figure>
 
       <div class="footer__content">
 
         <p class="footer__direction footer__direction--first">
-          <img src="images/icon-location.svg" class="footer__icon">
+          <img src="images/icon-location.svg" class="footer__icon" alt="">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
           dolore magna aliqua
         </p>
@@ -204,48 +212,44 @@
         <div class="footer__contact">
 
           <a href="#" class="footer__direction footer__direction--second">
-            <img src="images/icon-phone.svg" class="footer__icon">
+            <img src="images/icon-phone.svg" class="footer__icon" alt="">
             +1-543-123-4567
           </a>
-          
+
           <a href="#" class="footer__direction">
-            <img src="images/icon-email.svg" class="footer__icon">
+            <img src="images/icon-email.svg" class="footer__icon" alt="">
             example@fylo.com
           </a>
 
         </div>
 
         <nav class="footer__nav">
-          <a href="#" class="footer__link">About Us</a>
-          <a href="#" class="footer__link">Jobs</a>
-          <a href="#" class="footer__link">Press</a>
+          <a href="#" class="footer__link"><span lang="en">About Us</span><span lang="es">Nosotros</span></a>
+          <a href="#" class="footer__link"><span lang="en">Jobs</span><span lang="es">Empleos</span></a>
+          <a href="#" class="footer__link"><span lang="en">Press</span><span lang="es">Prensa</span></a>
           <a href="#" class="footer__link">Blog</a>
         </nav>
 
         <nav class="footer__nav">
-          <a href="#" class="footer__link">Contact Us</a>
-          <a href="#" class="footer__link">Terms</a>
-          <a href="#" class="footer__link">Privacy</a>
+          <a href="#" class="footer__link"><span lang="en">Contact Us</span><span lang="es">Contáctanos</span></a>
+          <a href="#" class="footer__link"><span lang="en">Terms</span><span lang="es">Términos</span></a>
+          <a href="#" class="footer__link"><span lang="en">Privacy</span><span lang="es">Privacidad</span></a>
         </nav>
 
         <div class="footer__social">
-
-          <a href="#" class="footer__smedia">
-            <img src="images/fb.svg" class="footer__media">
+          <a href="#" class="footer__smedia" aria-label="Facebook">
+            <img src="images/fb.svg" class="footer__media" alt="">
           </a>
-
-          <a href="#" class="footer__smedia">
-            <img src="images/instagram.svg" class="footer__media">
+          <a href="#" class="footer__smedia" aria-label="Instagram">
+            <img src="images/instagram.svg" class="footer__media" alt="">
           </a>
-
-          <a href="#" class="footer__smedia">
-            <img src="images/twitter.svg" class="footer__media">
+          <a href="#" class="footer__smedia" aria-label="Twitter">
+            <img src="images/twitter.svg" class="footer__media" alt="">
           </a>
-
         </div>
 
       </div>
-      
+
     </section>
   </footer>
 

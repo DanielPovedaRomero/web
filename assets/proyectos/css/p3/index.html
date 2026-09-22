@@ -4,11 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  <title>Easybank landing page</title>
+  <title data-es="Frontend Mentor | Landing page de Easybank">Frontend Mentor | Easybank landing page</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../../css/i18n.css">
+  <script src="../../../js/i18n.js" data-inicio="../../../../index.html#proyectos"></script>
 </head>
 <body>
 
@@ -17,35 +19,34 @@
     <nav class="nav container">
 
       <figure class="nav__logo">
-        <img src="images/logo.svg" class="nav__img">
+        <img src="images/logo.svg" class="nav__img" alt="Easybank">
       </figure>
 
       <div class="nav__links" id="menu">
-        <a href="#" class="nav__link">Home</a>
-        <a href="#" class="nav__link">About</a>
-        <a href="#" class="nav__link">Contact</a>
+        <a href="#" class="nav__link"><span lang="en">Home</span><span lang="es">Inicio</span></a>
+        <a href="#" class="nav__link"><span lang="en">About</span><span lang="es">Nosotros</span></a>
+        <a href="#" class="nav__link"><span lang="en">Contact</span><span lang="es">Contacto</span></a>
         <a href="#" class="nav__link">Blog</a>
-        <a href="#" class="nav__link">Careers</a>
+        <a href="#" class="nav__link"><span lang="en">Careers</span><span lang="es">Empleos</span></a>
       </div>
 
-      <a href="#menu" class="nav__menu">
-        <img src="images/icon-hamburger.svg" class="nav__icon">
+      <a href="#menu" class="nav__menu" aria-label="Menu" data-es-aria-label="Menú">
+        <img src="images/icon-hamburger.svg" class="nav__icon" alt="">
       </a>
 
-      <a href="#" class="cta cta--nav">Request Invite</a>
+      <a href="#" class="cta cta--nav"><span lang="en">Request Invite</span><span lang="es">Solicitar Invitación</span></a>
     </nav>
 
     <section class="hero__main">
       <div class="hero__background"></div>
 
       <div class="hero__texts">
-        <h1 class="hero__title">
-          Next generation digital banking
-        </h1>
-        <p class="hero__paragraph">Take your financial life online. Your Easybank account will be a one-stop-shop 
-          for spending, saving, budgeting, investing, and much more.</p>
+        <h1 class="hero__title"><span lang="en">Next generation digital banking</span><span lang="es">Banca digital de nueva generación</span></h1>
+        <p class="hero__paragraph"><span lang="en">Take your financial life online. Your Easybank account will be a one-stop-shop
+          for spending, saving, budgeting, investing, and much more.</span><span lang="es">Lleva tu vida financiera en línea. Tu cuenta Easybank será tu centro único
+          para gastar, ahorrar, presupuestar, invertir y mucho más.</span></p>
 
-        <a href="#" class="cta"> Request Invite</a>
+        <a href="#" class="cta"><span lang="en">Request Invite</span><span lang="es">Solicitar Invitación</span></a>
       </div>
     </section>
 
@@ -55,43 +56,46 @@
     <section class="easybank">
 
       <div class="easybank__container container">
-        <h2 class="title"> Why choose Easybank?</h2>
-        <p class="easybank__paragraph">We leverage Open Banking to turn your bank account into your financial hub. Control 
-          your finances like never before.</p>
+        <h2 class="title"><span lang="en">Why choose Easybank?</span><span lang="es">¿Por qué elegir Easybank?</span></h2>
+        <p class="easybank__paragraph"><span lang="en">We leverage Open Banking to turn your bank account into your financial hub. Control
+          your finances like never before.</span><span lang="es">Aprovechamos la Banca Abierta para convertir tu cuenta bancaria en tu centro financiero. Controla
+          tus finanzas como nunca antes.</span></p>
 
         <div class="easybank__services">
 
           <article class="easybank__service">
-            <img src="images/icon-online.svg" class="easybank__icon">
-            <h3 class="easybank__title">Online Banking</h3>
-            <p class="easybank__copy">Our modern web and mobile applications allow you to keep track of your finances 
-              wherever you are in the world.</p>
+            <img src="images/icon-online.svg" class="easybank__icon" alt="">
+            <h3 class="easybank__title"><span lang="en">Online Banking</span><span lang="es">Banca en Línea</span></h3>
+            <p class="easybank__copy"><span lang="en">Our modern web and mobile applications allow you to keep track of your finances
+              wherever you are in the world.</span><span lang="es">Nuestras modernas aplicaciones web y móviles te permiten seguir tus finanzas
+              estés donde estés en el mundo.</span></p>
           </article>
 
           <article class="easybank__service">
-            <img src="images/icon-budgeting.svg" class="easybank__icon">
-            <h3 class="easybank__title">Simple Budgeting</h3>
-            <p class="easybank__copy">See exactly where your money goes each month. Receive notifications when you’re 
-              close to hitting your limits.</p>
+            <img src="images/icon-budgeting.svg" class="easybank__icon" alt="">
+            <h3 class="easybank__title"><span lang="en">Simple Budgeting</span><span lang="es">Presupuesto Simple</span></h3>
+            <p class="easybank__copy"><span lang="en">See exactly where your money goes each month. Receive notifications when you’re
+              close to hitting your limits.</span><span lang="es">Mira exactamente a dónde va tu dinero cada mes. Recibe notificaciones cuando estés
+              cerca de alcanzar tus límites.</span></p>
           </article>
 
           <article class="easybank__service">
-            <img src="images/icon-onboarding.svg" class="easybank__icon">
-            <h3 class="easybank__title"> Fast Onboarding</h3>
-            <p class="easybank__copy">We don’t do branches. Open your account in minutes online and start taking control 
-              of your finances right away.</p>
+            <img src="images/icon-onboarding.svg" class="easybank__icon" alt="">
+            <h3 class="easybank__title"><span lang="en">Fast Onboarding</span><span lang="es">Registro Rápido</span></h3>
+            <p class="easybank__copy"><span lang="en">We don’t do branches. Open your account in minutes online and start taking control
+              of your finances right away.</span><span lang="es">No tenemos sucursales. Abre tu cuenta en línea en minutos y empieza a tomar el control
+              de tus finanzas de inmediato.</span></p>
           </article>
 
           <article class="easybank__service">
-            <img src="images/icon-api.svg" class="easybank__icon">
-            <h3 class="easybank__title">Open API</h3>
-            <p class="easybank__copy"> Manage your savings, investments, pension, and much more from one account. Tracking 
-              your money has never been easier.</p>
+            <img src="images/icon-api.svg" class="easybank__icon" alt="">
+            <h3 class="easybank__title"><span lang="en">Open API</span><span lang="es">API Abierta</span></h3>
+            <p class="easybank__copy"><span lang="en">Manage your savings, investments, pension, and much more from one account. Tracking
+              your money has never been easier.</span><span lang="es">Administra tus ahorros, inversiones, pensión y mucho más desde una sola cuenta. Seguir
+              tu dinero nunca había sido tan fácil.</span></p>
           </article>
-
 
         </div>
-
 
       </div>
 
@@ -99,8 +103,7 @@
 
     <section class="articles">
       <div class="articles__container container">
-        <h2 class="title"> Latest Articles</h2>
-        
+        <h2 class="title"><span lang="en">Latest Articles</span><span lang="es">Últimos Artículos</span></h2>
 
         <div class="articles__content">
 
@@ -108,10 +111,11 @@
             <div class="articles__img"></div>
 
             <div class="articles__text">
-              <p class="articles__author"> By Claire Robinson</p>
-              <h3 class="articles__title"> Receive money in any currency with no fees</h3>
-              <p class="articles__paragraph">The world is getting smaller and we’re becoming more mobile. So why should you be 
-                forced to only receive money in a single …</p>
+              <p class="articles__author"><span lang="en">By</span><span lang="es">Por</span> Claire Robinson</p>
+              <h3 class="articles__title"><span lang="en">Receive money in any currency with no fees</span><span lang="es">Recibe dinero en cualquier moneda sin comisiones</span></h3>
+              <p class="articles__paragraph"><span lang="en">The world is getting smaller and we’re becoming more mobile. So why should you be
+                forced to only receive money in a single …</span><span lang="es">El mundo se hace más pequeño y somos cada vez más móviles. Entonces, ¿por qué deberías
+                estar obligado a recibir dinero en una sola …</span></p>
             </div>
           </article>
 
@@ -119,10 +123,11 @@
             <div class="articles__img"></div>
 
             <div class="articles__text">
-              <p class="articles__author">By Wilson Hutton</p>
-              <h3 class="articles__title">Treat yourself without worrying about money</h3>
-              <p class="articles__paragraph">Our simple budgeting feature allows you to separate out your spending and set 
-                realistic limits each month. That means you …</p>
+              <p class="articles__author"><span lang="en">By</span><span lang="es">Por</span> Wilson Hutton</p>
+              <h3 class="articles__title"><span lang="en">Treat yourself without worrying about money</span><span lang="es">Date un gusto sin preocuparte por el dinero</span></h3>
+              <p class="articles__paragraph"><span lang="en">Our simple budgeting feature allows you to separate out your spending and set
+                realistic limits each month. That means you …</span><span lang="es">Nuestra función de presupuesto simple te permite separar tus gastos y fijar
+                límites realistas cada mes. Eso significa que …</span></p>
             </div>
           </article>
 
@@ -130,10 +135,11 @@
             <div class="articles__img"></div>
 
             <div class="articles__text">
-              <p class="articles__author">By Wilson Hutton</p>
-              <h3 class="articles__title">Take your Easybank card wherever you go</h3>
-              <p class="articles__paragraph">We want you to enjoy your travels. This is why we don’t charge any fees on purchases 
-                while you’re abroad. We’ll even show you …</p>
+              <p class="articles__author"><span lang="en">By</span><span lang="es">Por</span> Wilson Hutton</p>
+              <h3 class="articles__title"><span lang="en">Take your Easybank card wherever you go</span><span lang="es">Lleva tu tarjeta Easybank a donde vayas</span></h3>
+              <p class="articles__paragraph"><span lang="en">We want you to enjoy your travels. This is why we don’t charge any fees on purchases
+                while you’re abroad. We’ll even show you …</span><span lang="es">Queremos que disfrutes tus viajes. Por eso no cobramos comisiones por compras
+                mientras estás en el extranjero. Incluso te mostraremos …</span></p>
             </div>
           </article>
 
@@ -141,10 +147,11 @@
             <div class="articles__img"></div>
 
             <div class="articles__text">
-              <p class="articles__author">By Claire Robinson</p>
-              <h3 class="articles__title">Our invite-only Beta accounts are now live!</h3>
-              <p class="articles__paragraph">After a lot of hard work by the whole team, we’re excited to launch our closed beta. 
-                It’s easy to request an invite through the site ...</p>
+              <p class="articles__author"><span lang="en">By</span><span lang="es">Por</span> Claire Robinson</p>
+              <h3 class="articles__title"><span lang="en">Our invite-only Beta accounts are now live!</span><span lang="es">¡Nuestras cuentas Beta por invitación ya están disponibles!</span></h3>
+              <p class="articles__paragraph"><span lang="en">After a lot of hard work by the whole team, we’re excited to launch our closed beta.
+                It’s easy to request an invite through the site ...</span><span lang="es">Después de mucho trabajo de todo el equipo, nos emociona lanzar nuestra beta cerrada.
+                Es fácil solicitar una invitación a través del sitio ...</span></p>
             </div>
           </article>
 
@@ -158,52 +165,45 @@
 
       <div class="footer__mediakit">
         <figure class="footer__logo">
-          <img src="images/logo-white.svg" class="footer__img">
+          <img src="images/logo-white.svg" class="footer__img" alt="Easybank">
         </figure>
 
         <div class="footer__socialmedia">
-
-          <a href="#" class="footer__media">
-            <img src="images/icon-facebook.svg" class="footer__icon">
+          <a href="#" class="footer__media" aria-label="Facebook">
+            <img src="images/icon-facebook.svg" class="footer__icon" alt="">
           </a>
-
-          <a href="#" class="footer__media">
-            <img src="images/icon-youtube.svg" class="footer__icon">
+          <a href="#" class="footer__media" aria-label="YouTube">
+            <img src="images/icon-youtube.svg" class="footer__icon" alt="">
           </a>
-
-          <a href="#" class="footer__media">
-            <img src="images/icon-twitter.svg" class="footer__icon">
+          <a href="#" class="footer__media" aria-label="Twitter">
+            <img src="images/icon-twitter.svg" class="footer__icon" alt="">
           </a>
-
-          <a href="#" class="footer__media">
-            <img src="images/icon-pinterest.svg" class="footer__icon">
+          <a href="#" class="footer__media" aria-label="Pinterest">
+            <img src="images/icon-pinterest.svg" class="footer__icon" alt="">
           </a>
-
-          <a href="#" class="footer__media">
-            <img src="images/icon-instagram.svg" class="footer__icon">
+          <a href="#" class="footer__media" aria-label="Instagram">
+            <img src="images/icon-instagram.svg" class="footer__icon" alt="">
           </a>
-
         </div>
       </div>
 
       <nav class="footer__nav">
-        <a href="#" class="footer__link">About Us</a>
-        <a href="#" class="footer__link">Contact</a>
+        <a href="#" class="footer__link"><span lang="en">About Us</span><span lang="es">Nosotros</span></a>
+        <a href="#" class="footer__link"><span lang="en">Contact</span><span lang="es">Contacto</span></a>
         <a href="#" class="footer__link">Blog</a>
-        <a href="#" class="footer__link">Careers</a>
-        <a href="#" class="footer__link">Support</a>
-        <a href="#" class="footer__link">Privacy Policy</a>
+        <a href="#" class="footer__link"><span lang="en">Careers</span><span lang="es">Empleos</span></a>
+        <a href="#" class="footer__link"><span lang="en">Support</span><span lang="es">Soporte</span></a>
+        <a href="#" class="footer__link"><span lang="en">Privacy Policy</span><span lang="es">Política de Privacidad</span></a>
       </nav>
 
       <div class="footer__cta">
-        <a href="#" class="cta cta--footer">Request Invite</a>
+        <a href="#" class="cta cta--footer"><span lang="en">Request Invite</span><span lang="es">Solicitar Invitación</span></a>
 
-        <p class="footer__copy">© Easybank. All Rights Reserved </p>
+        <p class="footer__copy"><span lang="en">© Easybank. All Rights Reserved</span><span lang="es">© Easybank. Todos los derechos reservados</span></p>
       </div>
 
     </section>
   </footer>
 
-  
 </body>
 </html>
