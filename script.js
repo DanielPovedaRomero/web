@@ -186,6 +186,9 @@ function initMenu() {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') setOpen(false);
     });
+    document.addEventListener('click', (e) => {
+        if (menu.classList.contains('active') && !e.target.closest('.nav')) setOpen(false);
+    });
     window.matchMedia('(min-width: 900px)').addEventListener('change', () => setOpen(false));
 }
 

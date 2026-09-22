@@ -343,7 +343,15 @@ a {
 .hamburger.open span:nth-child(2) { opacity: 0; transform: translateX(8px); }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Móvil: menú a pantalla completa */
+/* Elementos que solo existen en el menú móvil tipo editor */
+.menu-head,
+.menu-cmd,
+.menu-file,
+.menu-ext {
+    display: none;
+}
+
+/* Móvil: menú como ventana de editor */
 @media (max-width: 899px) {
     .hamburger {
         display: block;
@@ -358,73 +366,207 @@ a {
         display: none;
     }
 
-    .menu {
+    /* Fondo oscurecido y desenfocado detrás de la ventana */
+    body::after {
+        content: '';
         position: fixed;
         inset: 0;
+        z-index: 99;
+        background: rgba(5, 12, 20, 0.6);
+        backdrop-filter: blur(6px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.35s ease, visibility 0.35s;
+    }
+
+    html.menu-abierto body::after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .menu {
+        position: fixed;
+        top: calc(var(--nav-height) - 1rem);
+        right: var(--gutter);
+        left: var(--gutter);
         z-index: 1;
+        max-width: 420px;
+        margin-left: auto;
         flex-direction: column;
         align-items: stretch;
-        justify-content: center;
-        gap: 0.5rem;
-        padding: 6rem 2rem 2rem;
-        border: none;
-        border-radius: 0;
-        background: rgba(9, 26, 40, 0.97) !important;
-        backdrop-filter: blur(12px);
-        /* Revelación circular desde el botón */
-        clip-path: circle(0 at calc(100% - 2.5rem) 2.5rem);
+        gap: 0;
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid var(--border) !important;
+        border-radius: 14px;
+        background: rgba(13, 22, 33, 0.97) !important;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55), 0 0 40px rgba(255, 119, 85, 0.08);
+        font-family: var(--mono);
+        letter-spacing: 0;
+        opacity: 0;
         visibility: hidden;
-        transition: clip-path 0.6s cubic-bezier(0.65, 0, 0.35, 1), visibility 0.6s;
+        transform: translateY(-12px) scale(0.96);
+        transform-origin: top right;
+        transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1), visibility 0.4s;
     }
 
     .menu.active {
-        clip-path: circle(150% at calc(100% - 2.5rem) 2.5rem);
+        opacity: 1;
         visibility: visible;
+        transform: none;
     }
 
     .menu li {
         opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.4s ease, transform 0.4s ease;
+        transform: translateX(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     .menu.active li {
         opacity: 1;
         transform: none;
-        transition-delay: calc(0.15s + var(--i, 0) * 0.07s);
+        transition-delay: calc(0.1s + var(--i, 0) * 0.05s);
     }
 
-    .menu a {
-        width: 100%;
-        padding: 0.6rem 0.5rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        border-radius: 0;
-        font-size: clamp(1.6rem, 7vw, 2.2rem);
-        color: var(--text);
+    /* Barra de título de la ventana */
+    .menu-head {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0.7rem 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(9, 26, 40, 0.8);
     }
 
-    .menu a:hover,
-    .menu a.activo {
+    .menu-head > span {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: #FF5F56;
+    }
+
+    .menu-head > span:nth-child(2) { background: #FFBD2E; }
+    .menu-head > span:nth-child(3) { background: #27C93F; }
+
+    .menu-head em {
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 0.75rem;
+        font-style: normal;
+        color: var(--code-gray);
+    }
+
+    /* Línea de comando */
+    .menu-cmd {
+        display: block;
+        padding: 0.9rem 1rem 0.5rem;
+        font-size: 0.85rem;
+        color: var(--code-green);
+    }
+
+    .menu-cmd span {
         color: var(--accent);
     }
 
-    .menu-num {
-        display: inline;
+    .menu-cmd::after {
+        content: '▋';
+        margin-left: 0.3rem;
+        color: var(--text-soft);
+        animation: parpadeo 1s steps(1) infinite;
     }
 
+    /* Secciones como archivos del proyecto */
+    .menu a {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.7rem 1rem;
+        border-left: 2px solid transparent;
+        border-radius: 0;
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--text-soft);
+        transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .menu a:hover {
+        background: rgba(255, 255, 255, 0.04);
+        color: #fff;
+    }
+
+    .menu a.activo {
+        border-left-color: var(--accent);
+        background: rgba(255, 119, 85, 0.08);
+        color: #fff;
+    }
+
+    /* Número de línea como en el margen del editor */
+    .menu-num {
+        display: inline;
+        width: 1.5rem;
+        font-size: 0.75rem;
+        color: rgba(110, 139, 163, 0.7);
+        text-align: right;
+    }
+
+    .menu a.activo .menu-num {
+        color: var(--accent);
+    }
+
+    .menu-file {
+        display: inline;
+        color: var(--code-purple);
+    }
+
+    .menu-ext {
+        display: inline;
+        margin-left: -0.75rem;
+        color: var(--code-gray);
+    }
+
+    /* Punto de "archivo abierto" en la sección actual */
+    .menu a.activo::after {
+        content: '';
+        width: 7px;
+        height: 7px;
+        margin-left: auto;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 8px var(--accent);
+    }
+
+    /* Barra de estado */
     .menu-social {
         display: flex;
-        gap: 1.25rem;
-        margin-top: 2rem;
-        font-size: 1.5rem;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 0.5rem;
+        padding: 0.45rem 1rem;
+        background: var(--gradient);
+        font-size: 0.75rem;
+        color: #fff;
+    }
+
+    .menu-rama {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-right: auto;
+        font-weight: 600;
     }
 
     .menu-social a {
         width: auto;
         padding: 0;
         border: none;
-        font-size: 1.5rem;
-        color: var(--text-soft);
+        font-size: 1rem;
+        color: #fff;
+    }
+
+    .menu-social a:hover {
+        background: none;
+        opacity: 0.8;
     }
 
     /* Bloquear el scroll de la página mientras el menú está abierto */
