@@ -45,7 +45,16 @@ const TRADUCCIONES_ES = {
     'cert.c3': 'Certificado de principios SOLID',
     'cert.c4': 'Certificado de .NET MAUI',
     'cert.c5': 'Certificado de patrones de diseño',
-    'cert.more': 'Ver más',
+    'cert.more': 'Ver todas las certificaciones',
+    'cert.statCerts': 'Certificaciones',
+    'cert.statPlatforms': 'Plataformas',
+    'cert.statExams': 'Exámenes Microsoft',
+    'cert.courses': 'cursos',
+    'cert.certs': 'certificaciones',
+    'cert.view': 'Ver en tamaño completo',
+    'cert.n3': 'Principios SOLID y Clean Code',
+    'cert.n4': 'Curso de .NET MAUI',
+    'cert.n5': 'Patrones de diseño en C#',
 
     'proj.title': 'Proyectos',
     'proj.comment': '// 03. proyectos',
@@ -89,6 +98,7 @@ const TEXTOS_JS = {
     }
 };
 
+const reducirMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let idioma = 'en';
 const t = (clave) => TEXTOS_JS[idioma][clave];
 
@@ -167,7 +177,7 @@ function initMenu() {
     });
 }
 
-/* Carrusel de certificaciones: se recalcula según el ancho real de cada slide */
+/* Carrusel de certificaciones: autoplay, vuelta infinita, teclado y gestos */
 function initCarrusel() {
     const carrusel = document.querySelector('.carrusel');
     if (!carrusel) return;
@@ -177,19 +187,21 @@ function initCarrusel() {
     const slides = track.children;
     const prev = carrusel.querySelector('.carrusel-btn.prev');
     const next = carrusel.querySelector('.carrusel-btn.next');
+    const DURACION = 5000;
     let index = 0;
 
     const step = () => {
         const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
         return slides[0].getBoundingClientRect().width + gap;
     };
-    const visibles = () => Math.max(1, Math.round((viewport.clientWidth + 1) / step()));
+    const visibles = () => Math.max(1, Math.round((track.clientWidth + 1) / step()));
     const maxIndex = () => Math.max(0, slides.length - visibles());
 
     // Indicadores de posición: uno por cada posición posible
     const puntos = document.createElement('div');
     puntos.className = 'carrusel-puntos';
     carrusel.after(puntos);
+    carrusel.style.setProperty('--duracion', `${DURACION}ms`);
 
     const renderPuntos = () => {
         const total = maxIndex() + 1;
@@ -198,7 +210,7 @@ function initCarrusel() {
                 const punto = document.createElement('button');
                 punto.type = 'button';
                 punto.className = 'carrusel-punto';
-                punto.addEventListener('click', () => { index = i; update(); });
+                punto.addEventListener('click', () => irA(i));
                 return punto;
             }));
         }
@@ -211,30 +223,130 @@ function initCarrusel() {
     const update = () => {
         index = Math.min(Math.max(index, 0), maxIndex());
         track.style.transform = `translateX(${-step() * index}px)`;
-        prev.disabled = index === 0;
-        next.disabled = index === maxIndex();
         renderPuntos();
     };
 
-    prev.addEventListener('click', () => { index--; update(); });
-    next.addEventListener('click', () => { index++; update(); });
+    // Avanzar con vuelta infinita en ambos sentidos
+    const mover = (delta) => {
+        const total = maxIndex() + 1;
+        irA((index + delta + total) % total);
+    };
+
+    /* Autoplay: se pausa al pasar el cursor, al enfocar con teclado,
+       al tocar, cuando la sección no está en pantalla o la pestaña está oculta */
+    let timer = null;
+    const motivosPausa = new Set();
+
+    const reiniciarProgreso = () => {
+        const activo = puntos.querySelector('.carrusel-punto.active');
+        if (!activo) return;
+        activo.classList.remove('active');
+        void activo.offsetWidth; // reinicia la animación de la barra
+        activo.classList.add('active');
+    };
+
+    const programar = () => {
+        clearTimeout(timer);
+        if (reducirMovimiento || motivosPausa.size) return;
+        timer = setTimeout(() => mover(1), DURACION);
+    };
+
+    const irA = (i) => {
+        index = i;
+        update();
+        reiniciarProgreso();
+        programar();
+    };
+
+    const pausar = (motivo) => {
+        motivosPausa.add(motivo);
+        carrusel.classList.add('pausado');
+        clearTimeout(timer);
+    };
+
+    const reanudar = (motivo) => {
+        motivosPausa.delete(motivo);
+        if (motivosPausa.size) return;
+        carrusel.classList.remove('pausado');
+        reiniciarProgreso();
+        programar();
+    };
+
+    carrusel.addEventListener('mouseenter', () => pausar('hover'));
+    carrusel.addEventListener('mouseleave', () => reanudar('hover'));
+    carrusel.addEventListener('focusin', () => pausar('foco'));
+    carrusel.addEventListener('focusout', (e) => {
+        if (!carrusel.contains(e.relatedTarget)) reanudar('foco');
+    });
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) pausar('oculta'); else reanudar('oculta');
+    });
+    if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) reanudar('fuera'); else pausar('fuera');
+        }, { threshold: 0.3 }).observe(carrusel);
+    }
+
+    prev.addEventListener('click', () => mover(-1));
+    next.addEventListener('click', () => mover(1));
     window.addEventListener('resize', update);
     document.addEventListener('cambio-idioma', renderPuntos);
 
+    // Flechas del teclado cuando el foco está dentro del carrusel
+    carrusel.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); mover(-1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); mover(1); }
+    });
+
     // Deslizar con el dedo en móviles
     let inicioX = null;
-    viewport.addEventListener('touchstart', (e) => { inicioX = e.touches[0].clientX; }, { passive: true });
+    viewport.addEventListener('touchstart', (e) => {
+        inicioX = e.touches[0].clientX;
+        pausar('tactil');
+    }, { passive: true });
     viewport.addEventListener('touchend', (e) => {
-        if (inicioX === null) return;
-        const delta = e.changedTouches[0].clientX - inicioX;
-        inicioX = null;
-        if (Math.abs(delta) > 40) {
-            index += delta < 0 ? 1 : -1;
-            update();
+        if (inicioX !== null) {
+            const delta = e.changedTouches[0].clientX - inicioX;
+            inicioX = null;
+            if (Math.abs(delta) > 40) mover(delta < 0 ? 1 : -1);
         }
+        reanudar('tactil');
     });
 
     update();
+    programar();
+}
+
+/* Contadores que suben desde 0 al aparecer en pantalla */
+function initContadores() {
+    const numeros = document.querySelectorAll('[data-contar]');
+    if (reducirMovimiento || !('IntersectionObserver' in window)) return;
+
+    const animar = (el) => {
+        const final = Number(el.dataset.contar);
+        const inicio = performance.now();
+        const duracion = 1400;
+        const frame = (ahora) => {
+            const avance = Math.min((ahora - inicio) / duracion, 1);
+            const suave = 1 - Math.pow(1 - avance, 3);
+            el.textContent = Math.round(final * suave);
+            if (avance < 1) requestAnimationFrame(frame);
+        };
+        requestAnimationFrame(frame);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            animar(entry.target);
+            observer.unobserve(entry.target);
+        });
+    }, { threshold: 0.6 });
+
+    numeros.forEach((el) => {
+        el.textContent = '0';
+        observer.observe(el);
+    });
 }
 
 /* Filtro de proyectos */
@@ -279,7 +391,6 @@ function initCopiarCorreo() {
     });
 }
 
-const reducirMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* Aparición de elementos al hacer scroll, escalonada entre hermanos */
 function initReveal() {
@@ -288,7 +399,7 @@ function initReveal() {
     const selectores = [
         '.titulo-seccion', '.descripcion', '.skills-text',
         '.experiencia-introduccion', '.experiencia-item',
-        '.plataformas-titulo', '.plataforma-item', '.carrusel',
+        '.cert-stat', '.plataformas-titulo', '.plataforma-item', '.carrusel',
         '.filtros', '.proyecto-card', '.skill-card',
         '.footer-cta', '.footer-grid > *'
     ];
@@ -390,5 +501,6 @@ initTyped();
 initScroll();
 initMenu();
 initCarrusel();
+initContadores();
 initFiltros();
 initCopiarCorreo();

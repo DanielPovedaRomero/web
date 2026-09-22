@@ -153,21 +153,45 @@
                 Throughout my career as a .NET developer, I have earned several certifications that validate and strengthen my technical knowledge, expanding my professional experience.
             </p>
 
+            <ul class="cert-stats">
+                <li class="cert-stat">
+                    <span class="cert-num"><span data-contar="15">15</span>+</span>
+                    <span class="cert-label" data-i18n="cert.statCerts">Certifications</span>
+                </li>
+                <li class="cert-stat">
+                    <span class="cert-num"><span data-contar="3">3</span></span>
+                    <span class="cert-label" data-i18n="cert.statPlatforms">Platforms</span>
+                </li>
+                <li class="cert-stat">
+                    <span class="cert-num"><span data-contar="2">2</span></span>
+                    <span class="cert-label" data-i18n="cert.statExams">Microsoft exams</span>
+                </li>
+            </ul>
+
             <h3 class="plataformas-titulo">
                 <span class="corchete" aria-hidden="true">{</span> <span data-i18n="cert.platforms">Platforms</span> <span class="corchete" aria-hidden="true">}</span>
             </h3>
             <ul class="plataformas">
-                <li class="plataforma-item">
-                    <img src="assets/img/plataformas/udem.png" alt="" class="plataforma-logo" width="80" height="80" loading="lazy">
-                    <span>Udemy</span>
+                <li class="plataforma-item" style="--marca: #A435F0">
+                    <img src="assets/img/plataformas/udem.png" alt="" class="plataforma-logo" width="48" height="48" loading="lazy">
+                    <span class="plataforma-info">
+                        <strong>Udemy</strong>
+                        <small>6 <span data-i18n="cert.courses">courses</span></small>
+                    </span>
                 </li>
-                <li class="plataforma-item">
-                    <img src="assets/img/plataformas/platzi.jpg" alt="" class="plataforma-logo" width="80" height="80" loading="lazy">
-                    <span>Platzi</span>
+                <li class="plataforma-item" style="--marca: #98CA3F">
+                    <img src="assets/img/plataformas/platzi.jpg" alt="" class="plataforma-logo" width="48" height="48" loading="lazy">
+                    <span class="plataforma-info">
+                        <strong>Platzi</strong>
+                        <small>6 <span data-i18n="cert.courses">courses</span></small>
+                    </span>
                 </li>
-                <li class="plataforma-item">
-                    <img src="assets/img/plataformas/microsoft.png" alt="" class="plataforma-logo" width="80" height="80" loading="lazy">
-                    <span>Microsoft</span>
+                <li class="plataforma-item" style="--marca: #00A4EF">
+                    <img src="assets/img/plataformas/microsoft.png" alt="" class="plataforma-logo" width="48" height="48" loading="lazy">
+                    <span class="plataforma-info">
+                        <strong>Microsoft</strong>
+                        <small>3 <span data-i18n="cert.certs">certifications</span></small>
+                    </span>
                 </li>
             </ul>
 
@@ -177,11 +201,71 @@
                 </button>
                 <div class="carrusel-viewport">
                     <ul class="carrusel-track">
-                        <li class="carrusel-slide"><a href="assets/img/certificaciones/AzureFun.png" target="_blank" rel="noopener"><img src="assets/img/certificaciones/AzureFun.png" alt="Azure Fundamentals certification" data-i18n-attr="alt:cert.c1" width="600" height="400" loading="lazy" decoding="async"></a></li>
-                        <li class="carrusel-slide"><a href="assets/img/certificaciones/AzureAI.png" target="_blank" rel="noopener"><img src="assets/img/certificaciones/AzureAI.png" alt="Azure AI Fundamentals certification" data-i18n-attr="alt:cert.c2" width="600" height="400" loading="lazy" decoding="async"></a></li>
-                        <li class="carrusel-slide"><a href="assets/img/certificaciones/solid.jpg" target="_blank" rel="noopener"><img src="assets/img/certificaciones/solid.jpg" alt="SOLID principles certificate" data-i18n-attr="alt:cert.c3" width="600" height="400" loading="lazy" decoding="async"></a></li>
-                        <li class="carrusel-slide"><a href="assets/img/certificaciones/maui.jpg" target="_blank" rel="noopener"><img src="assets/img/certificaciones/maui.jpg" alt=".NET MAUI certificate" data-i18n-attr="alt:cert.c4" width="600" height="400" loading="lazy" decoding="async"></a></li>
-                        <li class="carrusel-slide"><a href="assets/img/certificaciones/patrones.jpg" target="_blank" rel="noopener"><img src="assets/img/certificaciones/patrones.jpg" alt="Design patterns certificate" data-i18n-attr="alt:cert.c5" width="600" height="400" loading="lazy" decoding="async"></a></li>
+                        <li class="carrusel-slide">
+                            <a class="cert-card" href="assets/img/certificaciones/AzureFun.png" target="_blank" rel="noopener">
+                                <span class="cert-bar" aria-hidden="true"><span></span><span></span><span></span><em>az-900.png</em></span>
+                                <span class="cert-imagen">
+                                    <img src="assets/img/certificaciones/AzureFun.png" alt="Azure Fundamentals certification" data-i18n-attr="alt:cert.c1" width="600" height="400" loading="lazy" decoding="async">
+                                    <span class="cert-overlay"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> <span data-i18n="cert.view">View full size</span></span>
+                                </span>
+                                <span class="cert-info" style="--marca: #00A4EF">
+                                    <span class="cert-emisor">Microsoft</span>
+                                    <strong class="cert-nombre">AZ-900 Azure Fundamentals</strong>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="carrusel-slide">
+                            <a class="cert-card" href="assets/img/certificaciones/AzureAI.png" target="_blank" rel="noopener">
+                                <span class="cert-bar" aria-hidden="true"><span></span><span></span><span></span><em>ai-900.png</em></span>
+                                <span class="cert-imagen">
+                                    <img src="assets/img/certificaciones/AzureAI.png" alt="Azure AI Fundamentals certification" data-i18n-attr="alt:cert.c2" width="600" height="400" loading="lazy" decoding="async">
+                                    <span class="cert-overlay"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> <span data-i18n="cert.view">View full size</span></span>
+                                </span>
+                                <span class="cert-info" style="--marca: #00A4EF">
+                                    <span class="cert-emisor">Microsoft</span>
+                                    <strong class="cert-nombre">AI-900 Azure AI Fundamentals</strong>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="carrusel-slide">
+                            <a class="cert-card" href="assets/img/certificaciones/solid.jpg" target="_blank" rel="noopener">
+                                <span class="cert-bar" aria-hidden="true"><span></span><span></span><span></span><em>solid-clean-code.jpg</em></span>
+                                <span class="cert-imagen">
+                                    <img src="assets/img/certificaciones/solid.jpg" alt="SOLID principles certificate" data-i18n-attr="alt:cert.c3" width="600" height="400" loading="lazy" decoding="async">
+                                    <span class="cert-overlay"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> <span data-i18n="cert.view">View full size</span></span>
+                                </span>
+                                <span class="cert-info" style="--marca: #A435F0">
+                                    <span class="cert-emisor">Udemy</span>
+                                    <strong class="cert-nombre" data-i18n="cert.n3">SOLID Principles &amp; Clean Code</strong>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="carrusel-slide">
+                            <a class="cert-card" href="assets/img/certificaciones/maui.jpg" target="_blank" rel="noopener">
+                                <span class="cert-bar" aria-hidden="true"><span></span><span></span><span></span><em>dotnet-maui.jpg</em></span>
+                                <span class="cert-imagen">
+                                    <img src="assets/img/certificaciones/maui.jpg" alt=".NET MAUI certificate" data-i18n-attr="alt:cert.c4" width="600" height="400" loading="lazy" decoding="async">
+                                    <span class="cert-overlay"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> <span data-i18n="cert.view">View full size</span></span>
+                                </span>
+                                <span class="cert-info" style="--marca: #A435F0">
+                                    <span class="cert-emisor">Udemy</span>
+                                    <strong class="cert-nombre" data-i18n="cert.n4">.NET MAUI Course</strong>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="carrusel-slide">
+                            <a class="cert-card" href="assets/img/certificaciones/patrones.jpg" target="_blank" rel="noopener">
+                                <span class="cert-bar" aria-hidden="true"><span></span><span></span><span></span><em>design-patterns.jpg</em></span>
+                                <span class="cert-imagen">
+                                    <img src="assets/img/certificaciones/patrones.jpg" alt="Design patterns certificate" data-i18n-attr="alt:cert.c5" width="600" height="400" loading="lazy" decoding="async">
+                                    <span class="cert-overlay"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> <span data-i18n="cert.view">View full size</span></span>
+                                </span>
+                                <span class="cert-info" style="--marca: #A435F0">
+                                    <span class="cert-emisor">Udemy</span>
+                                    <strong class="cert-nombre" data-i18n="cert.n5">Design Patterns in C#</strong>
+                                </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <button class="carrusel-btn next" type="button" aria-label="Next" data-i18n-attr="aria-label:cert.next">
@@ -190,7 +274,7 @@
             </div>
 
             <a href="assets/certificaciones/index.html" class="btn btn-sm">
-                <i class="fas fa-eye" aria-hidden="true"></i> <span data-i18n="cert.more">See more</span>
+                <i class="fas fa-eye" aria-hidden="true"></i> <span data-i18n="cert.more">See all certifications</span>
             </a>
         </section>
 
