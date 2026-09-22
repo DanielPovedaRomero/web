@@ -20,7 +20,6 @@ const TRADUCCIONES_ES = {
         También enfocado en desarrollo de aplicaciones móviles con .NET MAUI y Xamarin.`,
     'hero.cv': 'Descargar CV',
     'hero.projects': 'Ver proyectos',
-    'hero.scroll': 'Desliza',
     'hero.stack': 'Stack tecnológico',
     'hero.photoAlt': 'Foto de Daniel Poveda Romero',
 
@@ -629,7 +628,7 @@ function initReveal() {
     if (reducirMovimiento || !('IntersectionObserver' in window)) return;
 
     const selectores = [
-        '.titulo-seccion', '.descripcion',
+        '.titulo-seccion', '.descripcion', '.stack',
         '.experiencia-introduccion', '.tl-item',
         '.cert-stat', '.plataformas-titulo', '.plataforma-item', '.carrusel',
         '.filtros', '.proyecto-card',

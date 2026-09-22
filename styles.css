@@ -2448,23 +2448,49 @@ html {
     transition: translate 0.4s ease-out;
 }
 
-/* Cinta de tecnologías en bucle infinito */
+/* Stack tecnológico: etiqueta tipo terminal + píldoras en bucle infinito */
+.stack {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    min-width: 0;
+}
+
+.stack-label {
+    flex-shrink: 0;
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    letter-spacing: 0;
+    white-space: nowrap;
+    color: var(--code-green);
+}
+
+.stack-label span {
+    color: var(--code-gray);
+}
+
 .stack-cinta {
-    --alto: 64px;
     position: relative;
+    width: 100%;
+    min-width: 0;
     overflow: hidden;
-    border-block: 1px solid var(--border);
-    background: rgba(15, 36, 54, 0.55);
-    backdrop-filter: blur(6px);
     /* Bordes que se desvanecen */
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
 }
 
 .stack-pista {
     display: flex;
     width: max-content;
-    animation: cinta 40s linear infinite;
+    padding: 0.4rem 0;
+    animation: cinta 45s linear infinite;
 }
 
 .stack-cinta:hover .stack-pista {
@@ -2473,47 +2499,42 @@ html {
 
 .stack-lista {
     display: flex;
-    align-items: center;
-    height: var(--alto);
+    gap: 0.75rem;
+    padding-right: 0.75rem;
 }
 
 .stack-lista li {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
-    padding: 0 1.75rem;
+    gap: 0.55rem;
+    padding: 0.45rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.03);
     font-family: var(--mono);
-    font-size: 0.95rem;
+    font-size: 0.82rem;
     font-weight: 600;
     letter-spacing: 0;
     color: var(--text-soft);
     white-space: nowrap;
-    transition: color 0.3s ease;
-}
-
-/* Separador tipo punto entre tecnologías */
-.stack-lista li::after {
-    content: '';
-    width: 5px;
-    height: 5px;
-    margin-left: 1.75rem;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    translate: 1.75rem 0;
+    transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .stack-lista li i {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     color: var(--color);
     transition: transform 0.3s ease;
 }
 
 .stack-lista li:hover {
+    border-color: color-mix(in srgb, var(--color) 60%, transparent);
+    background: color-mix(in srgb, var(--color) 10%, transparent);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--color) 25%, transparent);
     color: #fff;
 }
 
 .stack-lista li:hover i {
-    transform: scale(1.25) rotate(-8deg);
+    transform: scale(1.15);
 }
 
 /* La mitad de la pista es una copia exacta: al desplazarse -50% el bucle no tiene saltos */
@@ -2522,79 +2543,14 @@ html {
 }
 
 @media (max-width: 600px) {
-    .stack-cinta {
-        --alto: 52px;
-    }
-
     .stack-lista li {
-        padding: 0 1.1rem;
-        font-size: 0.82rem;
-    }
-
-    .stack-lista li::after {
-        margin-left: 1.1rem;
-        translate: 1.1rem 0;
+        padding: 0.4rem 0.85rem;
+        font-size: 0.76rem;
     }
 
     .stack-pista {
-        animation-duration: 30s;
+        animation-duration: 35s;
     }
-}
-
-/* La portada deja ver la cinta sin hacer scroll */
-.inicio {
-    min-height: calc(100vh - var(--nav-height) - 64px);
-    min-height: calc(100svh - var(--nav-height) - 64px);
-}
-
-/* Indicador de scroll */
-.hero-scroll {
-    display: none;
-    position: absolute;
-    left: 50%;
-    bottom: 1.5rem;
-    translate: -50% 0;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-soft);
-    text-decoration: none;
-    opacity: 0.8;
-    transition: opacity 0.3s ease, color 0.3s ease;
-    animation: aparecer-arriba 0.8s ease 1.6s backwards;
-}
-
-.hero-scroll:hover {
-    opacity: 1;
-    color: var(--accent);
-}
-
-.hero-mouse {
-    width: 24px;
-    height: 38px;
-    display: flex;
-    justify-content: center;
-    padding-top: 7px;
-    border: 2px solid currentColor;
-    border-radius: 14px;
-}
-
-.hero-mouse span {
-    width: 4px;
-    height: 8px;
-    border-radius: 2px;
-    background: var(--accent);
-    animation: rueda 1.8s ease-in-out infinite;
-}
-
-@keyframes rueda {
-    0% { opacity: 0; transform: translateY(-3px); }
-    30% { opacity: 1; }
-    100% { opacity: 0; transform: translateY(12px); }
 }
 
 @media (min-width: 900px) {
@@ -2602,8 +2558,16 @@ html {
         justify-content: flex-start;
     }
 
-    .hero-scroll {
-        display: flex;
+    .stack {
+        flex-direction: row;
+        gap: 1.5rem;
+        margin-top: 0;
+    }
+
+    /* Separador vertical entre la etiqueta y la cinta */
+    .stack-label {
+        padding-right: 1.5rem;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
     }
 }
 
