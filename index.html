@@ -24,15 +24,20 @@
             </a>
 
             <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
-                <i class="fas fa-bars" aria-hidden="true"></i>
+                <span></span><span></span><span></span>
             </button>
 
             <ul class="menu" id="menu">
-                <li><a href="#inicio" data-i18n="nav.home">Home</a></li>
-                <li><a href="#experiencia" data-i18n="nav.experience">Experience</a></li>
-                <li><a href="#certificaciones" data-i18n="nav.certifications">Certifications</a></li>
-                <li><a href="#proyectos" data-i18n="nav.projects">Projects</a></li>
-                <li><a href="#contacto" data-i18n="nav.contact">Contact</a></li>
+                <li class="menu-indicador" aria-hidden="true"></li>
+                <li><a href="#inicio"><span class="menu-num" aria-hidden="true">01.</span><span data-i18n="nav.home">Home</span></a></li>
+                <li><a href="#experiencia"><span class="menu-num" aria-hidden="true">02.</span><span data-i18n="nav.experience">Experience</span></a></li>
+                <li><a href="#certificaciones"><span class="menu-num" aria-hidden="true">03.</span><span data-i18n="nav.certifications">Certifications</span></a></li>
+                <li><a href="#proyectos"><span class="menu-num" aria-hidden="true">04.</span><span data-i18n="nav.projects">Projects</span></a></li>
+                <li><a href="#contacto"><span class="menu-num" aria-hidden="true">05.</span><span data-i18n="nav.contact">Contact</span></a></li>
+                <li class="menu-social">
+                    <a href="https://www.linkedin.com/in/daniel-poveda-romero-84a59a1a6/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                    <a href="https://github.com/DanielPovedaRomero" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+                </li>
             </ul>
 
             <div class="nav-actions">

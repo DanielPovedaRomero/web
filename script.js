@@ -158,15 +158,19 @@ function initIdioma() {
     else boton.dataset.activo = 'en';
 }
 
-/* Menú móvil */
+/* Menú móvil a pantalla completa */
 function initMenu() {
     const hamburger = document.querySelector('.hamburger');
     const menu = document.getElementById('menu');
     if (!hamburger || !menu) return;
 
+    // Orden de aparición escalonada de cada opción
+    Array.from(menu.children).forEach((li, i) => li.style.setProperty('--i', i));
+
     const setOpen = (open) => {
         menu.classList.toggle('active', open);
         hamburger.classList.toggle('open', open);
+        document.documentElement.classList.toggle('menu-abierto', open);
         hamburger.setAttribute('aria-expanded', String(open));
         hamburger.setAttribute('aria-label', t(open ? 'menuClose' : 'menuOpen'));
     };
@@ -176,16 +180,70 @@ function initMenu() {
 
     hamburger.addEventListener('click', () => setOpen(!menu.classList.contains('active')));
 
-    // Cerrar al elegir una sección, con Escape o al hacer clic fuera
+    // Cerrar al elegir una sección, con Escape o al pasar a escritorio
     menu.addEventListener('click', (e) => {
         if (e.target.closest('a')) setOpen(false);
     });
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') setOpen(false);
     });
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.nav')) setOpen(false);
+    window.matchMedia('(min-width: 900px)').addEventListener('change', () => setOpen(false));
+}
+
+/* Navbar: cápsula al hacer scroll, se oculta al bajar y píldora que sigue al cursor */
+function initNavbar() {
+    const header = document.querySelector('.site-header');
+    const menu = document.getElementById('menu');
+    const indicador = menu && menu.querySelector('.menu-indicador');
+    if (!header || !menu || !indicador) return;
+
+    // Estado según el scroll
+    let ultimoY = window.scrollY;
+    let pendiente = false;
+    const actualizar = () => {
+        pendiente = false;
+        const y = window.scrollY;
+        header.classList.toggle('scrolled', y > 20);
+        const bajando = y > ultimoY + 4;
+        const subiendo = y < ultimoY - 4;
+        if (bajando && y > 400 && !menu.classList.contains('active')) header.classList.add('oculto');
+        if (subiendo || y <= 400) header.classList.remove('oculto');
+        if (bajando || subiendo) ultimoY = y;
+    };
+    window.addEventListener('scroll', () => {
+        if (!pendiente) {
+            pendiente = true;
+            requestAnimationFrame(actualizar);
+        }
+    }, { passive: true });
+    actualizar();
+
+    // Mostrar la barra si se navega con teclado dentro de ella
+    header.addEventListener('focusin', () => header.classList.remove('oculto'));
+
+    // Píldora deslizante: sigue al cursor y vuelve a la sección activa
+    const escritorio = window.matchMedia('(min-width: 900px)');
+    const moverA = (enlace) => {
+        if (!enlace || !escritorio.matches) {
+            indicador.classList.remove('visible');
+            return;
+        }
+        indicador.style.width = `${enlace.offsetWidth}px`;
+        indicador.style.height = `${enlace.offsetHeight}px`;
+        indicador.style.transform = `translate(${enlace.offsetLeft}px, ${enlace.offsetTop}px)`;
+        indicador.classList.add('visible');
+    };
+    const volverAlActivo = () => moverA(menu.querySelector('a.activo'));
+
+    menu.querySelectorAll('a').forEach((enlace) => {
+        enlace.addEventListener('mouseenter', () => moverA(enlace));
+        enlace.addEventListener('focus', () => moverA(enlace));
     });
+    menu.addEventListener('mouseleave', volverAlActivo);
+    document.addEventListener('seccion-activa', volverAlActivo);
+    document.addEventListener('cambio-idioma', volverAlActivo);
+    window.addEventListener('resize', volverAlActivo);
+    document.fonts?.ready.then(volverAlActivo);
 }
 
 /* Carrusel de certificaciones: autoplay, vuelta infinita, teclado y gestos */
@@ -669,10 +727,11 @@ function initParallax() {
 /* Barra de progreso y enlace del menú de la sección visible */
 function initScroll() {
     const barra = document.querySelector('.scroll-progress');
-    const enlaces = document.querySelectorAll('.menu a');
+    const enlaces = document.querySelectorAll('.menu a[href^="#"]');
     const secciones = Array.from(enlaces, (a) => document.querySelector(a.hash)).filter(Boolean);
 
     let pendiente = false;
+    let seccionActual = null;
     const actualizar = () => {
         pendiente = false;
         const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -684,7 +743,11 @@ function initScroll() {
         if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
             activa = secciones[secciones.length - 1];
         }
-        enlaces.forEach((a) => a.classList.toggle('activo', a.hash === `#${activa.id}`));
+        if (activa.id !== seccionActual) {
+            seccionActual = activa.id;
+            enlaces.forEach((a) => a.classList.toggle('activo', a.hash === `#${activa.id}`));
+            document.dispatchEvent(new CustomEvent('seccion-activa'));
+        }
     };
 
     window.addEventListener('scroll', () => {
@@ -703,6 +766,7 @@ initTyped();
 initParallax();
 initScroll();
 initMenu();
+initNavbar();
 initCarrusel();
 initTimeline();
 initContadores();
