@@ -238,6 +238,29 @@ function initNavbar() {
     document.fonts?.ready.then(volverAlActivo);
 }
 
+/* Inclinación 3D y foco de luz en las tarjetas de certificados */
+function initCertTilt() {
+    if (reducirMovimiento || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    document.querySelectorAll('.cert-card').forEach((card) => {
+        card.addEventListener('pointermove', (e) => {
+            const r = card.getBoundingClientRect();
+            const px = (e.clientX - r.left) / r.width;
+            const py = (e.clientY - r.top) / r.height;
+            card.classList.add('inclinando');
+            card.style.setProperty('--mx', `${px * 100}%`);
+            card.style.setProperty('--my', `${py * 100}%`);
+            card.style.setProperty('--ry', `${(px - 0.5) * 10}deg`);
+            card.style.setProperty('--rx', `${(0.5 - py) * 8}deg`);
+        });
+        card.addEventListener('pointerleave', () => {
+            card.classList.remove('inclinando');
+            card.style.setProperty('--rx', '0deg');
+            card.style.setProperty('--ry', '0deg');
+        });
+    });
+}
+
 /* Carrusel de certificaciones: autoplay, vuelta infinita, teclado y gestos */
 function initCarrusel() {
     const carrusel = document.querySelector('.carrusel');
@@ -1249,6 +1272,7 @@ initScroll();
 initMenu();
 initNavbar();
 initCarrusel();
+initCertTilt();
 initTimeline();
 initContadores();
 initFiltros();
