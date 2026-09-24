@@ -939,238 +939,6 @@ function initCanvas() {
     arrancar();
 }
 
-/* Retrato de partículas: la foto de perfil se reconstruye con miles de partículas
-   que se ensamblan al cargar, se apartan del cursor y estallan al hacer clic */
-function initRetrato() {
-    const contenedor = document.querySelector('.inicio-image');
-    const foto = contenedor && contenedor.querySelector('img');
-    const canvas = contenedor && contenedor.querySelector('.retrato-canvas');
-    if (!foto || !canvas || !canvas.getContext || reducirMovimiento) return;
-
-    const ctx = canvas.getContext('2d');
-    const FONDO = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#091A28';
-    const BORDE = 6;                // grosor del borde oscuro alrededor de la foto
-    const MARGEN = 0.3;             // el canvas sobresale un 30% para que las partículas vuelen fuera
-
-    let particulas = [];
-    let porColor = [];              // [[color, partículas], ...]
-    let lado = 0;                   // tamaño CSS del canvas
-    let centro = 0;
-    let radio = 0;                  // radio de la foto dentro del canvas
-    let paso = 0;                   // tamaño de cada partícula
-    let tiempo = 0;
-    let escaneo = -1;               // posición de la línea de holograma (-1 = inactiva)
-    const cursor = { x: 0, y: 0, activo: false };
-
-    // Muestrea la foto en una rejilla y crea una partícula por celda dentro del círculo
-    const crearParticulas = () => {
-        const rejilla = lado < 300 ? 64 : 88;
-        const muestra = document.createElement('canvas');
-        muestra.width = muestra.height = rejilla;
-        const mctx = muestra.getContext('2d', { willReadFrequently: true });
-        mctx.drawImage(foto, 0, 0, rejilla, rejilla);
-        const datos = mctx.getImageData(0, 0, rejilla, rejilla).data; // lanza error si la imagen no es del mismo origen
-
-        const diametro = (radio - BORDE) * 2;
-        paso = diametro / rejilla;
-        const inicioXY = centro - diametro / 2;
-        const nuevas = [];
-        for (let fy = 0; fy < rejilla; fy++) {
-            for (let fx = 0; fx < rejilla; fx++) {
-                const tx = inicioXY + fx * paso + paso / 2;
-                const ty = inicioXY + fy * paso + paso / 2;
-                if (Math.hypot(tx - centro, ty - centro) > radio - BORDE - paso / 2) continue;
-                const i = (fy * rejilla + fx) * 4;
-                // Color cuantizado (múltiplos de 16) para agrupar partículas al dibujar
-                const q = (v) => Math.min(255, Math.round(v / 16) * 16);
-                // Llegan desde un anillo exterior, en espiral
-                const angulo = Math.random() * Math.PI * 2;
-                const distancia = lado * (0.45 + Math.random() * 0.4);
-                nuevas.push({
-                    tx, ty,
-                    x: centro + Math.cos(angulo) * distancia,
-                    y: centro + Math.sin(angulo) * distancia,
-                    vx: 0, vy: 0,
-                    color: `rgb(${q(datos[i])}, ${q(datos[i + 1])}, ${q(datos[i + 2])})`,
-                    retraso: Math.random() * 50 + Math.hypot(tx - centro, ty - centro) * 0.25
-                });
-            }
-        }
-        // Agrupadas por color: se dibuja cada grupo con un solo fill()
-        const grupos = new Map();
-        for (const p of nuevas) {
-            if (!grupos.has(p.color)) grupos.set(p.color, []);
-            grupos.get(p.color).push(p);
-        }
-        particulas = nuevas;
-        porColor = Array.from(grupos);
-    };
-
-    const redimensionar = () => {
-        const base = contenedor.getBoundingClientRect().width;
-        if (!base) return;
-        lado = base * (1 + MARGEN * 2);
-        centro = lado / 2;
-        radio = base / 2;
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        canvas.width = Math.round(lado * dpr);
-        canvas.height = Math.round(lado * dpr);
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        try {
-            crearParticulas();
-            contenedor.classList.add('retrato-activo');
-        } catch (err) {
-            // Sin acceso a los píxeles (p. ej. abriendo el archivo local): se queda la foto normal
-            contenedor.classList.remove('retrato-activo');
-            particulas = [];
-        }
-    };
-
-    const actualizar = () => {
-        tiempo++;
-        for (const p of particulas) {
-            if (p.retraso > 0) {
-                p.retraso--;
-                continue;
-            }
-            // Leve ondulación, como si el holograma respirara
-            const ox = Math.sin(tiempo * 0.03 + p.ty * 0.05) * 0.6;
-            const oy = Math.cos(tiempo * 0.03 + p.tx * 0.05) * 0.6;
-            p.vx += (p.tx + ox - p.x) * 0.045;
-            p.vy += (p.ty + oy - p.y) * 0.045;
-
-            if (cursor.activo) {
-                const dx = p.x - cursor.x;
-                const dy = p.y - cursor.y;
-                const d2 = dx * dx + dy * dy;
-                const alcance = radio * 0.35;
-                if (d2 < alcance * alcance && d2 > 0.01) {
-                    const d = Math.sqrt(d2);
-                    const fuerza = (1 - d / alcance) * 4;
-                    p.vx += (dx / d) * fuerza;
-                    p.vy += (dy / d) * fuerza;
-                }
-            }
-            p.vx *= 0.82;
-            p.vy *= 0.82;
-            p.x += p.vx;
-            p.y += p.vy;
-        }
-
-        // Línea de escaneo cada ~6 segundos
-        if (escaneo < 0 && tiempo % 360 === 0) escaneo = centro - radio;
-        if (escaneo >= 0) {
-            escaneo += 3;
-            if (escaneo > centro + radio) escaneo = -1;
-        }
-    };
-
-    const dibujar = () => {
-        ctx.clearRect(0, 0, lado, lado);
-
-        // Disco oscuro que tapa el anillo de colores (hace de borde de la foto)
-        ctx.fillStyle = FONDO;
-        ctx.beginPath();
-        ctx.arc(centro, centro, radio, 0, Math.PI * 2);
-        ctx.fill();
-
-        const tam = paso * 0.92;
-        for (const [color, grupo] of porColor) {
-            ctx.fillStyle = color;
-            ctx.beginPath();
-            for (const p of grupo) {
-                if (p.retraso <= 0) ctx.rect(p.x - tam / 2, p.y - tam / 2, tam, tam);
-            }
-            ctx.fill();
-        }
-
-        // Holograma: franja luminosa que recorre el retrato
-        if (escaneo >= 0) {
-            ctx.save();
-            ctx.beginPath();
-            ctx.arc(centro, centro, radio - BORDE, 0, Math.PI * 2);
-            ctx.clip();
-            const franja = ctx.createLinearGradient(0, escaneo - 30, 0, escaneo + 4);
-            franja.addColorStop(0, 'rgba(255, 170, 119, 0)');
-            franja.addColorStop(0.85, 'rgba(255, 170, 119, 0.35)');
-            franja.addColorStop(1, 'rgba(255, 255, 255, 0.8)');
-            ctx.fillStyle = franja;
-            ctx.fillRect(0, escaneo - 30, lado, 34);
-            ctx.restore();
-        }
-    };
-
-    // Bucle: solo con la portada visible y la pestaña activa
-    let frame = null;
-    let visible = true;
-    const bucle = () => {
-        actualizar();
-        dibujar();
-        frame = requestAnimationFrame(bucle);
-    };
-    const arrancar = () => {
-        if (!frame && visible && !document.hidden && particulas.length) frame = requestAnimationFrame(bucle);
-    };
-    const detener = () => {
-        cancelAnimationFrame(frame);
-        frame = null;
-    };
-
-    const posicion = (e) => {
-        const rect = canvas.getBoundingClientRect();
-        cursor.x = (e.clientX - rect.left) * (lado / rect.width);
-        cursor.y = (e.clientY - rect.top) * (lado / rect.height);
-    };
-    canvas.addEventListener('pointermove', (e) => {
-        posicion(e);
-        cursor.activo = true;
-    });
-    canvas.addEventListener('pointerleave', () => { cursor.activo = false; });
-    canvas.addEventListener('pointerup', (e) => {
-        if (e.pointerType !== 'mouse') cursor.activo = false;
-    });
-    // Clic: el retrato estalla y se reconstruye
-    canvas.addEventListener('click', (e) => {
-        posicion(e);
-        for (const p of particulas) {
-            const dx = p.x - cursor.x;
-            const dy = p.y - cursor.y;
-            const d = Math.hypot(dx, dy) || 1;
-            const fuerza = 18 + Math.random() * 22;
-            p.vx += (dx / d) * fuerza;
-            p.vy += (dy / d) * fuerza;
-            p.retraso = Math.random() * 15;
-        }
-    });
-
-    if ('IntersectionObserver' in window) {
-        new IntersectionObserver(([entry]) => {
-            visible = entry.isIntersecting;
-            if (visible) arrancar(); else detener();
-        }).observe(contenedor);
-    }
-    document.addEventListener('visibilitychange', () => {
-        if (document.hidden) detener(); else arrancar();
-    });
-
-    let timer = null;
-    new ResizeObserver(() => {
-        clearTimeout(timer);
-        timer = setTimeout(() => {
-            detener();
-            redimensionar();
-            arrancar();
-        }, 150);
-    }).observe(contenedor);
-
-    const empezar = () => {
-        redimensionar();
-        arrancar();
-    };
-    if (foto.complete && foto.naturalWidth) empezar();
-    else foto.addEventListener('load', empezar, { once: true });
-}
-
 /* Cursor animado: la bolita sigue al mouse, gira su anillo y reacciona a lo interactivo */
 function initCursor() {
     if (reducirMovimiento || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
@@ -1195,6 +963,161 @@ function initCursor() {
     window.addEventListener('pointerdown', () => html.classList.add('cursor-clic'));
     window.addEventListener('pointerup', () => html.classList.remove('cursor-clic'));
     document.addEventListener('mouseleave', () => html.classList.add('cursor-fuera'));
+}
+
+/* Canvas de la ventana Developer.cs: lluvia de código, escáner,
+   brillo y chispas que siguen al mouse y vapor saliendo del café */
+function initConsolaCanvas() {
+    const ventana = document.querySelector('.code-window');
+    const canvas = ventana && ventana.querySelector('.code-window-canvas');
+    if (!canvas || reducirMovimiento) return;
+
+    const ctx = canvas.getContext('2d');
+    const taza = ventana.querySelector('.tk-cafe');
+    const GLIFOS = '{}[]();<>/=+*01#$&.NETC#async await var new =>'.split('');
+    const COLORES = ['255, 119, 85', '255, 170, 119', '165, 108, 246', '121, 192, 255'];
+    let w = 0;
+    let h = 0;
+    let dpr = 1;
+    let columnas = [];
+    let chispas = [];
+    let vapor = [];
+    let mouse = null;
+    let visible = false;
+    let raf = null;
+    let t = 0;
+
+    const medir = () => {
+        const r = ventana.getBoundingClientRect();
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = r.width;
+        h = r.height;
+        canvas.width = Math.round(w * dpr);
+        canvas.height = Math.round(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const paso = 16;
+        columnas = Array.from({ length: Math.ceil(w / paso) }, (_, i) => ({
+            x: i * paso + 4,
+            y: Math.random() * h,
+            v: 0.25 + Math.random() * 0.55,
+            color: COLORES[i % COLORES.length],
+            glifo: GLIFOS[(Math.random() * GLIFOS.length) | 0],
+        }));
+    };
+
+    // Posición de la taza relativa a la ventana, para el vapor
+    const origenVapor = () => {
+        if (!taza) return null;
+        const a = ventana.getBoundingClientRect();
+        const b = taza.getBoundingClientRect();
+        return { x: b.left - a.left + b.width / 2, y: b.top - a.top };
+    };
+
+    const dibujar = () => {
+        t++;
+        ctx.clearRect(0, 0, w, h);
+
+        // Lluvia de glifos
+        ctx.font = '11px "JetBrains Mono", monospace';
+        ctx.textAlign = 'center';
+        columnas.forEach((c) => {
+            c.y += c.v;
+            if (c.y > h + 20) {
+                c.y = -20 - Math.random() * h * 0.5;
+                c.glifo = GLIFOS[(Math.random() * GLIFOS.length) | 0];
+            }
+            if (t % 40 === 0 && Math.random() < 0.3) c.glifo = GLIFOS[(Math.random() * GLIFOS.length) | 0];
+            for (let k = 0; k < 4; k++) {
+                const y = c.y - k * 14;
+                if (y < 0 || y > h) continue;
+                let alfa = (k === 0 ? 0.5 : 0.22 / k);
+                if (mouse) {
+                    const d = Math.hypot(c.x - mouse.x, y - mouse.y);
+                    if (d < 90) alfa += (1 - d / 90) * 0.5;
+                }
+                ctx.fillStyle = `rgba(${c.color}, ${alfa})`;
+                ctx.fillText(k === 0 ? c.glifo : GLIFOS[(c.x + k * 7 + ((c.y / 14) | 0)) % GLIFOS.length], c.x, y);
+            }
+        });
+
+        // Línea de escaneo que baja
+        const sy = (t * 0.8) % (h + 60) - 30;
+        const g = ctx.createLinearGradient(0, sy - 30, 0, sy + 2);
+        g.addColorStop(0, 'rgba(255, 119, 85, 0)');
+        g.addColorStop(1, 'rgba(255, 119, 85, 0.16)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, sy - 30, w, 32);
+        ctx.fillStyle = 'rgba(255, 170, 119, 0.55)';
+        ctx.fillRect(0, sy + 1, w, 1);
+
+        // Brillo que sigue al mouse
+        if (mouse) {
+            const rg = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 120);
+            rg.addColorStop(0, 'rgba(255, 119, 85, 0.18)');
+            rg.addColorStop(1, 'rgba(255, 119, 85, 0)');
+            ctx.fillStyle = rg;
+            ctx.fillRect(0, 0, w, h);
+        }
+
+        // Chispas
+        chispas = chispas.filter((p) => (p.vida -= 0.025) > 0);
+        chispas.forEach((p) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.03;
+            ctx.fillStyle = `rgba(${p.color}, ${p.vida})`;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 1.6 * p.vida + 0.4, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        // Vapor del café
+        const o = t % 9 === 0 ? origenVapor() : null;
+        if (o) vapor.push({ x: o.x + (Math.random() - 0.5) * 4, y: o.y, vida: 1, fase: Math.random() * 6 });
+        vapor = vapor.filter((p) => (p.vida -= 0.012) > 0);
+        vapor.forEach((p) => {
+            p.y -= 0.45;
+            const x = p.x + Math.sin(p.fase + t * 0.05) * 3 * (1 - p.vida);
+            ctx.fillStyle = `rgba(255, 220, 200, ${p.vida * 0.35})`;
+            ctx.beginPath();
+            ctx.arc(x, p.y, 2 + (1 - p.vida) * 5, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        raf = visible ? requestAnimationFrame(dibujar) : null;
+    };
+
+    const arrancar = () => {
+        if (!raf && visible) raf = requestAnimationFrame(dibujar);
+    };
+
+    ventana.addEventListener('pointermove', (e) => {
+        const r = ventana.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        if (mouse && Math.random() < 0.6) {
+            chispas.push({
+                x, y,
+                vx: (Math.random() - 0.5) * 1.6,
+                vy: -Math.random() * 1.4,
+                vida: 1,
+                color: COLORES[(Math.random() * COLORES.length) | 0],
+            });
+        }
+        mouse = { x, y };
+    });
+    ventana.addEventListener('pointerleave', () => { mouse = null; });
+
+    new ResizeObserver(medir).observe(ventana);
+    new IntersectionObserver(([e]) => {
+        visible = e.isIntersecting && ventana.offsetParent !== null;
+        arrancar();
+    }).observe(ventana);
+    document.addEventListener('visibilitychange', () => {
+        visible = !document.hidden && ventana.offsetParent !== null;
+        arrancar();
+    });
+    medir();
 }
 
 /* Parallax de la portada: las capas siguen al cursor con distinta profundidad */
@@ -1266,8 +1189,8 @@ initReveal();
 initTyped();
 initParallax();
 initCanvas();
-initRetrato();
 initCursor();
+initConsolaCanvas();
 initScroll();
 initMenu();
 initNavbar();

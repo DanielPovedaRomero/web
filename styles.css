@@ -2598,26 +2598,6 @@ html.cursor-fuera .cursor-bola {
     transition: opacity 0.6s ease;
 }
 
-/* Retrato de partículas: el canvas sobresale de la foto para que
-   las partículas puedan volar fuera del círculo */
-.retrato-canvas {
-    position: absolute;
-    inset: -30%;
-    width: 160%;
-    height: 160%;
-    display: none;
-    cursor: crosshair;
-    touch-action: pan-y;
-}
-
-.retrato-activo .retrato-canvas {
-    display: block;
-}
-
-.retrato-activo img {
-    opacity: 0;
-}
-
 .inicio h1 {
     min-height: 3.6em;
 }
@@ -2935,6 +2915,41 @@ html {
 .code-window {
     translate: calc(var(--px) * 14px) calc(var(--py) * 14px);
     transition: translate 0.4s ease-out;
+}
+
+/* Canvas animado dentro de la ventana y borde de luz giratorio */
+.code-window {
+    overflow: hidden;
+    isolation: isolate;
+    border: 1px solid transparent;
+    background:
+        linear-gradient(rgba(13, 22, 33, 0.94), rgba(13, 22, 33, 0.94)) padding-box,
+        conic-gradient(from var(--giro), rgba(255, 255, 255, 0.1), var(--accent) 20%, #A56CF6 30%, rgba(255, 255, 255, 0.1) 45%) border-box;
+    animation: aparecer-arriba 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.8s backwards,
+               flotar 7s ease-in-out 1.7s infinite reverse,
+               girar-borde 5s linear infinite;
+    transition: translate 0.4s ease-out, box-shadow 0.3s ease;
+}
+
+.code-window:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 119, 85, 0.25);
+}
+
+.code-window-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.code-window-bar {
+    background: rgba(9, 18, 28, 0.6);
+}
+
+.code-window pre {
+    text-shadow: 0 0 12px rgba(9, 18, 28, 0.9);
 }
 
 /* Stack tecnológico: etiqueta tipo terminal + píldoras en bucle infinito */
