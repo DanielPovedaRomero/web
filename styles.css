@@ -2273,6 +2273,27 @@ a {
 
 .inicio-image img {
     border: 6px solid var(--bg);
+    transition: opacity 0.6s ease;
+}
+
+/* Retrato de partículas: el canvas sobresale de la foto para que
+   las partículas puedan volar fuera del círculo */
+.retrato-canvas {
+    position: absolute;
+    inset: -30%;
+    width: 160%;
+    height: 160%;
+    display: none;
+    cursor: crosshair;
+    touch-action: pan-y;
+}
+
+.retrato-activo .retrato-canvas {
+    display: block;
+}
+
+.retrato-activo img {
+    opacity: 0;
 }
 
 .inicio h1 {

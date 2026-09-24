@@ -916,6 +916,238 @@ function initCanvas() {
     arrancar();
 }
 
+/* Retrato de partículas: la foto de perfil se reconstruye con miles de partículas
+   que se ensamblan al cargar, se apartan del cursor y estallan al hacer clic */
+function initRetrato() {
+    const contenedor = document.querySelector('.inicio-image');
+    const foto = contenedor && contenedor.querySelector('img');
+    const canvas = contenedor && contenedor.querySelector('.retrato-canvas');
+    if (!foto || !canvas || !canvas.getContext || reducirMovimiento) return;
+
+    const ctx = canvas.getContext('2d');
+    const FONDO = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#091A28';
+    const BORDE = 6;                // grosor del borde oscuro alrededor de la foto
+    const MARGEN = 0.3;             // el canvas sobresale un 30% para que las partículas vuelen fuera
+
+    let particulas = [];
+    let porColor = [];              // [[color, partículas], ...]
+    let lado = 0;                   // tamaño CSS del canvas
+    let centro = 0;
+    let radio = 0;                  // radio de la foto dentro del canvas
+    let paso = 0;                   // tamaño de cada partícula
+    let tiempo = 0;
+    let escaneo = -1;               // posición de la línea de holograma (-1 = inactiva)
+    const cursor = { x: 0, y: 0, activo: false };
+
+    // Muestrea la foto en una rejilla y crea una partícula por celda dentro del círculo
+    const crearParticulas = () => {
+        const rejilla = lado < 300 ? 64 : 88;
+        const muestra = document.createElement('canvas');
+        muestra.width = muestra.height = rejilla;
+        const mctx = muestra.getContext('2d', { willReadFrequently: true });
+        mctx.drawImage(foto, 0, 0, rejilla, rejilla);
+        const datos = mctx.getImageData(0, 0, rejilla, rejilla).data; // lanza error si la imagen no es del mismo origen
+
+        const diametro = (radio - BORDE) * 2;
+        paso = diametro / rejilla;
+        const inicioXY = centro - diametro / 2;
+        const nuevas = [];
+        for (let fy = 0; fy < rejilla; fy++) {
+            for (let fx = 0; fx < rejilla; fx++) {
+                const tx = inicioXY + fx * paso + paso / 2;
+                const ty = inicioXY + fy * paso + paso / 2;
+                if (Math.hypot(tx - centro, ty - centro) > radio - BORDE - paso / 2) continue;
+                const i = (fy * rejilla + fx) * 4;
+                // Color cuantizado (múltiplos de 16) para agrupar partículas al dibujar
+                const q = (v) => Math.min(255, Math.round(v / 16) * 16);
+                // Llegan desde un anillo exterior, en espiral
+                const angulo = Math.random() * Math.PI * 2;
+                const distancia = lado * (0.45 + Math.random() * 0.4);
+                nuevas.push({
+                    tx, ty,
+                    x: centro + Math.cos(angulo) * distancia,
+                    y: centro + Math.sin(angulo) * distancia,
+                    vx: 0, vy: 0,
+                    color: `rgb(${q(datos[i])}, ${q(datos[i + 1])}, ${q(datos[i + 2])})`,
+                    retraso: Math.random() * 50 + Math.hypot(tx - centro, ty - centro) * 0.25
+                });
+            }
+        }
+        // Agrupadas por color: se dibuja cada grupo con un solo fill()
+        const grupos = new Map();
+        for (const p of nuevas) {
+            if (!grupos.has(p.color)) grupos.set(p.color, []);
+            grupos.get(p.color).push(p);
+        }
+        particulas = nuevas;
+        porColor = Array.from(grupos);
+    };
+
+    const redimensionar = () => {
+        const base = contenedor.getBoundingClientRect().width;
+        if (!base) return;
+        lado = base * (1 + MARGEN * 2);
+        centro = lado / 2;
+        radio = base / 2;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.round(lado * dpr);
+        canvas.height = Math.round(lado * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        try {
+            crearParticulas();
+            contenedor.classList.add('retrato-activo');
+        } catch (err) {
+            // Sin acceso a los píxeles (p. ej. abriendo el archivo local): se queda la foto normal
+            contenedor.classList.remove('retrato-activo');
+            particulas = [];
+        }
+    };
+
+    const actualizar = () => {
+        tiempo++;
+        for (const p of particulas) {
+            if (p.retraso > 0) {
+                p.retraso--;
+                continue;
+            }
+            // Leve ondulación, como si el holograma respirara
+            const ox = Math.sin(tiempo * 0.03 + p.ty * 0.05) * 0.6;
+            const oy = Math.cos(tiempo * 0.03 + p.tx * 0.05) * 0.6;
+            p.vx += (p.tx + ox - p.x) * 0.045;
+            p.vy += (p.ty + oy - p.y) * 0.045;
+
+            if (cursor.activo) {
+                const dx = p.x - cursor.x;
+                const dy = p.y - cursor.y;
+                const d2 = dx * dx + dy * dy;
+                const alcance = radio * 0.35;
+                if (d2 < alcance * alcance && d2 > 0.01) {
+                    const d = Math.sqrt(d2);
+                    const fuerza = (1 - d / alcance) * 4;
+                    p.vx += (dx / d) * fuerza;
+                    p.vy += (dy / d) * fuerza;
+                }
+            }
+            p.vx *= 0.82;
+            p.vy *= 0.82;
+            p.x += p.vx;
+            p.y += p.vy;
+        }
+
+        // Línea de escaneo cada ~6 segundos
+        if (escaneo < 0 && tiempo % 360 === 0) escaneo = centro - radio;
+        if (escaneo >= 0) {
+            escaneo += 3;
+            if (escaneo > centro + radio) escaneo = -1;
+        }
+    };
+
+    const dibujar = () => {
+        ctx.clearRect(0, 0, lado, lado);
+
+        // Disco oscuro que tapa el anillo de colores (hace de borde de la foto)
+        ctx.fillStyle = FONDO;
+        ctx.beginPath();
+        ctx.arc(centro, centro, radio, 0, Math.PI * 2);
+        ctx.fill();
+
+        const tam = paso * 0.92;
+        for (const [color, grupo] of porColor) {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            for (const p of grupo) {
+                if (p.retraso <= 0) ctx.rect(p.x - tam / 2, p.y - tam / 2, tam, tam);
+            }
+            ctx.fill();
+        }
+
+        // Holograma: franja luminosa que recorre el retrato
+        if (escaneo >= 0) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(centro, centro, radio - BORDE, 0, Math.PI * 2);
+            ctx.clip();
+            const franja = ctx.createLinearGradient(0, escaneo - 30, 0, escaneo + 4);
+            franja.addColorStop(0, 'rgba(255, 170, 119, 0)');
+            franja.addColorStop(0.85, 'rgba(255, 170, 119, 0.35)');
+            franja.addColorStop(1, 'rgba(255, 255, 255, 0.8)');
+            ctx.fillStyle = franja;
+            ctx.fillRect(0, escaneo - 30, lado, 34);
+            ctx.restore();
+        }
+    };
+
+    // Bucle: solo con la portada visible y la pestaña activa
+    let frame = null;
+    let visible = true;
+    const bucle = () => {
+        actualizar();
+        dibujar();
+        frame = requestAnimationFrame(bucle);
+    };
+    const arrancar = () => {
+        if (!frame && visible && !document.hidden && particulas.length) frame = requestAnimationFrame(bucle);
+    };
+    const detener = () => {
+        cancelAnimationFrame(frame);
+        frame = null;
+    };
+
+    const posicion = (e) => {
+        const rect = canvas.getBoundingClientRect();
+        cursor.x = (e.clientX - rect.left) * (lado / rect.width);
+        cursor.y = (e.clientY - rect.top) * (lado / rect.height);
+    };
+    canvas.addEventListener('pointermove', (e) => {
+        posicion(e);
+        cursor.activo = true;
+    });
+    canvas.addEventListener('pointerleave', () => { cursor.activo = false; });
+    canvas.addEventListener('pointerup', (e) => {
+        if (e.pointerType !== 'mouse') cursor.activo = false;
+    });
+    // Clic: el retrato estalla y se reconstruye
+    canvas.addEventListener('click', (e) => {
+        posicion(e);
+        for (const p of particulas) {
+            const dx = p.x - cursor.x;
+            const dy = p.y - cursor.y;
+            const d = Math.hypot(dx, dy) || 1;
+            const fuerza = 18 + Math.random() * 22;
+            p.vx += (dx / d) * fuerza;
+            p.vy += (dy / d) * fuerza;
+            p.retraso = Math.random() * 15;
+        }
+    });
+
+    if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([entry]) => {
+            visible = entry.isIntersecting;
+            if (visible) arrancar(); else detener();
+        }).observe(contenedor);
+    }
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) detener(); else arrancar();
+    });
+
+    let timer = null;
+    new ResizeObserver(() => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            detener();
+            redimensionar();
+            arrancar();
+        }, 150);
+    }).observe(contenedor);
+
+    const empezar = () => {
+        redimensionar();
+        arrancar();
+    };
+    if (foto.complete && foto.naturalWidth) empezar();
+    else foto.addEventListener('load', empezar, { once: true });
+}
+
 /* Parallax de la portada: las capas siguen al cursor con distinta profundidad */
 function initParallax() {
     const inicio = document.querySelector('.inicio');
@@ -985,6 +1217,7 @@ initReveal();
 initTyped();
 initParallax();
 initCanvas();
+initRetrato();
 initScroll();
 initMenu();
 initNavbar();
