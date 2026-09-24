@@ -4,148 +4,349 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-es="Certificaciones | Daniel Poveda Romero">Certifications | Daniel Poveda Romero</title>
+  <meta name="theme-color" content="#091A28">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Montserrat:wght@400;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="../css/i18n.css">
   <script src="../js/i18n.js" data-inicio="../../index.html#certificaciones"></script>
+  <script src="certificaciones.js" defer></script>
 </head>
 <body>
+  <div class="fondo" aria-hidden="true"><span></span><span></span><span></span></div>
 
   <!-- ENCABEZADO -->
-  <header class="header">
-    <div class="header-content">
-      <img src="../img/header/logo.webp" alt="Logo .NET Developer" class="header-logo">
-      <h1><span lang="en">Certifications</span><span lang="es">Certificaciones</span></h1>
+  <header class="hero">
+    <div class="hero-fila">
+    <a href="../../index.html" class="hero-logo" aria-label="Back to portfolio" data-es-aria-label="Volver al portafolio">
+      <span class="hero-orbita" aria-hidden="true"><i></i><i></i></span>
+      <img src="../img/header/logo.webp" alt="Logo .NET Developer" width="300" height="240">
+    </a>
+    <p class="hero-ruta"><i class="fa-solid fa-code-branch" aria-hidden="true"></i><span class="c-gris">~/portfolio/</span>certifications<span class="c-acento">.cs</span><span class="cursor-texto" aria-hidden="true"></span></p>
     </div>
+    <h1>
+      <span lang="en">My <span class="grad">Certifications</span></span>
+      <span lang="es">Mis <span class="grad">Certificaciones</span></span>
+    </h1>
+    <p class="hero-texto">
+      <span lang="en">Credentials that back my journey as a .NET developer: cloud, AI, architecture, clean code and cross-platform apps.</span>
+      <span lang="es">Credenciales que respaldan mi camino como desarrollador .NET: nube, IA, arquitectura, código limpio y apps multiplataforma.</span>
+    </p>
+    <ul class="hero-stats">
+      <li><i class="fa-solid fa-award" aria-hidden="true"></i><div><strong data-contar="15">15</strong><span lang="en">Certificates</span><span lang="es">Certificados</span></div></li>
+      <li><i class="fa-solid fa-layer-group" aria-hidden="true"></i><div><strong data-contar="3">3</strong><span lang="en">Platforms</span><span lang="es">Plataformas</span></div></li>
+      <li><i class="fa-brands fa-microsoft" aria-hidden="true"></i><div><strong data-contar="3">3</strong><span lang="en">Microsoft</span><span lang="es">Microsoft</span></div></li>
+    </ul>
   </header>
 
-  <!-- SECCIÓN DE CERTIFICACIONES -->
-  <main>
-    <section class="certifications-section">
-      <div class="certifications-grid">
-
-        <div class="cert-card">
-          <img src="../img/plataformas/microsoft.webp" alt="Microsoft Logo" class="cert-logo">
-          <h3>AZ-900 Azure Fundamentals</h3>
-          <p lang="en">I earned this Microsoft certification, which backs my knowledge of the cloud and the services offered by Microsoft Azure. I learned about service models (IaaS, PaaS, SaaS), core Azure services, as well as security, compliance, pricing and support.</p>
-          <p lang="es">Obtuve esta certificación de Microsoft que respalda mis conocimientos sobre la nube y los servicios que ofrece Microsoft Azure. Aprendí sobre modelos de servicio (IaaS, PaaS, SaaS), servicios principales de Azure, así como aspectos de seguridad, cumplimiento, precios y soporte.</p>
-          <a href="../img/certificaciones/azurefun.webp" target="_blank" rel="noopener" class="view-btn"><span lang="en">View Certificate</span><span lang="es">Ver Certificado</span></a>
-        </div>
-
-        <div class="cert-card">
-          <img src="../img/plataformas/microsoft.webp" alt="Microsoft Logo" class="cert-logo">
-          <h3>AI-900 Azure AI Fundamentals</h3>
-          <p lang="en">This Microsoft certification backs my knowledge of Azure artificial intelligence. I learned about machine learning, computer vision, natural language processing and conversational agents, as well as tools such as Azure Machine Learning.</p>
-          <p lang="es">Con esta certificación de Microsoft que respalda mis conocimientos en inteligencia artificial de Azure. Aprendí sobre el aprendizaje automático, visión por computadora, procesamiento de lenguaje natural y agentes conversacionales, así como el uso de herramientas como Azure Machine Learning.</p>
-          <a href="../img/certificaciones/azureai.webp" target="_blank" rel="noopener" class="view-btn"><span lang="en">View Certificate</span><span lang="es">Ver Certificado</span></a>
-        </div>
-
-        <div class="cert-card">
-          <img src="../img/plataformas/microsoft.webp" alt="Microsoft Logo" class="cert-logo">
-          <h3>Foundational C# with Microsoft</h3>
-          <p lang="en">This Microsoft certification validates foundational C# knowledge, covering key concepts such as object-oriented programming, exception handling and control structures.</p>
-          <p lang="es">Esta certificación de Microsoft valida conocimientos fundamentales de C#, cubriendo conceptos clave como programación orientada a objetos, manejo de excepciones y estructuras de control.</p>
-          <a href="../img/certificaciones/codecamp.webp" target="_blank" rel="noopener" class="view-btn"><span lang="en">View Certificate</span><span lang="es">Ver Certificado</span></a>
-        </div>
-
-        <div class="cert-card">
-          <img src="../img/plataformas/udem.webp" alt="Udemy Logo" class="cert-logo">
-          <h3><span lang="en">SOLID Principles and Clean Code</span><span lang="es">Principios SOLID y Clean Code</span></h3>
-          <p lang="en">This course teaches SOLID principles and Clean Code, focusing on clear names for variables and methods, maintainable code and practices such as single responsibility.</p>
-          <p lang="es">Este curso enseña principios SOLID y Clean Code, enfocándose en nombres claros para variables y métodos, código mantenible y prácticas como responsabilidad única.</p>
-          <a href="../img/certificaciones/solid.webp" target="_blank" rel="noopener" class="view-btn"><span lang="en">View Certificate</span><span lang="es">Ver Certificado</span></a>
-        </div>
-
-        <div class="cert-card">
-          <img src="../img/plataformas/udem.webp" alt="Udemy Logo" class="cert-logo">
-          <h3><span lang="en">Design Patterns in C#</span><span lang="es">Patrones de diseño en C#</span></h3>
-          <p lang="en">This course teaches design patterns in C# applied to ASP.NET, such as Singleton, Repository and Factory Method, improving code scalability, maintainability and organization.</p>
-          <p lang="es">Este curso enseña patrones de diseño en C# aplicados a ASP.NET, como Singleton, Repository y Factory Method, mejorando la escalabilidad, mantenibilidad y organización del código.</p>
-          <a href="../img/certificaciones/patrones.webp" target="_blank" rel="noopener" class="view-btn"><span lang="en">View Certificate</span><span lang="es">Ver Certificado</span></a>
-        </div>
-
-        <div class="cert-card">
-          <img src="../img/plataformas/udem.webp" alt="Udemy Logo" class="cert-logo">
-          <h3><span lang="en">.NET MAUI Course</span><span lang="es">Curso de .NET MAUI</span></h3>
-          <p lang="en">This course teaches how to build cross-platform applications with .NET MAUI and Visual Studio 2022, from initial setup to creating functional, adaptable projects.</p>
-          <p lang="es">Este curso enseña a desarrollar aplicaciones multiplataforma con .NET MAUI y Visual Studio 2022, abordando desde la configuración inicial hasta la creación de proyectos funcionales y adaptables.</p>
-          <a href="../img/certificaciones/maui.webp" target="_blank" rel="noopener" class="view-btn"><span lang="en">View Certificate</span><span lang="es">Ver Certificado</span></a>
-        </div>
-
-        <div class="cert-card">
-          <img src="../img/plataformas/udem.webp" alt="Udemy Logo" class="cert-logo">
-          <h3><span lang="en">CSS3 and HTML Course</span><span lang="es">Curso de CSS3 y HTML</span></h3>
-          <p lang="en">This course covers everything from the fundamentals to advanced CSS3 techniques, teaching how to design modern, responsive interfaces with animations, transitions and custom styles.</p>
-          <p lang="es">Este curso abarca desde los fundamentos hasta técnicas avanzadas de CSS3, enseñando cómo diseñar interfaces modernas y responsivas con animaciones, transiciones y estilos personalizados.</p>
-          <a href="../img/certificaciones/css.webp" target="_blank" rel="noopener" class="view-btn"><span lang="en">View Certificate</span><span lang="es">Ver Certificado</span></a>
-        </div>
-
-        <div class="cert-card">
-          <img src="../img/plataformas/udem.webp" alt="Udemy Logo" class="cert-logo">
-          <h3><span lang="en">Introduction to Concurrency in C#</span><span lang="es">Introducción a la Concurrencia en C#</span></h3>
-          <p lang="en">This course introduces concurrency, asynchrony and parallelism in C#, teaching how to optimize applications with async/await, Tasks and other tools to improve performance.</p>
-          <p lang="es">Este curso introduce los conceptos de concurrencia, asincronía y paralelismo en C#, enseñando cómo optimizar aplicaciones mediante async/await, Tasks y otras herramientas para mejorar el rendimiento.</p>
-          <a href="../img/certificaciones/concurrencia.webp" target="_blank" rel="noopener" class="view-btn"><span lang="en">View Certificate</span><span lang="es">Ver Certificado</span></a>
-        </div>
-
-        <div class="cert-card">
-          <img src="../img/plataformas/udem.webp" alt="Udemy Logo" class="cert-logo">
-          <h3>LINQ C# 10</h3>
-          <p lang="en">This course explores practical LINQ examples with C# 10, teaching how to write efficient queries over collections and filter, sort and transform data in a clear, functional way.</p>
-          <p lang="es">Este curso explora ejemplos prácticos de LINQ con C# 10, enseñando cómo realizar consultas eficientes sobre colecciones, filtrar, ordenar y transformar datos de manera clara y funcional.</p>
-          <a href="../img/certificaciones/linq.webp" target="_blank" rel="noopener" class="view-btn"><span lang="en">View Certificate</span><span lang="es">Ver Certificado</span></a>
-        </div>
-
-        <div class="cert-card">
-          <img src="../img/plataformas/platzi.webp" alt="Platzi Logo" class="cert-logo">
-          <h3><span lang="en">GIT AND GITHUB</span><span lang="es">GIT Y GITHUB</span></h3>
-          <p lang="en">This professional Platzi course teaches advanced Git and GitHub usage, covering everything from version control to project collaboration and branching.</p>
-          <p lang="es">Este curso profesional de Platzi enseña el manejo avanzado de Git y GitHub, cubriendo desde control de versiones hasta la colaboración en proyectos y el uso de ramas.</p>
-          <a href="../img/certificaciones/git.webp" target="_blank" rel="noopener" class="view-btn"><span lang="en">View Certificate</span><span lang="es">Ver Certificado</span></a>
-        </div>
-
-        <div class="cert-card">
-          <img src="../img/plataformas/platzi.webp" alt="Platzi Logo" class="cert-logo">
-          <h3><span lang="en">Best Practices and Clean Code in C#</span><span lang="es">Buenas Prácticas y Código Limpio en C#</span></h3>
-          <p lang="en">This course covers best practices and principles for writing clean code in C#, teaching techniques such as meaningful names, refactoring and applying SOLID principles to improve software quality.</p>
-          <p lang="es">Este curso aborda buenas prácticas y principios para escribir código limpio en C#, enseñando técnicas como nombres significativos, refactorización y aplicación de principios SOLID para mejorar la calidad del software.</p>
-          <a href="../img/certificaciones/clean.webp" target="_blank" rel="noopener" class="view-btn"><span lang="en">View Certificate</span><span lang="es">Ver Certificado</span></a>
-        </div>
-
-        <div class="cert-card">
-          <img src="../img/plataformas/platzi.webp" alt="Platzi Logo" class="cert-logo">
-          <h3><span lang="en">APIs IN .NET</span><span lang="es">APIS EN .NET</span></h3>
-          <p lang="en">This course teaches how to build robust, scalable APIs with .NET, from creating endpoints to implementing security and best practices in web service development.</p>
-          <p lang="es">Este curso enseña a construir APIs robustas y escalables con .NET, abordando desde la creación de endpoints hasta la implementación de seguridad y buenas prácticas en el desarrollo de servicios web.</p>
-          <a href="../img/certificaciones/apis.webp" target="_blank" rel="noopener" class="view-btn"><span lang="en">View Certificate</span><span lang="es">Ver Certificado</span></a>
-        </div>
-
-        <div class="cert-card">
-          <img src="../img/plataformas/platzi.webp" alt="Platzi Logo" class="cert-logo">
-          <h3><span lang="en">Introduction to Test Automation</span><span lang="es">Introducción a la Automatización de Pruebas</span></h3>
-          <p lang="en">This Platzi course introduces the basics of test automation, teaching tools and techniques to design, implement and run tests that improve software quality.</p>
-          <p lang="es">Este curso de Platzi introduce los conceptos básicos de la automatización de pruebas, enseñando herramientas y técnicas para diseñar, implementar y ejecutar pruebas que optimicen la calidad del software.</p>
-          <a href="../img/certificaciones/pruebas.webp" target="_blank" rel="noopener" class="view-btn"><span lang="en">View Certificate</span><span lang="es">Ver Certificado</span></a>
-        </div>
-
-        <div class="cert-card">
-          <img src="../img/plataformas/platzi.webp" alt="Platzi Logo" class="cert-logo">
-          <h3><span lang="en">Working with XAML in .NET MAUI</span><span lang="es">Manejo de XAML en .NET MAUI</span></h3>
-          <p lang="en">This course focuses on working with XAML in .NET MAUI, teaching how to design cross-platform user interfaces efficiently and flexibly with this technology.</p>
-          <p lang="es">Este curso se enfoca en el manejo de XAML en .NET MAUI, enseñando cómo diseñar interfaces de usuario multiplataforma de manera eficiente y personalizable con esta tecnología.</p>
-          <a href="../img/certificaciones/xamel.webp" target="_blank" rel="noopener" class="view-btn"><span lang="en">View Certificate</span><span lang="es">Ver Certificado</span></a>
-        </div>
-
-        <div class="cert-card">
-          <img src="../img/plataformas/platzi.webp" alt="Platzi Logo" class="cert-logo">
-          <h3><span lang="en">Web Development with Blazor and .NET</span><span lang="es">Desarrollo WEB con Blazor y .NET</span></h3>
-          <p lang="en">This Platzi course teaches how to build modern web applications with Blazor and .NET, creating dynamic interfaces and optimizing performance with cutting-edge technologies.</p>
-          <p lang="es">Este curso de Platzi enseña a desarrollar aplicaciones web modernas utilizando Blazor y .NET, creando interfaces dinámicas y optimizando el rendimiento con tecnologías de vanguardia.</p>
-          <a href="../img/certificaciones/blazor.webp" target="_blank" rel="noopener" class="view-btn"><span lang="en">View Certificate</span><span lang="es">Ver Certificado</span></a>
-        </div>
-
+  <main class="contenedor">
+    <!-- FILTROS -->
+    <div class="controles">
+      <div class="filtros" role="group" aria-label="Filter by platform" data-es-aria-label="Filtrar por plataforma">
+        <button type="button" class="filtro activo" data-filtro="todos" aria-pressed="true"><span lang="en">All</span><span lang="es">Todas</span> <em>15</em></button>
+        <button type="button" class="filtro" data-filtro="microsoft" aria-pressed="false" style="--marca: #00A4EF">Microsoft <em>3</em></button>
+        <button type="button" class="filtro" data-filtro="udemy" aria-pressed="false" style="--marca: #A435F0">Udemy <em>6</em></button>
+        <button type="button" class="filtro" data-filtro="platzi" aria-pressed="false" style="--marca: #98CA3F">Platzi <em>6</em></button>
       </div>
+      <label class="buscador">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <input type="search" placeholder="Search certificates..." data-es-placeholder="Buscar certificados..." aria-label="Search" data-es-aria-label="Buscar">
+      </label>
+    </div>
+
+    <!-- CERTIFICACIONES -->
+    <section class="grid" aria-live="polite">
+        <article class="cert" data-plataforma="microsoft" style="--marca: #00A4EF; --i: 1">
+          <span class="cert-luz" aria-hidden="true"></span>
+          <button class="cert-preview" type="button" data-src="../img/certificaciones/azurefun.webp" aria-label="View AZ-900 Azure Fundamentals certificate" data-es-aria-label="Ver certificado AZ-900 Azure Fundamentals">
+            <img src="../img/certificaciones/azurefun.webp" alt="" loading="lazy" decoding="async" width="600" height="400">
+            <span class="cert-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+          </button>
+          <div class="cert-cuerpo">
+            <div class="cert-meta">
+              <img src="../img/plataformas/microsoft.webp" alt="" class="cert-logo" width="28" height="28">
+              <span class="cert-plataforma">Microsoft</span>
+              <span class="cert-num">#01</span>
+            </div>
+            <h3>AZ-900 Azure Fundamentals</h3>
+            <p lang="en">I earned this Microsoft certification, which backs my knowledge of the cloud and the services offered by Microsoft Azure. I learned about service models (IaaS, PaaS, SaaS), core Azure services, as well as security, compliance, pricing and support.</p>
+            <p lang="es">Obtuve esta certificación de Microsoft que respalda mis conocimientos sobre la nube y los servicios que ofrece Microsoft Azure. Aprendí sobre modelos de servicio (IaaS, PaaS, SaaS), servicios principales de Azure, así como aspectos de seguridad, cumplimiento, precios y soporte.</p>
+            <a href="../img/certificaciones/azurefun.webp" target="_blank" rel="noopener" class="cert-link"><span lang="en">Open certificate</span><span lang="es">Abrir certificado</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </article>
+        <article class="cert" data-plataforma="microsoft" style="--marca: #00A4EF; --i: 2">
+          <span class="cert-luz" aria-hidden="true"></span>
+          <button class="cert-preview" type="button" data-src="../img/certificaciones/azureai.webp" aria-label="View AI-900 Azure AI Fundamentals certificate" data-es-aria-label="Ver certificado AI-900 Azure AI Fundamentals">
+            <img src="../img/certificaciones/azureai.webp" alt="" loading="lazy" decoding="async" width="600" height="400">
+            <span class="cert-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+          </button>
+          <div class="cert-cuerpo">
+            <div class="cert-meta">
+              <img src="../img/plataformas/microsoft.webp" alt="" class="cert-logo" width="28" height="28">
+              <span class="cert-plataforma">Microsoft</span>
+              <span class="cert-num">#02</span>
+            </div>
+            <h3>AI-900 Azure AI Fundamentals</h3>
+            <p lang="en">This Microsoft certification backs my knowledge of Azure artificial intelligence. I learned about machine learning, computer vision, natural language processing and conversational agents, as well as tools such as Azure Machine Learning.</p>
+            <p lang="es">Con esta certificación de Microsoft que respalda mis conocimientos en inteligencia artificial de Azure. Aprendí sobre el aprendizaje automático, visión por computadora, procesamiento de lenguaje natural y agentes conversacionales, así como el uso de herramientas como Azure Machine Learning.</p>
+            <a href="../img/certificaciones/azureai.webp" target="_blank" rel="noopener" class="cert-link"><span lang="en">Open certificate</span><span lang="es">Abrir certificado</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </article>
+        <article class="cert" data-plataforma="microsoft" style="--marca: #00A4EF; --i: 3">
+          <span class="cert-luz" aria-hidden="true"></span>
+          <button class="cert-preview" type="button" data-src="../img/certificaciones/codecamp.webp" aria-label="View Foundational C# with Microsoft certificate" data-es-aria-label="Ver certificado Foundational C# with Microsoft">
+            <img src="../img/certificaciones/codecamp.webp" alt="" loading="lazy" decoding="async" width="600" height="400">
+            <span class="cert-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+          </button>
+          <div class="cert-cuerpo">
+            <div class="cert-meta">
+              <img src="../img/plataformas/microsoft.webp" alt="" class="cert-logo" width="28" height="28">
+              <span class="cert-plataforma">Microsoft</span>
+              <span class="cert-num">#03</span>
+            </div>
+            <h3>Foundational C# with Microsoft</h3>
+            <p lang="en">This Microsoft certification validates foundational C# knowledge, covering key concepts such as object-oriented programming, exception handling and control structures.</p>
+            <p lang="es">Esta certificación de Microsoft valida conocimientos fundamentales de C#, cubriendo conceptos clave como programación orientada a objetos, manejo de excepciones y estructuras de control.</p>
+            <a href="../img/certificaciones/codecamp.webp" target="_blank" rel="noopener" class="cert-link"><span lang="en">Open certificate</span><span lang="es">Abrir certificado</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </article>
+        <article class="cert" data-plataforma="udemy" style="--marca: #A435F0; --i: 4">
+          <span class="cert-luz" aria-hidden="true"></span>
+          <button class="cert-preview" type="button" data-src="../img/certificaciones/solid.webp" aria-label="View SOLID Principles and Clean Code certificate" data-es-aria-label="Ver certificado SOLID Principles and Clean Code">
+            <img src="../img/certificaciones/solid.webp" alt="" loading="lazy" decoding="async" width="600" height="400">
+            <span class="cert-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+          </button>
+          <div class="cert-cuerpo">
+            <div class="cert-meta">
+              <img src="../img/plataformas/udem.webp" alt="" class="cert-logo" width="28" height="28">
+              <span class="cert-plataforma">Udemy</span>
+              <span class="cert-num">#04</span>
+            </div>
+            <h3><span lang="en">SOLID Principles and Clean Code</span><span lang="es">Principios SOLID y Clean Code</span></h3>
+            <p lang="en">This course teaches SOLID principles and Clean Code, focusing on clear names for variables and methods, maintainable code and practices such as single responsibility.</p>
+            <p lang="es">Este curso enseña principios SOLID y Clean Code, enfocándose en nombres claros para variables y métodos, código mantenible y prácticas como responsabilidad única.</p>
+            <a href="../img/certificaciones/solid.webp" target="_blank" rel="noopener" class="cert-link"><span lang="en">Open certificate</span><span lang="es">Abrir certificado</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </article>
+        <article class="cert" data-plataforma="udemy" style="--marca: #A435F0; --i: 5">
+          <span class="cert-luz" aria-hidden="true"></span>
+          <button class="cert-preview" type="button" data-src="../img/certificaciones/patrones.webp" aria-label="View Design Patterns in C# certificate" data-es-aria-label="Ver certificado Design Patterns in C#">
+            <img src="../img/certificaciones/patrones.webp" alt="" loading="lazy" decoding="async" width="600" height="400">
+            <span class="cert-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+          </button>
+          <div class="cert-cuerpo">
+            <div class="cert-meta">
+              <img src="../img/plataformas/udem.webp" alt="" class="cert-logo" width="28" height="28">
+              <span class="cert-plataforma">Udemy</span>
+              <span class="cert-num">#05</span>
+            </div>
+            <h3><span lang="en">Design Patterns in C#</span><span lang="es">Patrones de diseño en C#</span></h3>
+            <p lang="en">This course teaches design patterns in C# applied to ASP.NET, such as Singleton, Repository and Factory Method, improving code scalability, maintainability and organization.</p>
+            <p lang="es">Este curso enseña patrones de diseño en C# aplicados a ASP.NET, como Singleton, Repository y Factory Method, mejorando la escalabilidad, mantenibilidad y organización del código.</p>
+            <a href="../img/certificaciones/patrones.webp" target="_blank" rel="noopener" class="cert-link"><span lang="en">Open certificate</span><span lang="es">Abrir certificado</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </article>
+        <article class="cert" data-plataforma="udemy" style="--marca: #A435F0; --i: 6">
+          <span class="cert-luz" aria-hidden="true"></span>
+          <button class="cert-preview" type="button" data-src="../img/certificaciones/maui.webp" aria-label="View .NET MAUI Course certificate" data-es-aria-label="Ver certificado .NET MAUI Course">
+            <img src="../img/certificaciones/maui.webp" alt="" loading="lazy" decoding="async" width="600" height="400">
+            <span class="cert-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+          </button>
+          <div class="cert-cuerpo">
+            <div class="cert-meta">
+              <img src="../img/plataformas/udem.webp" alt="" class="cert-logo" width="28" height="28">
+              <span class="cert-plataforma">Udemy</span>
+              <span class="cert-num">#06</span>
+            </div>
+            <h3><span lang="en">.NET MAUI Course</span><span lang="es">Curso de .NET MAUI</span></h3>
+            <p lang="en">This course teaches how to build cross-platform applications with .NET MAUI and Visual Studio 2022, from initial setup to creating functional, adaptable projects.</p>
+            <p lang="es">Este curso enseña a desarrollar aplicaciones multiplataforma con .NET MAUI y Visual Studio 2022, abordando desde la configuración inicial hasta la creación de proyectos funcionales y adaptables.</p>
+            <a href="../img/certificaciones/maui.webp" target="_blank" rel="noopener" class="cert-link"><span lang="en">Open certificate</span><span lang="es">Abrir certificado</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </article>
+        <article class="cert" data-plataforma="udemy" style="--marca: #A435F0; --i: 7">
+          <span class="cert-luz" aria-hidden="true"></span>
+          <button class="cert-preview" type="button" data-src="../img/certificaciones/css.webp" aria-label="View CSS3 and HTML Course certificate" data-es-aria-label="Ver certificado CSS3 and HTML Course">
+            <img src="../img/certificaciones/css.webp" alt="" loading="lazy" decoding="async" width="600" height="400">
+            <span class="cert-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+          </button>
+          <div class="cert-cuerpo">
+            <div class="cert-meta">
+              <img src="../img/plataformas/udem.webp" alt="" class="cert-logo" width="28" height="28">
+              <span class="cert-plataforma">Udemy</span>
+              <span class="cert-num">#07</span>
+            </div>
+            <h3><span lang="en">CSS3 and HTML Course</span><span lang="es">Curso de CSS3 y HTML</span></h3>
+            <p lang="en">This course covers everything from the fundamentals to advanced CSS3 techniques, teaching how to design modern, responsive interfaces with animations, transitions and custom styles.</p>
+            <p lang="es">Este curso abarca desde los fundamentos hasta técnicas avanzadas de CSS3, enseñando cómo diseñar interfaces modernas y responsivas con animaciones, transiciones y estilos personalizados.</p>
+            <a href="../img/certificaciones/css.webp" target="_blank" rel="noopener" class="cert-link"><span lang="en">Open certificate</span><span lang="es">Abrir certificado</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </article>
+        <article class="cert" data-plataforma="udemy" style="--marca: #A435F0; --i: 8">
+          <span class="cert-luz" aria-hidden="true"></span>
+          <button class="cert-preview" type="button" data-src="../img/certificaciones/concurrencia.webp" aria-label="View Introduction to Concurrency in C# certificate" data-es-aria-label="Ver certificado Introduction to Concurrency in C#">
+            <img src="../img/certificaciones/concurrencia.webp" alt="" loading="lazy" decoding="async" width="600" height="400">
+            <span class="cert-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+          </button>
+          <div class="cert-cuerpo">
+            <div class="cert-meta">
+              <img src="../img/plataformas/udem.webp" alt="" class="cert-logo" width="28" height="28">
+              <span class="cert-plataforma">Udemy</span>
+              <span class="cert-num">#08</span>
+            </div>
+            <h3><span lang="en">Introduction to Concurrency in C#</span><span lang="es">Introducción a la Concurrencia en C#</span></h3>
+            <p lang="en">This course introduces concurrency, asynchrony and parallelism in C#, teaching how to optimize applications with async/await, Tasks and other tools to improve performance.</p>
+            <p lang="es">Este curso introduce los conceptos de concurrencia, asincronía y paralelismo en C#, enseñando cómo optimizar aplicaciones mediante async/await, Tasks y otras herramientas para mejorar el rendimiento.</p>
+            <a href="../img/certificaciones/concurrencia.webp" target="_blank" rel="noopener" class="cert-link"><span lang="en">Open certificate</span><span lang="es">Abrir certificado</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </article>
+        <article class="cert" data-plataforma="udemy" style="--marca: #A435F0; --i: 9">
+          <span class="cert-luz" aria-hidden="true"></span>
+          <button class="cert-preview" type="button" data-src="../img/certificaciones/linq.webp" aria-label="View LINQ C# 10 certificate" data-es-aria-label="Ver certificado LINQ C# 10">
+            <img src="../img/certificaciones/linq.webp" alt="" loading="lazy" decoding="async" width="600" height="400">
+            <span class="cert-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+          </button>
+          <div class="cert-cuerpo">
+            <div class="cert-meta">
+              <img src="../img/plataformas/udem.webp" alt="" class="cert-logo" width="28" height="28">
+              <span class="cert-plataforma">Udemy</span>
+              <span class="cert-num">#09</span>
+            </div>
+            <h3>LINQ C# 10</h3>
+            <p lang="en">This course explores practical LINQ examples with C# 10, teaching how to write efficient queries over collections and filter, sort and transform data in a clear, functional way.</p>
+            <p lang="es">Este curso explora ejemplos prácticos de LINQ con C# 10, enseñando cómo realizar consultas eficientes sobre colecciones, filtrar, ordenar y transformar datos de manera clara y funcional.</p>
+            <a href="../img/certificaciones/linq.webp" target="_blank" rel="noopener" class="cert-link"><span lang="en">Open certificate</span><span lang="es">Abrir certificado</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </article>
+        <article class="cert" data-plataforma="platzi" style="--marca: #98CA3F; --i: 10">
+          <span class="cert-luz" aria-hidden="true"></span>
+          <button class="cert-preview" type="button" data-src="../img/certificaciones/git.webp" aria-label="View GIT AND GITHUB certificate" data-es-aria-label="Ver certificado GIT AND GITHUB">
+            <img src="../img/certificaciones/git.webp" alt="" loading="lazy" decoding="async" width="600" height="400">
+            <span class="cert-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+          </button>
+          <div class="cert-cuerpo">
+            <div class="cert-meta">
+              <img src="../img/plataformas/platzi.webp" alt="" class="cert-logo" width="28" height="28">
+              <span class="cert-plataforma">Platzi</span>
+              <span class="cert-num">#10</span>
+            </div>
+            <h3><span lang="en">GIT AND GITHUB</span><span lang="es">GIT Y GITHUB</span></h3>
+            <p lang="en">This professional Platzi course teaches advanced Git and GitHub usage, covering everything from version control to project collaboration and branching.</p>
+            <p lang="es">Este curso profesional de Platzi enseña el manejo avanzado de Git y GitHub, cubriendo desde control de versiones hasta la colaboración en proyectos y el uso de ramas.</p>
+            <a href="../img/certificaciones/git.webp" target="_blank" rel="noopener" class="cert-link"><span lang="en">Open certificate</span><span lang="es">Abrir certificado</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </article>
+        <article class="cert" data-plataforma="platzi" style="--marca: #98CA3F; --i: 11">
+          <span class="cert-luz" aria-hidden="true"></span>
+          <button class="cert-preview" type="button" data-src="../img/certificaciones/clean.webp" aria-label="View Best Practices and Clean Code in C# certificate" data-es-aria-label="Ver certificado Best Practices and Clean Code in C#">
+            <img src="../img/certificaciones/clean.webp" alt="" loading="lazy" decoding="async" width="600" height="400">
+            <span class="cert-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+          </button>
+          <div class="cert-cuerpo">
+            <div class="cert-meta">
+              <img src="../img/plataformas/platzi.webp" alt="" class="cert-logo" width="28" height="28">
+              <span class="cert-plataforma">Platzi</span>
+              <span class="cert-num">#11</span>
+            </div>
+            <h3><span lang="en">Best Practices and Clean Code in C#</span><span lang="es">Buenas Prácticas y Código Limpio en C#</span></h3>
+            <p lang="en">This course covers best practices and principles for writing clean code in C#, teaching techniques such as meaningful names, refactoring and applying SOLID principles to improve software quality.</p>
+            <p lang="es">Este curso aborda buenas prácticas y principios para escribir código limpio en C#, enseñando técnicas como nombres significativos, refactorización y aplicación de principios SOLID para mejorar la calidad del software.</p>
+            <a href="../img/certificaciones/clean.webp" target="_blank" rel="noopener" class="cert-link"><span lang="en">Open certificate</span><span lang="es">Abrir certificado</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </article>
+        <article class="cert" data-plataforma="platzi" style="--marca: #98CA3F; --i: 12">
+          <span class="cert-luz" aria-hidden="true"></span>
+          <button class="cert-preview" type="button" data-src="../img/certificaciones/apis.webp" aria-label="View APIs IN .NET certificate" data-es-aria-label="Ver certificado APIs IN .NET">
+            <img src="../img/certificaciones/apis.webp" alt="" loading="lazy" decoding="async" width="600" height="400">
+            <span class="cert-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+          </button>
+          <div class="cert-cuerpo">
+            <div class="cert-meta">
+              <img src="../img/plataformas/platzi.webp" alt="" class="cert-logo" width="28" height="28">
+              <span class="cert-plataforma">Platzi</span>
+              <span class="cert-num">#12</span>
+            </div>
+            <h3><span lang="en">APIs IN .NET</span><span lang="es">APIS EN .NET</span></h3>
+            <p lang="en">This course teaches how to build robust, scalable APIs with .NET, from creating endpoints to implementing security and best practices in web service development.</p>
+            <p lang="es">Este curso enseña a construir APIs robustas y escalables con .NET, abordando desde la creación de endpoints hasta la implementación de seguridad y buenas prácticas en el desarrollo de servicios web.</p>
+            <a href="../img/certificaciones/apis.webp" target="_blank" rel="noopener" class="cert-link"><span lang="en">Open certificate</span><span lang="es">Abrir certificado</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </article>
+        <article class="cert" data-plataforma="platzi" style="--marca: #98CA3F; --i: 13">
+          <span class="cert-luz" aria-hidden="true"></span>
+          <button class="cert-preview" type="button" data-src="../img/certificaciones/pruebas.webp" aria-label="View Introduction to Test Automation certificate" data-es-aria-label="Ver certificado Introduction to Test Automation">
+            <img src="../img/certificaciones/pruebas.webp" alt="" loading="lazy" decoding="async" width="600" height="400">
+            <span class="cert-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+          </button>
+          <div class="cert-cuerpo">
+            <div class="cert-meta">
+              <img src="../img/plataformas/platzi.webp" alt="" class="cert-logo" width="28" height="28">
+              <span class="cert-plataforma">Platzi</span>
+              <span class="cert-num">#13</span>
+            </div>
+            <h3><span lang="en">Introduction to Test Automation</span><span lang="es">Introducción a la Automatización de Pruebas</span></h3>
+            <p lang="en">This Platzi course introduces the basics of test automation, teaching tools and techniques to design, implement and run tests that improve software quality.</p>
+            <p lang="es">Este curso de Platzi introduce los conceptos básicos de la automatización de pruebas, enseñando herramientas y técnicas para diseñar, implementar y ejecutar pruebas que optimicen la calidad del software.</p>
+            <a href="../img/certificaciones/pruebas.webp" target="_blank" rel="noopener" class="cert-link"><span lang="en">Open certificate</span><span lang="es">Abrir certificado</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </article>
+        <article class="cert" data-plataforma="platzi" style="--marca: #98CA3F; --i: 14">
+          <span class="cert-luz" aria-hidden="true"></span>
+          <button class="cert-preview" type="button" data-src="../img/certificaciones/xamel.webp" aria-label="View Working with XAML in .NET MAUI certificate" data-es-aria-label="Ver certificado Working with XAML in .NET MAUI">
+            <img src="../img/certificaciones/xamel.webp" alt="" loading="lazy" decoding="async" width="600" height="400">
+            <span class="cert-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+          </button>
+          <div class="cert-cuerpo">
+            <div class="cert-meta">
+              <img src="../img/plataformas/platzi.webp" alt="" class="cert-logo" width="28" height="28">
+              <span class="cert-plataforma">Platzi</span>
+              <span class="cert-num">#14</span>
+            </div>
+            <h3><span lang="en">Working with XAML in .NET MAUI</span><span lang="es">Manejo de XAML en .NET MAUI</span></h3>
+            <p lang="en">This course focuses on working with XAML in .NET MAUI, teaching how to design cross-platform user interfaces efficiently and flexibly with this technology.</p>
+            <p lang="es">Este curso se enfoca en el manejo de XAML en .NET MAUI, enseñando cómo diseñar interfaces de usuario multiplataforma de manera eficiente y personalizable con esta tecnología.</p>
+            <a href="../img/certificaciones/xamel.webp" target="_blank" rel="noopener" class="cert-link"><span lang="en">Open certificate</span><span lang="es">Abrir certificado</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </article>
+        <article class="cert" data-plataforma="platzi" style="--marca: #98CA3F; --i: 15">
+          <span class="cert-luz" aria-hidden="true"></span>
+          <button class="cert-preview" type="button" data-src="../img/certificaciones/blazor.webp" aria-label="View Web Development with Blazor and .NET certificate" data-es-aria-label="Ver certificado Web Development with Blazor and .NET">
+            <img src="../img/certificaciones/blazor.webp" alt="" loading="lazy" decoding="async" width="600" height="400">
+            <span class="cert-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+          </button>
+          <div class="cert-cuerpo">
+            <div class="cert-meta">
+              <img src="../img/plataformas/platzi.webp" alt="" class="cert-logo" width="28" height="28">
+              <span class="cert-plataforma">Platzi</span>
+              <span class="cert-num">#15</span>
+            </div>
+            <h3><span lang="en">Web Development with Blazor and .NET</span><span lang="es">Desarrollo WEB con Blazor y .NET</span></h3>
+            <p lang="en">This Platzi course teaches how to build modern web applications with Blazor and .NET, creating dynamic interfaces and optimizing performance with cutting-edge technologies.</p>
+            <p lang="es">Este curso de Platzi enseña a desarrollar aplicaciones web modernas utilizando Blazor y .NET, creando interfaces dinámicas y optimizando el rendimiento con tecnologías de vanguardia.</p>
+            <a href="../img/certificaciones/blazor.webp" target="_blank" rel="noopener" class="cert-link"><span lang="en">Open certificate</span><span lang="es">Abrir certificado</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </article>
     </section>
+
+    <p class="vacio" hidden>
+      <i class="fa-regular fa-folder-open" aria-hidden="true"></i>
+      <span lang="en">No certificates match your search.</span><span lang="es">Ningún certificado coincide con tu búsqueda.</span>
+    </p>
   </main>
+
+  <!-- VISOR -->
+  <dialog class="visor" aria-label="Certificate viewer" data-es-aria-label="Visor de certificados">
+    <div class="visor-barra">
+      <span class="visor-puntos" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="visor-titulo"></span>
+      <button type="button" class="visor-cerrar" aria-label="Close" data-es-aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <figure class="visor-figura"><img src="" alt=""></figure>
+    <button type="button" class="visor-nav prev" aria-label="Previous" data-es-aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+    <button type="button" class="visor-nav next" aria-label="Next" data-es-aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+  </dialog>
 
 </body>
 </html>
