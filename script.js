@@ -15,9 +15,9 @@ const TRADUCCIONES_ES = {
     'nav.copyEmail': 'Copiar correo',
 
     'hero.intro': `¡Hola Mundo! Soy Daniel
-        <img src="assets/img/header/bandera-cr.svg" alt="Costa Rica" class="bandera bandera-sm" width="20" height="12">,
-        un apasionado desarrollador backend con experiencia en la creación de aplicaciones eficientes y escalables utilizando .NET C#.
-        También enfocado en desarrollo de aplicaciones móviles con .NET MAUI y Xamarin.`,
+        <img src="assets/img/header/bandera-cr.svg" alt="Costa Rica" class="bandera bandera-sm" width="20" height="12">, un apasionado del desarrollo de software. Disfruto diseñar soluciones con
+        <strong>arquitectura limpia</strong>, desplegarlas en <strong>Azure</strong> mediante <strong>DevOps</strong>
+        y llevarlas también al mundo <strong>móvil</strong> con .NET MAUI. Siempre aprendiendo, siempre programando… con un café en la mano.`,
     'hero.cv': 'Descargar CV',
     'hero.projects': 'Ver proyectos',
     'hero.stack': 'Stack tecnológico',
@@ -27,12 +27,12 @@ const TRADUCCIONES_ES = {
     'exp.comment': '// 01. experiencia',
     'exp.intro': 'A lo largo de mi trayectoria como desarrollador, he adquirido experiencia en diversas tecnologías y roles. Estas posiciones me han permitido abordar desafíos complejos y proponer soluciones eficaces.',
     'exp.tech': 'Tecnologías',
-    'exp.job1.title': 'Programador Medium',
+    'exp.job1.title': 'Desarrollador Senior',
     'exp.job1.date': '2022 — Actualidad',
-    'exp.job1.desc': 'Encargado de crear aplicaciones en .NET con arquitecturas escalables, refactorizar código para mejorar calidad y rendimiento, e implementar unit tests. Integré soluciones con Softland ERP y participé en la migración de aplicaciones de Xamarin a .NET MAUI, añadiendo nuevas funcionalidades en proyectos móviles.',
-    'exp.job2.title': 'Programador Junior',
+    'exp.job1.desc': 'Lidero el diseño y desarrollo de soluciones .NET escalables basadas en arquitectura limpia, desde APIs e integraciones con ERP (Softland) hasta aplicaciones móviles, incluyendo la migración de Xamarin a .NET MAUI. Despliego y opero servicios en Azure, automatizo pipelines de CI/CD con Azure DevOps y GitHub Actions, y aseguro la calidad mediante pruebas unitarias y de integración, revisiones de código y refactorización continua.',
+    'exp.job2.title': 'Desarrollador Junior',
     'exp.current': 'Actual',
-    'exp.job2.desc': 'Durante este tiempo, me especialicé en desarrollos a la medida, gestión de bases de datos y toma de requerimientos, garantizando entregables alineados a las necesidades de los clientes. Adquirí experiencia con Softland ERP, integrando y personalizando funcionalidades empresariales, además de capacitar a usuarios finales. También inicié mi trayectoria en tecnologías móviles con Xamarin.',
+    'exp.job2.desc': 'Desarrollé soluciones empresariales a la medida con .NET y .NET Core: APIs REST, servicios de Windows para procesos automatizados en segundo plano y bases de datos SQL Server con consultas optimizadas y procedimientos almacenados. Integré y personalicé funcionalidades de Softland ERP, tomé requerimientos directamente con los clientes y capacité a usuarios finales. Además, inicié en el desarrollo móvil con Xamarin, gestionando el código y el versionamiento en GitHub.',
 
     'cert.title': 'Certificaciones',
     'cert.comment': '// 02. certificaciones',

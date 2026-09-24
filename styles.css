@@ -711,6 +711,12 @@ html.cursor-fuera .cursor-bola {
     margin: 0 0 1.5rem;
 }
 
+/* Áreas de experiencia resaltadas en la presentación */
+.inicio-text p strong {
+    font-weight: 600;
+    color: var(--accent-2);
+}
+
 .inicio-visual {
     position: relative;
     order: -1;
