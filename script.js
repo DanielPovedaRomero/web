@@ -15,7 +15,7 @@ const TRADUCCIONES_ES = {
     'nav.copyEmail': 'Copiar correo',
 
     'hero.intro': `¡Hola Mundo! Soy Daniel
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Flag_of_Costa_Rica.svg" alt="Costa Rica" class="bandera bandera-sm" width="20" height="12">,
+        <img src="assets/img/header/bandera-cr.svg" alt="Costa Rica" class="bandera bandera-sm" width="20" height="12">,
         un apasionado desarrollador backend con experiencia en la creación de aplicaciones eficientes y escalables utilizando .NET C#.
         También enfocado en desarrollo de aplicaciones móviles con .NET MAUI y Xamarin.`,
     'hero.cv': 'Descargar CV',

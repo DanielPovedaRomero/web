@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Montserrat:wght@400;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preload" as="image" href="assets/img/header/perfil.webp" fetchpriority="high">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="assets/css/i18n.css">
     <script src="script.js" defer></script>
@@ -20,7 +21,7 @@
     <header class="site-header">
         <nav class="nav" aria-label="Main navigation" data-i18n-attr="aria-label:nav.label">
             <a href="#inicio" class="logo">
-                <img src="assets/img/header/logo.png" alt="Daniel Poveda Romero" width="120" height="97">
+                <img src="assets/img/header/logo.webp" alt="Daniel Poveda Romero" width="120" height="97">
             </a>
 
             <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
@@ -72,7 +73,7 @@
                 <h1>.NET <br><span class="acento"><span class="typed">Software Developer</span></span></h1>
                 <p data-i18n-html="hero.intro">
                     Hello World! I'm Daniel
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Flag_of_Costa_Rica.svg" alt="Costa Rica" class="bandera bandera-sm" width="20" height="12">,
+                    <img src="assets/img/header/bandera-cr.svg" alt="Costa Rica" class="bandera bandera-sm" width="20" height="12">,
                     a passionate backend developer with experience building efficient, scalable applications with .NET C#.
                     Also focused on mobile app development with .NET MAUI and Xamarin.
                 </p>
@@ -87,7 +88,7 @@
             </div>
             <div class="inicio-visual">
                 <div class="inicio-image">
-                    <img src="assets/img/header/perfil.jpeg" alt="Photo of Daniel Poveda Romero" width="400" height="400" data-i18n-attr="alt:hero.photoAlt">
+                    <img fetchpriority="high" src="assets/img/header/perfil.webp" alt="Photo of Daniel Poveda Romero" width="400" height="400" data-i18n-attr="alt:hero.photoAlt">
                 </div>
                 <div class="code-window" aria-hidden="true">
                     <div class="code-window-bar">
@@ -166,7 +167,7 @@
                             </header>
                             <h3>
                                 <span data-i18n="exp.job1.title">Mid-level Developer</span>
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Flag_of_Costa_Rica.svg" alt="Costa Rica" class="bandera" width="30" height="18" loading="lazy">
+                                <img src="assets/img/header/bandera-cr.svg" alt="Costa Rica" class="bandera" width="30" height="18" loading="lazy" decoding="async">
                             </h3>
                             <p data-i18n="exp.job1.desc">
                                 Responsible for building .NET applications with scalable architectures, refactoring code to improve quality and performance, and implementing unit tests.
@@ -195,7 +196,7 @@
                             </header>
                             <h3>
                                 <span data-i18n="exp.job2.title">Junior Developer</span>
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Flag_of_Costa_Rica.svg" alt="Costa Rica" class="bandera" width="30" height="18" loading="lazy">
+                                <img src="assets/img/header/bandera-cr.svg" alt="Costa Rica" class="bandera" width="30" height="18" loading="lazy" decoding="async">
                             </h3>
                             <p data-i18n="exp.job2.desc">
                                 During this time, I specialized in custom development, database management and requirements gathering, delivering results aligned with
@@ -242,21 +243,21 @@
             </h3>
             <ul class="plataformas">
                 <li class="plataforma-item" style="--marca: #A435F0">
-                    <img src="assets/img/plataformas/udem.png" alt="" class="plataforma-logo" width="48" height="48" loading="lazy">
+                    <img src="assets/img/plataformas/udem.webp" alt="" class="plataforma-logo" width="48" height="48" loading="lazy" decoding="async">
                     <span class="plataforma-info">
                         <strong>Udemy</strong>
                         <small>6 <span data-i18n="cert.courses">courses</span></small>
                     </span>
                 </li>
                 <li class="plataforma-item" style="--marca: #98CA3F">
-                    <img src="assets/img/plataformas/platzi.jpg" alt="" class="plataforma-logo" width="48" height="48" loading="lazy">
+                    <img src="assets/img/plataformas/platzi.webp" alt="" class="plataforma-logo" width="48" height="48" loading="lazy" decoding="async">
                     <span class="plataforma-info">
                         <strong>Platzi</strong>
                         <small>6 <span data-i18n="cert.courses">courses</span></small>
                     </span>
                 </li>
                 <li class="plataforma-item" style="--marca: #00A4EF">
-                    <img src="assets/img/plataformas/microsoft.png" alt="" class="plataforma-logo" width="48" height="48" loading="lazy">
+                    <img src="assets/img/plataformas/microsoft.webp" alt="" class="plataforma-logo" width="48" height="48" loading="lazy" decoding="async">
                     <span class="plataforma-info">
                         <strong>Microsoft</strong>
                         <small>3 <span data-i18n="cert.certs">certifications</span></small>
@@ -271,10 +272,10 @@
                 <div class="carrusel-viewport">
                     <ul class="carrusel-track">
                         <li class="carrusel-slide">
-                            <a class="cert-card" href="assets/img/certificaciones/AzureFun.png" target="_blank" rel="noopener">
+                            <a class="cert-card" href="assets/img/certificaciones/azurefun.webp" target="_blank" rel="noopener">
                                 <span class="cert-bar" aria-hidden="true"><span></span><span></span><span></span><em>az-900.png</em></span>
                                 <span class="cert-imagen">
-                                    <img src="assets/img/certificaciones/AzureFun.png" alt="Azure Fundamentals certification" data-i18n-attr="alt:cert.c1" width="600" height="400" loading="lazy" decoding="async">
+                                    <img src="assets/img/certificaciones/azurefun.webp" alt="Azure Fundamentals certification" data-i18n-attr="alt:cert.c1" width="600" height="400" loading="lazy" decoding="async">
                                     <span class="cert-overlay"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> <span data-i18n="cert.view">View full size</span></span>
                                 </span>
                                 <span class="cert-info" style="--marca: #00A4EF">
@@ -284,10 +285,10 @@
                             </a>
                         </li>
                         <li class="carrusel-slide">
-                            <a class="cert-card" href="assets/img/certificaciones/AzureAI.png" target="_blank" rel="noopener">
+                            <a class="cert-card" href="assets/img/certificaciones/azureai.webp" target="_blank" rel="noopener">
                                 <span class="cert-bar" aria-hidden="true"><span></span><span></span><span></span><em>ai-900.png</em></span>
                                 <span class="cert-imagen">
-                                    <img src="assets/img/certificaciones/AzureAI.png" alt="Azure AI Fundamentals certification" data-i18n-attr="alt:cert.c2" width="600" height="400" loading="lazy" decoding="async">
+                                    <img src="assets/img/certificaciones/azureai.webp" alt="Azure AI Fundamentals certification" data-i18n-attr="alt:cert.c2" width="600" height="400" loading="lazy" decoding="async">
                                     <span class="cert-overlay"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> <span data-i18n="cert.view">View full size</span></span>
                                 </span>
                                 <span class="cert-info" style="--marca: #00A4EF">
@@ -297,10 +298,10 @@
                             </a>
                         </li>
                         <li class="carrusel-slide">
-                            <a class="cert-card" href="assets/img/certificaciones/solid.jpg" target="_blank" rel="noopener">
+                            <a class="cert-card" href="assets/img/certificaciones/solid.webp" target="_blank" rel="noopener">
                                 <span class="cert-bar" aria-hidden="true"><span></span><span></span><span></span><em>solid-clean-code.jpg</em></span>
                                 <span class="cert-imagen">
-                                    <img src="assets/img/certificaciones/solid.jpg" alt="SOLID principles certificate" data-i18n-attr="alt:cert.c3" width="600" height="400" loading="lazy" decoding="async">
+                                    <img src="assets/img/certificaciones/solid.webp" alt="SOLID principles certificate" data-i18n-attr="alt:cert.c3" width="600" height="400" loading="lazy" decoding="async">
                                     <span class="cert-overlay"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> <span data-i18n="cert.view">View full size</span></span>
                                 </span>
                                 <span class="cert-info" style="--marca: #A435F0">
@@ -310,10 +311,10 @@
                             </a>
                         </li>
                         <li class="carrusel-slide">
-                            <a class="cert-card" href="assets/img/certificaciones/maui.jpg" target="_blank" rel="noopener">
+                            <a class="cert-card" href="assets/img/certificaciones/maui.webp" target="_blank" rel="noopener">
                                 <span class="cert-bar" aria-hidden="true"><span></span><span></span><span></span><em>dotnet-maui.jpg</em></span>
                                 <span class="cert-imagen">
-                                    <img src="assets/img/certificaciones/maui.jpg" alt=".NET MAUI certificate" data-i18n-attr="alt:cert.c4" width="600" height="400" loading="lazy" decoding="async">
+                                    <img src="assets/img/certificaciones/maui.webp" alt=".NET MAUI certificate" data-i18n-attr="alt:cert.c4" width="600" height="400" loading="lazy" decoding="async">
                                     <span class="cert-overlay"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> <span data-i18n="cert.view">View full size</span></span>
                                 </span>
                                 <span class="cert-info" style="--marca: #A435F0">
@@ -323,10 +324,10 @@
                             </a>
                         </li>
                         <li class="carrusel-slide">
-                            <a class="cert-card" href="assets/img/certificaciones/patrones.jpg" target="_blank" rel="noopener">
+                            <a class="cert-card" href="assets/img/certificaciones/patrones.webp" target="_blank" rel="noopener">
                                 <span class="cert-bar" aria-hidden="true"><span></span><span></span><span></span><em>design-patterns.jpg</em></span>
                                 <span class="cert-imagen">
-                                    <img src="assets/img/certificaciones/patrones.jpg" alt="Design patterns certificate" data-i18n-attr="alt:cert.c5" width="600" height="400" loading="lazy" decoding="async">
+                                    <img src="assets/img/certificaciones/patrones.webp" alt="Design patterns certificate" data-i18n-attr="alt:cert.c5" width="600" height="400" loading="lazy" decoding="async">
                                     <span class="cert-overlay"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> <span data-i18n="cert.view">View full size</span></span>
                                 </span>
                                 <span class="cert-info" style="--marca: #A435F0">
@@ -364,7 +365,7 @@
                 <li class="proyecto-card" data-categoria="azure" style="--marca: #2F80ED">
                     <article class="proyecto-inner">
                         <div class="proyecto-media">
-                            <img src="assets/img/proyectos/htmlcss/azure/lenguaje.svg" alt="" loading="lazy">
+                            <img src="assets/img/proyectos/htmlcss/azure/lenguaje.svg" alt="" loading="lazy" decoding="async">
                             <span class="proyecto-num" aria-hidden="true">01</span>
                             <span class="proyecto-cat"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Azure</span>
                         </div>
@@ -382,7 +383,7 @@
                 <li class="proyecto-card" data-categoria="azure" style="--marca: #2F80ED">
                     <article class="proyecto-inner">
                         <div class="proyecto-media">
-                            <img src="assets/img/proyectos/htmlcss/azure/facia.png" alt="" loading="lazy">
+                            <img src="assets/img/proyectos/htmlcss/azure/facia.webp" alt="" width="800" height="401" loading="lazy" decoding="async">
                             <span class="proyecto-num" aria-hidden="true">02</span>
                             <span class="proyecto-cat"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Azure</span>
                         </div>
@@ -400,7 +401,7 @@
                 <li class="proyecto-card" data-categoria="azure" style="--marca: #2F80ED">
                     <article class="proyecto-inner">
                         <div class="proyecto-media">
-                            <img src="assets/img/proyectos/htmlcss/azure/vision.png" alt="" loading="lazy">
+                            <img src="assets/img/proyectos/htmlcss/azure/vision.webp" alt="" width="660" height="349" loading="lazy" decoding="async">
                             <span class="proyecto-num" aria-hidden="true">03</span>
                             <span class="proyecto-cat"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Azure</span>
                         </div>
@@ -418,7 +419,7 @@
                 <li class="proyecto-card" data-categoria="azure" style="--marca: #2F80ED">
                     <article class="proyecto-inner">
                         <div class="proyecto-media">
-                            <img src="assets/img/proyectos/htmlcss/azure/azure.jpg" alt="" loading="lazy">
+                            <img src="assets/img/proyectos/htmlcss/azure/azure.webp" alt="" width="487" height="487" loading="lazy" decoding="async">
                             <span class="proyecto-num" aria-hidden="true">04</span>
                             <span class="proyecto-cat"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Azure</span>
                         </div>
@@ -436,7 +437,7 @@
                 <li class="proyecto-card" data-categoria="maui" style="--marca: #A56CF6">
                     <article class="proyecto-inner">
                         <div class="proyecto-media">
-                            <img src="assets/img/proyectos/htmlcss/maui/1.png" alt="" loading="lazy">
+                            <img src="assets/img/proyectos/htmlcss/maui/1.webp" alt="" width="379" height="497" loading="lazy" decoding="async">
                             <span class="proyecto-num" aria-hidden="true">05</span>
                             <span class="proyecto-cat"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> .NET MAUI</span>
                         </div>
@@ -454,7 +455,7 @@
                 <li class="proyecto-card" data-categoria="maui" style="--marca: #A56CF6">
                     <article class="proyecto-inner">
                         <div class="proyecto-media">
-                            <img src="assets/img/proyectos/htmlcss/maui/2.png" alt="" loading="lazy">
+                            <img src="assets/img/proyectos/htmlcss/maui/2.webp" alt="" width="330" height="369" loading="lazy" decoding="async">
                             <span class="proyecto-num" aria-hidden="true">06</span>
                             <span class="proyecto-cat"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> .NET MAUI</span>
                         </div>
@@ -472,7 +473,7 @@
                 <li class="proyecto-card" data-categoria="maui" style="--marca: #A56CF6">
                     <article class="proyecto-inner">
                         <div class="proyecto-media">
-                            <img src="assets/img/proyectos/htmlcss/maui/3.png" alt="" loading="lazy">
+                            <img src="assets/img/proyectos/htmlcss/maui/3.webp" alt="" width="407" height="366" loading="lazy" decoding="async">
                             <span class="proyecto-num" aria-hidden="true">07</span>
                             <span class="proyecto-cat"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> .NET MAUI</span>
                         </div>
@@ -490,7 +491,7 @@
                 <li class="proyecto-card" data-categoria="css" style="--marca: #FF7755">
                     <article class="proyecto-inner">
                         <div class="proyecto-media">
-                            <img src="assets/img/proyectos/htmlcss/huddle/1.png" alt="" loading="lazy">
+                            <img src="assets/img/proyectos/htmlcss/huddle/1.webp" alt="" width="800" height="571" loading="lazy" decoding="async">
                             <span class="proyecto-num" aria-hidden="true">08</span>
                             <span class="proyecto-cat"><i class="fa-brands fa-css3-alt" aria-hidden="true"></i> HTML CSS</span>
                         </div>
@@ -508,7 +509,7 @@
                 <li class="proyecto-card" data-categoria="css" style="--marca: #FF7755">
                     <article class="proyecto-inner">
                         <div class="proyecto-media">
-                            <img src="assets/img/proyectos/htmlcss/huddle/2.png" alt="" loading="lazy">
+                            <img src="assets/img/proyectos/htmlcss/huddle/2.webp" alt="" width="800" height="530" loading="lazy" decoding="async">
                             <span class="proyecto-num" aria-hidden="true">09</span>
                             <span class="proyecto-cat"><i class="fa-brands fa-css3-alt" aria-hidden="true"></i> HTML CSS</span>
                         </div>
@@ -526,7 +527,7 @@
                 <li class="proyecto-card" data-categoria="css" style="--marca: #FF7755">
                     <article class="proyecto-inner">
                         <div class="proyecto-media">
-                            <img src="assets/img/proyectos/htmlcss/huddle/3.png" alt="" loading="lazy">
+                            <img src="assets/img/proyectos/htmlcss/huddle/3.webp" alt="" width="800" height="544" loading="lazy" decoding="async">
                             <span class="proyecto-num" aria-hidden="true">10</span>
                             <span class="proyecto-cat"><i class="fa-brands fa-css3-alt" aria-hidden="true"></i> HTML CSS</span>
                         </div>
@@ -562,7 +563,7 @@
 
         <div class="footer-grid">
             <div class="footer-marca">
-                <img src="assets/img/header/logo.png" alt="Daniel Poveda Romero" width="130" height="104" loading="lazy">
+                <img src="assets/img/header/logo.webp" alt="Daniel Poveda Romero" width="130" height="104" loading="lazy" decoding="async">
                 <p data-i18n="footer.tagline">Backend Developer specialized in .NET.</p>
                 <p class="footer-estado">
                     <span class="footer-punto" aria-hidden="true"></span>

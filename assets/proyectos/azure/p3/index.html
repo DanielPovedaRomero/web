@@ -16,7 +16,7 @@
         <p class="project-subtitle" lang="es">Implementación Face IA de Microsoft Azure</p>
         <div class="badges">
           <span class="badge azure-badge">
-            <img src="img/azure.png" alt="Azure Logo" class="azure-icon" />
+            <img src="img/azure.webp" alt="Azure Logo" class="azure-icon" />
             Microsoft Azure
           </span>
         </div>
@@ -50,7 +50,7 @@
         <p lang="en">We go to the Azure portal and create the resource: Face AI.</p>
         <p lang="es">Debemos ir al portal de Azure y crear el recurso: Face IA.</p>
         <figure class="api-image">
-          <img src="img/c1.png" alt="Creating the resource in Azure" data-es-alt="Creación del recurso en Azure" class="small" />
+          <img src="img/c1.webp" alt="Creating the resource in Azure" data-es-alt="Creación del recurso en Azure" class="small" />
         </figure>
         <p lang="en">Once the resource is created, we review its details and save the connection credentials, which we will need later in the project.</p>
         <p lang="es">Una vez creado el recurso, debemos revisar su información y guardar las credenciales de conexión, que necesitaremos más adelante en el proyecto.</p>
@@ -60,20 +60,20 @@
         <p lang="en">We go to the C# quickstart option to see some examples, or to Vision Studio to explore more of the services.</p>
         <p lang="es">Vamos a la opción de inicio rápido en C# para ver algunos ejemplos o ir a Vision Studio para explorar más de los servicios.</p>
         <figure class="api-image">
-          <img src="img/c3.png" alt="Opening Vision Studio" data-es-alt="Acceso a Vision Studio" />
+          <img src="img/c3.webp" alt="Opening Vision Studio" data-es-alt="Acceso a Vision Studio" />
         </figure>
         <p lang="en">Inside Vision Studio, we check that it is linked to our Azure resource, which we can confirm from the gear icon:</p>
         <p lang="es">Dentro de Vision Studio, validamos que esté ligado a nuestro recurso de Azure, lo cual podemos confirmar desde el ícono de engranaje:</p>
         <figure class="api-image">
-          <img src="img/c4.png" alt="Checking the resource link" data-es-alt="Validación de enlace al recurso" class="small" />
+          <img src="img/c4.webp" alt="Checking the resource link" data-es-alt="Validación de enlace al recurso" class="small" />
         </figure>
         <figure class="api-image">
-          <img src="img/c5.png" alt="Reviewing the configuration" data-es-alt="Revisión de configuración" />
+          <img src="img/c5.webp" alt="Reviewing the configuration" data-es-alt="Revisión de configuración" />
         </figure>
         <p lang="en">Once the resource is linked, we can use all the services Face AI offers.</p>
         <p lang="es">Una vez enlazado el recurso, podremos utilizar todos los servicios que Face IA nos ofrece.</p>
         <figure class="api-image">
-          <img src="img/c6.png" alt="Available services" data-es-alt="Servicios disponibles" />
+          <img src="img/c6.webp" alt="Available services" data-es-alt="Servicios disponibles" />
         </figure>
       </section>
 
@@ -86,7 +86,7 @@
           Para este proyecto se creó una aplicación de consola en .NET 8.0. Posteriormente, instalamos el SDK <code>Azure.AI.Vision.Face</code> desde NuGet. Es importante que la opción de incluir versiones preliminares (pre-release) esté activa.
         </p>
         <figure class="api-image">
-          <img src="img/C7.png" alt="Installing the SDK" data-es-alt="Instalación del SDK" />
+          <img src="img/c7.webp" alt="Installing the SDK" data-es-alt="Instalación del SDK" />
         </figure>
         <p>
           <span lang="en">I based the SDK usage on the official Microsoft documentation:</span>
@@ -99,17 +99,17 @@
         <p lang="en">We use the credentials from the Face resource we created and an image hosted in Blob Storage.</p>
         <p lang="es">Usaremos las credenciales obtenidas del recurso de Face creado y una imagen alojada en Blob Storage.</p>
         <figure class="api-image">
-          <img src="img/C8.png" alt="SDK configuration" data-es-alt="Configuración del SDK" class="small" />
+          <img src="img/c8.webp" alt="SDK configuration" data-es-alt="Configuración del SDK" class="small" />
         </figure>
         <p lang="en">We configure the client.</p>
         <p lang="es">Configuramos el cliente.</p>
         <figure class="api-image">
-          <img src="img/c9.png" class="small" alt="Using the SDK" data-es-alt="Uso del SDK" />
+          <img src="img/c9.webp" class="small" alt="Using the SDK" data-es-alt="Uso del SDK" />
         </figure>
         <p lang="en">This is the image we will use as an example:</p>
         <p lang="es">La imagen que utilizaremos como ejemplo es la siguiente:</p>
         <figure class="api-image">
-          <img src="img/c11.png" class="small" alt="Sample image" data-es-alt="Imagen de prueba" />
+          <img src="img/c11.webp" class="small" alt="Sample image" data-es-alt="Imagen de prueba" />
         </figure>
       </section>
 
@@ -124,22 +124,22 @@
         <p lang="en">We define the method attributes used in the example.</p>
         <p lang="es">Se crean los atributos del método que se usarán en el ejemplo.</p>
         <figure class="api-image">
-          <img src="img/c10.png" class="medium" alt="Method attributes" data-es-alt="Atributos del método" />
+          <img src="img/c10.webp" class="medium" alt="Method attributes" data-es-alt="Atributos del método" />
         </figure>
         <p lang="en">We create the <code>Detect</code> method.</p>
         <p lang="es">Se crea el método <code>Detect</code>.</p>
         <figure class="api-image">
-          <img src="img/c12.png" class="medium" alt="Detect method" data-es-alt="Método Detect" />
+          <img src="img/c12.webp" class="medium" alt="Detect method" data-es-alt="Método Detect" />
         </figure>
         <p lang="en">We get the result and loop through the response, which analyzes each face found in the image.</p>
         <p lang="es">Obtenemos el resultado y recorremos su respuesta, la cual analiza cada uno de los rostros encontrados en la imagen.</p>
         <figure class="api-image">
-          <img src="img/c13.png" alt="Face analysis result" data-es-alt="Resultado análisis de rostros" />
+          <img src="img/c13.webp" alt="Face analysis result" data-es-alt="Resultado análisis de rostros" />
         </figure>
         <p lang="en">As a result we get:</p>
         <p lang="es">Como resultado obtenemos:</p>
         <figure class="api-image">
-          <img src="img/c14.png" alt="Final result" data-es-alt="Resultado final" />
+          <img src="img/c14.webp" alt="Final result" data-es-alt="Resultado final" />
         </figure>
       </section>
     </main>
