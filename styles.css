@@ -1701,7 +1701,6 @@ html.cursor-fuera .cursor-bola {
     position: relative;
     margin-top: 4rem;
     padding: 5rem var(--gutter) 1.5rem;
-    background: linear-gradient(180deg, transparent, rgba(15, 36, 54, 0.9) 30%);
     overflow: hidden;
     isolation: isolate;
 }
