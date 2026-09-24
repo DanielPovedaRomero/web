@@ -65,6 +65,73 @@ html * {
     cursor: url('assets/img/header/cursor.svg') 20 20, auto !important;
 }
 
+/* Cursor animado (lo activa script.js solo con mouse) */
+html.cursor-animado,
+html.cursor-animado * {
+    cursor: none !important;
+}
+
+.cursor-bola {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    pointer-events: none;
+    will-change: transform;
+    transition: opacity 0.2s ease;
+}
+
+.cursor-bola-img {
+    position: absolute;
+    inset: 0;
+    background: url('assets/img/header/cursor.svg') center / contain no-repeat;
+    animation: cursor-latido 2.4s ease-in-out infinite;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Anillo punteado que gira alrededor */
+.cursor-bola::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border: 1.5px dashed rgba(255, 170, 119, 0.7);
+    border-radius: 50%;
+    animation: cursor-giro 6s linear infinite;
+    transition: inset 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease;
+}
+
+@keyframes cursor-latido {
+    0%, 100% { filter: drop-shadow(0 0 3px rgba(255, 119, 85, 0.5)); }
+    50% { filter: drop-shadow(0 0 10px rgba(255, 119, 85, 0.9)); }
+}
+
+@keyframes cursor-giro {
+    to { transform: rotate(360deg); }
+}
+
+/* Sobre enlaces y botones: crece y el anillo se abre y acelera */
+html.cursor-sobre .cursor-bola-img {
+    transform: scale(1.2);
+}
+
+html.cursor-sobre .cursor-bola::before {
+    inset: -11px;
+    border-color: rgba(255, 119, 85, 0.95);
+    animation-duration: 2s;
+}
+
+/* Al hacer clic se aprieta */
+html.cursor-clic .cursor-bola-img {
+    transform: scale(0.8);
+}
+
+html.cursor-fuera .cursor-bola {
+    opacity: 0;
+}
+
 :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;

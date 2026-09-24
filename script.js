@@ -1148,6 +1148,32 @@ function initRetrato() {
     else foto.addEventListener('load', empezar, { once: true });
 }
 
+/* Cursor animado: la bolita sigue al mouse, gira su anillo y reacciona a lo interactivo */
+function initCursor() {
+    if (reducirMovimiento || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    const html = document.documentElement;
+    const bola = document.createElement('div');
+    bola.className = 'cursor-bola';
+    bola.setAttribute('aria-hidden', 'true');
+    bola.innerHTML = '<div class="cursor-bola-img"></div>';
+    document.body.appendChild(bola);
+    html.classList.add('cursor-animado', 'cursor-fuera');
+
+    const INTERACTIVOS = 'a, button, input, label, select, textarea, [role="button"], .proyecto-card, .cert-card';
+
+    window.addEventListener('pointermove', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        bola.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+        html.classList.remove('cursor-fuera');
+        html.classList.toggle('cursor-sobre', !!e.target.closest(INTERACTIVOS));
+    }, { passive: true });
+
+    window.addEventListener('pointerdown', () => html.classList.add('cursor-clic'));
+    window.addEventListener('pointerup', () => html.classList.remove('cursor-clic'));
+    document.addEventListener('mouseleave', () => html.classList.add('cursor-fuera'));
+}
+
 /* Parallax de la portada: las capas siguen al cursor con distinta profundidad */
 function initParallax() {
     const inicio = document.querySelector('.inicio');
@@ -1218,6 +1244,7 @@ initTyped();
 initParallax();
 initCanvas();
 initRetrato();
+initCursor();
 initScroll();
 initMenu();
 initNavbar();
