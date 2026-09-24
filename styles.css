@@ -59,6 +59,12 @@ a {
     color: inherit;
 }
 
+/* Cursor: bolita naranja con </> (centrada en el punto de clic) */
+html,
+html * {
+    cursor: url('assets/img/header/cursor.svg') 20 20, auto !important;
+}
+
 :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
