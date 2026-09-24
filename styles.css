@@ -2555,9 +2555,12 @@ html.cursor-fuera .cursor-bola {
 }
 
 .inicio::before {
-    top: 10%;
-    left: 5%;
-    background: var(--accent);
+    top: -15%;
+    left: -12%;
+    width: min(560px, 80vw);
+    background: radial-gradient(circle, rgba(255, 119, 85, 0.55), rgba(165, 108, 246, 0.25) 45%, transparent 70%);
+    filter: blur(110px);
+    opacity: 0.16;
     animation: flotar-mancha 14s ease-in-out infinite alternate;
 }
 
