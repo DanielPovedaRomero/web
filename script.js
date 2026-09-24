@@ -688,6 +688,234 @@ function initTyped() {
     setTimeout(tick, 2500);
 }
 
+/* Fondo interactivo de todo el sitio: red de partículas y símbolos de código
+   con profundidad al hacer scroll y una paleta que cambia según la sección */
+function initCanvas() {
+    const canvas = document.querySelector('.fondo-canvas');
+    if (!canvas || !canvas.getContext) return;
+
+    const ctx = canvas.getContext('2d');
+    const SIMBOLOS = ['</>', '{ }', 'C#', '=>', '.NET', ';', '( )', '[ ]', '&&', '//'];
+    const FUENTE = getComputedStyle(document.documentElement).getPropertyValue('--mono') || 'monospace';
+
+    // Colores [inicio del degradado, fin] de cada sección
+    const PALETAS = {
+        inicio: [[255, 119, 85], [47, 128, 237]],
+        experiencia: [[255, 119, 85], [165, 108, 246]],
+        certificaciones: [[47, 128, 237], [126, 231, 135]],
+        proyectos: [[165, 108, 246], [255, 119, 85]],
+        contacto: [[255, 170, 119], [255, 119, 85]]
+    };
+    const paleta = PALETAS.inicio.map((c) => [...c]);
+    let objetivo = PALETAS.inicio;
+
+    let ancho = 0;
+    let alto = 0;
+    let particulas = [];
+    let ondas = [];
+    let distanciaEnlace = 130;
+    const cursor = { x: -9999, y: -9999, activo: false };
+
+    const colorEn = (x, alfa) => {
+        const t = Math.min(Math.max(x / ancho, 0), 1);
+        const [a, b] = paleta;
+        return `rgba(${Math.round(a[0] + (b[0] - a[0]) * t)}, ${Math.round(a[1] + (b[1] - a[1]) * t)}, ${Math.round(a[2] + (b[2] - a[2]) * t)}, ${alfa})`;
+    };
+
+    const crearParticulas = () => {
+        const movil = ancho < 600;
+        const total = Math.round(Math.min(Math.max((ancho * alto) / (movil ? 17000 : 14000), 26), movil ? 42 : 85));
+        distanciaEnlace = movil ? 100 : 130;
+        particulas = Array.from({ length: total }, (_, i) => ({
+            x: Math.random() * ancho,
+            y: Math.random() * alto,
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: (Math.random() - 0.5) * 0.35,
+            z: 0.35 + Math.random() * 0.65,   // profundidad: 1 = cerca, 0.35 = lejos
+            r: Math.random() * 1.4 + 0.8,
+            simbolo: i % 7 === 0 ? SIMBOLOS[i % SIMBOLOS.length] : null,
+            tam: 11 + Math.random() * 5,
+            giro: (Math.random() - 0.5) * 0.4
+        }));
+    };
+
+    const redimensionar = () => {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        ancho = window.innerWidth;
+        alto = window.innerHeight;
+        canvas.width = Math.round(ancho * dpr);
+        canvas.height = Math.round(alto * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        crearParticulas();
+        if (reducirMovimiento) dibujar();
+    };
+
+    // Posición en pantalla: las partículas lejanas se desplazan menos con el scroll
+    const pantallaY = (p) => ((p.y - window.scrollY * p.z * 0.3) % alto + alto) % alto;
+
+    const actualizar = () => {
+        // Transición suave hacia la paleta de la sección actual
+        for (let i = 0; i < 2; i++) {
+            for (let c = 0; c < 3; c++) paleta[i][c] += (objetivo[i][c] - paleta[i][c]) * 0.04;
+        }
+
+        for (const p of particulas) {
+            const py = pantallaY(p);
+            if (cursor.activo) {
+                const dx = p.x - cursor.x;
+                const dy = py - cursor.y;
+                const d2 = dx * dx + dy * dy;
+                if (d2 < 140 * 140 && d2 > 0.01) {
+                    const d = Math.sqrt(d2);
+                    const fuerza = ((140 - d) / 140) * 0.6 * p.z;
+                    p.vx += (dx / d) * fuerza;
+                    p.vy += (dy / d) * fuerza;
+                }
+            }
+            for (const o of ondas) {
+                const dx = p.x - o.x;
+                const dy = py - o.y;
+                const d = Math.hypot(dx, dy);
+                if (d > 0.01 && Math.abs(d - o.radio) < 30) {
+                    p.vx += (dx / d) * 1.2 * o.vida;
+                    p.vy += (dy / d) * 1.2 * o.vida;
+                }
+            }
+            p.vx = p.vx * 0.96 + (Math.random() - 0.5) * 0.02;
+            p.vy = p.vy * 0.96 + (Math.random() - 0.5) * 0.02;
+            if (Math.hypot(p.vx, p.vy) < 0.12) {
+                p.vx *= 1.05;
+                p.vy *= 1.05;
+            }
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0 || p.x > ancho) { p.vx *= -1; p.x = Math.min(Math.max(p.x, 0), ancho); }
+        }
+        ondas = ondas.filter((o) => {
+            o.radio += 6;
+            o.vida -= 0.02;
+            return o.vida > 0;
+        });
+    };
+
+    const dibujar = () => {
+        ctx.clearRect(0, 0, ancho, alto);
+        const pos = particulas.map((p) => ({ p, x: p.x, y: pantallaY(p) }));
+
+        // Enlaces entre partículas cercanas y a profundidad parecida
+        ctx.lineWidth = 1;
+        for (let i = 0; i < pos.length; i++) {
+            const a = pos[i];
+            for (let j = i + 1; j < pos.length; j++) {
+                const b = pos[j];
+                const dx = a.x - b.x;
+                const dy = a.y - b.y;
+                const d2 = dx * dx + dy * dy;
+                if (d2 < distanciaEnlace * distanciaEnlace && Math.abs(a.p.z - b.p.z) < 0.35) {
+                    const alfa = (1 - Math.sqrt(d2) / distanciaEnlace) * 0.24 * Math.min(a.p.z, b.p.z);
+                    ctx.strokeStyle = colorEn((a.x + b.x) / 2, alfa);
+                    ctx.beginPath();
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(b.x, b.y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // Líneas desde el cursor hacia las partículas que "detecta"
+        if (cursor.activo) {
+            for (const { x, y } of pos) {
+                const d = Math.hypot(x - cursor.x, y - cursor.y);
+                if (d < 170) {
+                    ctx.strokeStyle = colorEn(x, (1 - d / 170) * 0.5);
+                    ctx.beginPath();
+                    ctx.moveTo(cursor.x, cursor.y);
+                    ctx.lineTo(x, y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // Partículas y símbolos (más tenues cuanto más lejos)
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        for (const { p, x, y } of pos) {
+            if (p.simbolo) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(p.giro);
+                ctx.font = `600 ${p.tam * p.z}px ${FUENTE}`;
+                ctx.fillStyle = colorEn(x, 0.4 * p.z);
+                ctx.fillText(p.simbolo, 0, 0);
+                ctx.restore();
+            } else {
+                ctx.fillStyle = colorEn(x, 0.75 * p.z);
+                ctx.beginPath();
+                ctx.arc(x, y, p.r * p.z, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (const o of ondas) {
+            ctx.strokeStyle = colorEn(o.x, o.vida * 0.6);
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(o.x, o.y, o.radio, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+    };
+
+    // Bucle: se detiene con la pestaña oculta
+    let frame = null;
+    const bucle = () => {
+        actualizar();
+        dibujar();
+        frame = requestAnimationFrame(bucle);
+    };
+    const arrancar = () => {
+        if (!frame && !document.hidden && !reducirMovimiento) frame = requestAnimationFrame(bucle);
+    };
+    const detener = () => {
+        cancelAnimationFrame(frame);
+        frame = null;
+    };
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) detener(); else arrancar();
+    });
+
+    // Interacción en toda la página (el canvas es fijo: se usan coordenadas de la ventana)
+    window.addEventListener('pointermove', (e) => {
+        cursor.x = e.clientX;
+        cursor.y = e.clientY;
+        cursor.activo = e.pointerType === 'mouse';
+    }, { passive: true });
+    document.addEventListener('pointerleave', () => { cursor.activo = false; });
+    window.addEventListener('pointerdown', (e) => {
+        if (e.target.closest('a, button, input, label, .proyecto-card, .cert-card, .exp-card, .nav, .toast')) return;
+        ondas.push({ x: e.clientX, y: e.clientY, radio: 0, vida: 1 });
+        if (reducirMovimiento) dibujar();
+    }, { passive: true });
+
+    // Paleta según la sección visible
+    if ('IntersectionObserver' in window) {
+        // Franja central de la pantalla: la sección que la cruza define los colores
+        const observador = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting && PALETAS[entry.target.id]) objetivo = PALETAS[entry.target.id];
+            });
+        }, { rootMargin: '-45% 0px -45% 0px' });
+        document.querySelectorAll('main section[id], footer[id]').forEach((s) => observador.observe(s));
+    }
+
+    let redimensionTimer = null;
+    window.addEventListener('resize', () => {
+        clearTimeout(redimensionTimer);
+        redimensionTimer = setTimeout(redimensionar, 150);
+    });
+    redimensionar();
+    arrancar();
+}
+
 /* Parallax de la portada: las capas siguen al cursor con distinta profundidad */
 function initParallax() {
     const inicio = document.querySelector('.inicio');
@@ -756,6 +984,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
 initReveal();
 initTyped();
 initParallax();
+initCanvas();
 initScroll();
 initMenu();
 initNavbar();

@@ -2521,6 +2521,16 @@ html {
    Portada moderna
 ********************************************/
 
+/* Canvas interactivo fijo detrás de todo el sitio */
+.fondo-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
 /* Rol con degradado y brillo que lo recorre */
 .inicio h1 .acento {
     background: linear-gradient(90deg, var(--accent), var(--accent-2), #FFD9B8, var(--accent-2), var(--accent));
