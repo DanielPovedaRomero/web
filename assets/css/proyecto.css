@@ -1,0 +1,854 @@
+/********************************************
+   Páginas de detalle de proyectos (Azure y .NET MAUI)
+   Tema compartido; cada familia define --marca en su styles.css
+********************************************/
+:root {
+  --bg: #091A28;
+  --surface: #0F2436;
+  --surface-2: #132C42;
+  --text: #FFFFFF;
+  --text-soft: #B8C4CF;
+  --muted: #7A8B99;
+  --accent: #FF7755;
+  --accent-2: #FFAA77;
+  --gradient: linear-gradient(135deg, #FF7755, #FFAA77);
+  --border: rgba(255, 255, 255, 0.08);
+  --mono: 'JetBrains Mono', 'Courier New', monospace;
+  --marca: #0078D4;
+  --marca-2: #50E6FF;
+}
+
+@property --giro {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes girar {
+  to { --giro: 360deg; }
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Montserrat', system-ui, sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+body.visor-abierto {
+  overflow: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+img {
+  max-width: 100%;
+}
+
+code {
+  padding: 0.12rem 0.45rem;
+  border: 1px solid color-mix(in srgb, var(--marca-2) 25%, transparent);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--marca) 14%, transparent);
+  color: var(--marca-2);
+  font-family: var(--mono);
+  font-size: 0.86em;
+  white-space: nowrap;
+}
+
+strong {
+  color: #fff;
+}
+
+/********************************************
+   Fondo: rejilla + luces
+********************************************/
+.p-fondo {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.p-fondo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 50% 0%, #000 25%, transparent 80%);
+}
+
+.p-fondo span {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  filter: blur(100px);
+  animation: flotar 18s ease-in-out infinite alternate;
+}
+
+.p-fondo span:nth-child(1) { top: -160px; left: -120px; background: var(--marca); opacity: 0.35; }
+.p-fondo span:nth-child(2) { top: 30%; right: -180px; background: var(--accent); opacity: 0.18; animation-delay: -6s; }
+.p-fondo span:nth-child(3) { bottom: -200px; left: 30%; background: var(--marca-2); opacity: 0.12; animation-delay: -12s; }
+
+@keyframes flotar {
+  to { transform: translate(80px, 60px) scale(1.15); }
+}
+
+/* Barra de progreso de lectura */
+.p-progreso {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--marca), var(--marca-2), var(--accent));
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/********************************************
+   Contenedor
+********************************************/
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 1.25rem 7rem;
+}
+
+/********************************************
+   Encabezado
+********************************************/
+.project-header {
+  position: relative;
+  margin: 2.5rem 0 3rem;
+  padding: clamp(2.5rem, 7vw, 4rem) clamp(1.25rem, 5vw, 3rem);
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 28px;
+  background:
+    linear-gradient(160deg, rgba(19, 44, 66, 0.92), rgba(9, 26, 40, 0.92)) padding-box,
+    conic-gradient(from var(--giro), rgba(255, 255, 255, 0.06), var(--marca) 25%, var(--marca-2) 35%, rgba(255, 255, 255, 0.06) 55%) border-box;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4), 0 0 80px color-mix(in srgb, var(--marca) 18%, transparent);
+  text-align: center;
+  animation: girar 8s linear infinite, aparecer 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Brillo de marca dentro del encabezado */
+.project-header::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  width: 70%;
+  height: 80%;
+  border-radius: 50%;
+  background: var(--marca);
+  opacity: 0.25;
+  filter: blur(70px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.project-title-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Ruta estilo terminal que añade proyecto.js */
+.p-ruta {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  line-height: 1;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.p-ruta i {
+  margin-right: 0.55rem;
+  color: var(--marca-2);
+}
+
+.p-ruta .gris { color: var(--muted); }
+.p-ruta .marca { color: var(--accent); }
+
+.p-ruta::after {
+  content: '';
+  width: 7px;
+  height: 0.95em;
+  margin-left: 4px;
+  border-radius: 1px;
+  background: var(--accent);
+  animation: parpadeo 1s steps(1) infinite;
+}
+
+@keyframes parpadeo {
+  50% { opacity: 0; }
+}
+
+/* Título: en MAUI es el h1; en Azure el subtítulo hace de título */
+.project-title,
+.tema-azure .project-subtitle {
+  max-width: 760px;
+  font-size: clamp(1.8rem, 5.5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  background: linear-gradient(120deg, #fff 30%, var(--marca-2) 50%, #fff 70%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: brillo-texto 6s ease-in-out infinite;
+}
+
+@keyframes brillo-texto {
+  50% { background-position: 100% 0; }
+}
+
+.tema-maui .project-subtitle {
+  margin-top: 0.75rem;
+  color: var(--text-soft);
+  font-size: clamp(1rem, 2.8vw, 1.15rem);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 1.1rem 0.4rem 0.4rem;
+  border: 1px solid color-mix(in srgb, var(--marca) 50%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--marca) 15%, transparent);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  box-shadow: 0 0 25px color-mix(in srgb, var(--marca) 25%, transparent);
+}
+
+.azure-icon,
+.maui-icon {
+  width: 34px;
+  height: 34px;
+  padding: 4px;
+  border-radius: 50%;
+  background: #fff;
+  object-fit: contain;
+}
+
+/********************************************
+   Contenido
+********************************************/
+.project-content > h2,
+.project-links h2,
+.project-challenges h2,
+.api-section h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 3.5rem 0 1.25rem;
+  font-size: clamp(1.4rem, 4vw, 1.9rem);
+  line-height: 1.25;
+}
+
+/* Marcador tipo comentario de código antes de los títulos */
+.project-content > h2::before,
+.project-links h2::before,
+.project-challenges h2::before {
+  content: '//';
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.8em;
+}
+
+.project-content > h2:first-child {
+  margin-top: 0;
+}
+
+.project-content p {
+  margin-bottom: 1.1rem;
+  color: var(--text-soft);
+  font-size: 1.02rem;
+}
+
+/* Enlaces */
+.links-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.link-button,
+.microsoft-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.4rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.link-button::before,
+.microsoft-link::before {
+  font-family: 'Font Awesome 6 Brands';
+  font-size: 1.15rem;
+  font-weight: 400;
+}
+
+.github-link::before { content: '\f09b'; }
+.microsoft-link::before { content: '\f3ca'; }
+
+.link-button::after,
+.microsoft-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.15) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.link-button:hover,
+.microsoft-link:hover {
+  transform: translateY(-3px);
+  border-color: var(--marca-2);
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--marca) 40%, transparent);
+}
+
+.link-button:hover::after,
+.microsoft-link:hover::after {
+  transform: translateX(100%);
+}
+
+.github-link {
+  background: linear-gradient(135deg, #24292E, #3A4148);
+}
+
+.microsoft-link {
+  background: linear-gradient(135deg, var(--marca), color-mix(in srgb, var(--marca) 60%, #000));
+}
+
+.microsoft-link {
+  margin: 0.5rem 0 1.5rem;
+}
+
+/********************************************
+   Secciones paso a paso (Azure)
+********************************************/
+.project-content {
+  counter-reset: paso;
+}
+
+.api-section {
+  position: relative;
+  margin-top: 2rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: rgba(15, 36, 54, 0.7);
+  backdrop-filter: blur(10px);
+  counter-increment: paso;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.api-section:hover {
+  border-color: color-mix(in srgb, var(--marca) 45%, transparent);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 40px color-mix(in srgb, var(--marca) 12%, transparent);
+}
+
+/* Número de paso */
+.api-section::before {
+  content: counter(paso, decimal-leading-zero);
+  position: absolute;
+  top: -14px;
+  left: clamp(1.5rem, 4vw, 2.5rem);
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--marca), color-mix(in srgb, var(--marca) 55%, var(--marca-2)));
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--marca) 45%, transparent);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.api-section h2 {
+  margin: 0.5rem 0 1.25rem;
+  font-size: clamp(1.25rem, 3.5vw, 1.6rem);
+}
+
+.api-section p {
+  font-size: 1rem;
+}
+
+/* Capturas con marco de ventana */
+.api-image {
+  margin: 1.5rem 0 2rem;
+  text-align: center;
+}
+
+.api-image img {
+  display: block;
+  width: 100%;
+  max-width: 760px;
+  height: auto;
+  margin: 0 auto 1rem;
+  border: 1px solid var(--border);
+  border-top: 26px solid #1B3550;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+  cursor: zoom-in;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.api-image img.small { width: 55%; max-width: 340px; }
+.api-image img.medium,
+.api-image img.credentials { width: 75%; max-width: 480px; }
+
+.api-image img:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.5), 0 0 35px color-mix(in srgb, var(--marca) 30%, transparent);
+}
+
+/********************************************
+   Retos (MAUI)
+********************************************/
+.challenges-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 1.25rem;
+  counter-reset: reto;
+}
+
+.challenge-item {
+  position: relative;
+  padding: 1.6rem 1.4rem 1.2rem;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.03)) border-box;
+  counter-increment: reto;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+}
+
+.challenge-item::before {
+  content: counter(reto, decimal-leading-zero);
+  position: absolute;
+  top: 0.4rem;
+  right: 1rem;
+  font-family: var(--mono);
+  font-size: 2.6rem;
+  font-weight: 600;
+  line-height: 1;
+  color: color-mix(in srgb, var(--marca-2) 18%, transparent);
+  transition: color 0.3s ease;
+}
+
+.challenge-item:hover {
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    conic-gradient(from var(--giro), var(--marca), var(--marca-2), var(--accent), var(--marca)) border-box;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4), 0 0 35px color-mix(in srgb, var(--marca) 25%, transparent);
+  transform: translateY(-6px);
+  animation: girar 3s linear infinite;
+}
+
+.challenge-item:hover::before {
+  color: color-mix(in srgb, var(--marca-2) 45%, transparent);
+}
+
+.challenge-item h3 {
+  margin-bottom: 0.6rem;
+  padding-right: 3.75rem;
+  font-size: 1.1rem;
+  line-height: 1.35;
+}
+
+.challenge-item p {
+  margin: 0;
+  font-size: 0.93rem;
+}
+
+/********************************************
+   Galería de capturas (MAUI): marcos de teléfono
+********************************************/
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+  gap: 1.75rem 1.25rem;
+}
+
+.screenshot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.screenshot img {
+  display: block;
+  width: 100%;
+  max-width: 230px;
+  height: auto;
+  border: 7px solid #1A2B3A;
+  border-radius: 26px;
+  background: #000;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 20px 40px rgba(0, 0, 0, 0.45);
+  cursor: zoom-in;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.screenshot:hover img {
+  transform: translateY(-8px) rotate(-1.5deg);
+  box-shadow: 0 0 0 1px var(--marca-2), 0 30px 55px rgba(0, 0, 0, 0.5), 0 0 40px color-mix(in srgb, var(--marca) 35%, transparent);
+}
+
+.screenshot figcaption {
+  padding: 0.3rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-soft);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-align: center;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.screenshot:hover figcaption {
+  border-color: color-mix(in srgb, var(--marca-2) 50%, transparent);
+  color: #fff;
+}
+
+/********************************************
+   Índice lateral (lo crea proyecto.js en pantallas anchas)
+********************************************/
+.p-indice {
+  display: none;
+}
+
+@media (min-width: 1360px) {
+  .p-indice {
+    position: fixed;
+    top: 50%;
+    left: max(1rem, calc((100vw - 980px) / 2 - 250px));
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    width: 220px;
+    max-height: 70vh;
+    padding: 1rem 0.5rem 1rem 1rem;
+    overflow-y: auto;
+    border-left: 1px solid var(--border);
+    transform: translateY(-50%);
+    animation: aparecer 0.6s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+.p-indice p {
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.p-indice a {
+  position: relative;
+  display: block;
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.p-indice a::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -1.05rem;
+  width: 2px;
+  height: 0;
+  background: var(--marca-2);
+  transform: translateY(-50%);
+  transition: height 0.25s ease;
+}
+
+.p-indice a:hover {
+  color: #fff;
+}
+
+.p-indice a.activo {
+  background: color-mix(in srgb, var(--marca) 15%, transparent);
+  color: #fff;
+}
+
+.p-indice a.activo::before {
+  height: 70%;
+}
+
+/********************************************
+   Aparición al hacer scroll
+********************************************/
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(24px); }
+}
+
+.js-revelar .revelar {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--d, 0) * 70ms);
+}
+
+.js-revelar .revelar.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Tras aparecer, las transiciones propias del elemento vuelven a mandar */
+.js-revelar .revelar.listo {
+  transition-delay: 0s;
+}
+
+.js-revelar .api-section.revelar.listo {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.js-revelar .challenge-item.revelar.listo {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+}
+
+/********************************************
+   Visor de imágenes
+********************************************/
+.p-visor {
+  width: min(1100px, calc(100% - 2rem));
+  max-height: calc(100% - 2rem);
+  margin: auto;
+  padding: 0;
+  overflow: visible;
+  border: 1px solid color-mix(in srgb, var(--marca) 50%, transparent);
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 60px color-mix(in srgb, var(--marca) 25%, transparent);
+}
+
+.p-visor[open] {
+  animation: abrir 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes abrir {
+  from { opacity: 0; transform: scale(0.96) translateY(12px); }
+}
+
+.p-visor::backdrop {
+  background: rgba(5, 14, 22, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+.p-visor-barra {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem 0.6rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.p-visor-puntos {
+  display: flex;
+  gap: 6px;
+}
+
+.p-visor-puntos span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #FF5F56;
+}
+
+.p-visor-puntos span:nth-child(2) { background: #FFBD2E; }
+.p-visor-puntos span:nth-child(3) { background: #27C93F; }
+
+.p-visor-titulo {
+  flex: 1;
+  overflow: hidden;
+  color: var(--text-soft);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.p-visor-contador {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+
+.p-visor button {
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: rgba(9, 26, 40, 0.9);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.p-visor button:hover {
+  background: var(--accent);
+}
+
+.p-visor-cerrar {
+  width: 34px;
+  height: 34px;
+}
+
+.p-visor figure {
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.p-visor figure img {
+  max-width: 100%;
+  max-height: calc(100vh - 9rem);
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.p-visor figure img.cambia {
+  animation: cambiar 0.22s ease;
+}
+
+@keyframes cambiar {
+  from { opacity: 0; transform: scale(0.98); }
+}
+
+.p-visor-nav {
+  position: absolute;
+  top: 50%;
+  width: 46px;
+  height: 46px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transform: translateY(-50%);
+}
+
+.p-visor-nav:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.p-visor-nav.prev { left: -23px; }
+.p-visor-nav.next { right: -23px; }
+
+a:focus-visible,
+button:focus-visible,
+img[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/********************************************
+   Móvil
+********************************************/
+@media (max-width: 600px) {
+  .project-header {
+    margin-top: 1.25rem;
+    border-radius: 22px;
+  }
+
+  .p-ruta {
+    font-size: 0.72rem;
+  }
+
+  .api-image img.small,
+  .api-image img.medium,
+  .api-image img.credentials {
+    width: 100%;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem 0.9rem;
+  }
+
+  code {
+    white-space: normal;
+  }
+
+  .p-visor-nav.prev { left: 0.5rem; }
+  .p-visor-nav.next { right: 0.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .js-revelar .revelar {
+    opacity: 1;
+    transform: none;
+  }
+}
